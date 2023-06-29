@@ -1,0 +1,11 @@
+.transactionsTitle {
+    text-align: start;
+    font-size: 24px;
+  }
+  
+  @media (max-width: 768px) {
+  
+    .transactionsTitle {
+      font-size: 16px;
+    }
+  }
