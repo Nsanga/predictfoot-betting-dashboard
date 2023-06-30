@@ -11,7 +11,7 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 import { useMediaQuery, useTheme } from '@material-ui/core';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 
 const Profile = () => {

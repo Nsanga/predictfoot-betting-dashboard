@@ -2,7 +2,7 @@ import React from 'react'
 import { Stack, Box, Button } from '@mui/material'
 import { MdClose } from 'react-icons/md'
 import { HiDownload } from 'react-icons/hi'
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 const DetailUserTransaction = () => {
     return (

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'; 
 import styles from '../styles/Home.module.css';
 import { useMediaQuery, useTheme } from '@material-ui/core';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 const GraphicsPerformance = ({ titre, dataPerformances, xAxisDataKey, xAxisTickFormatter, stroke, height }) => {
     const theme = useTheme();

@@ -24,7 +24,7 @@ import { GiPlainCircle } from 'react-icons/gi'
 import MenuIcon from "@mui/icons-material/Menu";
 import Logout from '@mui/icons-material/Logout';
 import Profile from './Profile';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 const Menu = () => {
 

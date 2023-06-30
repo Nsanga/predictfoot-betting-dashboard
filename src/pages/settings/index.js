@@ -1,5 +1,5 @@
 import Title from '../../components/Title'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Stack, Button, Grid } from '@mui/material';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
@@ -11,18 +11,21 @@ import Table from '../../components/Table';
 import VerticalTabs from '../../components/VerticalTabs';
 import ModalForm from '../../components/Modal';
 import { useMediaQuery } from '@material-ui/core';
-import Layout from '../../components/Layout';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-const Settings = () => {
+const Settings = ({setPageTitle}) => {
     const theme = useTheme();
     console.log(theme);
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     console.log(isMatch);
 
     const [value, setValue] = React.useState('1');
+
+    useEffect(() => {
+        setPageTitle('Settings');
+    }, [setPageTitle]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -77,7 +80,6 @@ const Settings = () => {
         <>
             {isMatch ? (
                 <>
-                    <Title titre='Settings' />
                     <Box style={{ padding: '8px' }}>
                         <Box sx={{ width: '100%', typography: 'body1' }}>
                             <TabContext value={value}>
@@ -133,70 +135,71 @@ const Settings = () => {
 
             ) : (
                 <>
-                    <Box sx={{ flexGrow: 1 }}>
+                    {/* <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={3} className='nav'>
                                 <Layout />
                             </Grid>
                             <Grid item xs={9}>
-                                <Title titre='Settings' />
-                                <Box sx={{ width: '100%', typography: 'body1' }}>
-                                    <TabContext value={value}>
-                                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                            <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="inherit">
-                                                <Tab label="Pronostics" value='1' style={{ textTransform: 'none', fontSize: '16px' }} />
-                                                <Tab label="Paiements" value='2' style={{ textTransform: 'none', fontSize: '16px' }} />
-                                                <Tab label="Forfaits" value='3' style={{ textTransform: 'none', fontSize: '16px' }} />
-                                                <Tab label="Notifications automatiques" value='4' style={{ textTransform: 'none', fontSize: '16px' }} />
-                                            </TabList>
-                                        </Box>
-                                        <TabPanel value="1">
-                                            <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
-                                                <ModalForm
-                                                    titleModal='Ajouter un type de pronostic'
-                                                    titre='titre'
-                                                    description='description' />
-                                            </Stack>
-
-                                            <Box className='table-user'>
-                                                <Table data={matchPredictions} columns={columns} action={true} />
-                                            </Box>
-
-                                        </TabPanel>
-                                        <TabPanel value="2">
-                                            <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
-                                                <ModalForm
-                                                    titleModal='Ajouter un mode de paiement'
-                                                    titre='titre'
-                                                    description='description'
-                                                    avatar='avatar' />
-                                            </Stack>
-
-                                            <Box className='table-user'>
-                                                <Table data={paiements} columns={columns} action={true} />
-                                            </Box>
-                                        </TabPanel>
-                                        <TabPanel value="3">
-                                            <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
-                                                <ModalForm
-                                                    titleModal='Ajouter un forfait'
-                                                    type='type'
-                                                    duree='duree'
-                                                    prix='prix' />
-                                            </Stack>
-
-                                            <Box className='table-user'>
-                                                <Table data={forfaits} columns={columnsForfaits} action={true} />
-                                            </Box>
-                                        </TabPanel>
-                                        <TabPanel value="4">
-                                            <VerticalTabs />
-                                        </TabPanel>
-                                    </TabContext>
-                                </Box>
+                                
 
                             </Grid>
                         </Grid>
+                    </Box> */}
+                    <Title titre='Settings' />
+                    <Box sx={{ width: '100%', typography: 'body1' }}>
+                        <TabContext value={value}>
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="inherit">
+                                    <Tab label="Pronostics" value='1' style={{ textTransform: 'none', fontSize: '16px' }} />
+                                    <Tab label="Paiements" value='2' style={{ textTransform: 'none', fontSize: '16px' }} />
+                                    <Tab label="Forfaits" value='3' style={{ textTransform: 'none', fontSize: '16px' }} />
+                                    <Tab label="Notifications automatiques" value='4' style={{ textTransform: 'none', fontSize: '16px' }} />
+                                </TabList>
+                            </Box>
+                            <TabPanel value="1">
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                    <ModalForm
+                                        titleModal='Ajouter un type de pronostic'
+                                        titre='titre'
+                                        description='description' />
+                                </Stack>
+
+                                <Box className='table-user'>
+                                    <Table data={matchPredictions} columns={columns} action={true} />
+                                </Box>
+
+                            </TabPanel>
+                            <TabPanel value="2">
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                    <ModalForm
+                                        titleModal='Ajouter un mode de paiement'
+                                        titre='titre'
+                                        description='description'
+                                        avatar='avatar' />
+                                </Stack>
+
+                                <Box className='table-user'>
+                                    <Table data={paiements} columns={columns} action={true} />
+                                </Box>
+                            </TabPanel>
+                            <TabPanel value="3">
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                    <ModalForm
+                                        titleModal='Ajouter un forfait'
+                                        type='type'
+                                        duree='duree'
+                                        prix='prix' />
+                                </Stack>
+
+                                <Box className='table-user'>
+                                    <Table data={forfaits} columns={columnsForfaits} action={true} />
+                                </Box>
+                            </TabPanel>
+                            <TabPanel value="4">
+                                <VerticalTabs />
+                            </TabPanel>
+                        </TabContext>
                     </Box>
                 </>
 

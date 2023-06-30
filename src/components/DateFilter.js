@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsFilter } from 'react-icons/bs';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 import { connect, useDispatch } from "react-redux";
 import { fetchPredictRequest } from '../redux/predict/actions';
 

@@ -3,7 +3,7 @@ import { Stack, Box } from '@mui/material'
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import { MdDelete } from 'react-icons/md';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 const DetailsUsers = () => {
     return (

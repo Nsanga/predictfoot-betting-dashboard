@@ -4,7 +4,7 @@ import { useMediaQuery, useTheme } from '@material-ui/core';
 import DateFilter from './DateFilter';
 import moment from 'moment';
 import 'moment/locale/fr';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 import OldMatch from './OldMatch';
 import { connect, useDispatch } from "react-redux";
 import Pagination from '@material-ui/lab/Pagination';
@@ -33,12 +33,19 @@ const OldTips = (
     };
     const dispatch = useDispatch();
     useEffect(() => {
-        const dateFrom = moment().subtract(5, 'days').format('YYYY-MM-DD');
-        const dateTo = moment().subtract(1, 'days').format('YYYY-MM-DD');
-        const page = 1;
-        const limit = 10;
-        dispatch(fetchPredictRequest({dateFrom, dateTo, page, limit}));
-    }, [dispatch]);
+        const fetchData = async () => {
+          const dateFrom = moment().subtract(5, 'days').format('YYYY-MM-DD');
+          const dateTo = moment().subtract(1, 'days').format('YYYY-MM-DD');
+          const search = '';
+          const page = 1;
+          const limit = 10;
+      
+          await dispatch(fetchPredictRequest({ dateFrom, dateTo, search, page, limit }));
+        };
+      
+        fetchData();
+      }, []);
+      
 
     const handlePageChange = (event, page) => {
         const limit = 3;
@@ -103,7 +110,7 @@ const OldTips = (
                     <Box className='div-match'>
                         <OldMatch
                             size='11px'
-                            sizeCoast='16px'
+                            sizeCoast='12px'
                             width={25}
                             height={40}
                             predicts={predicts} />

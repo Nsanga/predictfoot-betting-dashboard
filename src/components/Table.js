@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack/Stack';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { FaPen } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 const AvatarTextCell = ({ avatar, text }) => (
     <div style={{ display: "flex", alignItems: "center" }}>

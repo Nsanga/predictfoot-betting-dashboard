@@ -4,20 +4,7 @@ import Button from '@mui/material/Button';
 import { useMediaQuery, useTheme } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { deletePredictRequest } from '../redux/predict/actions';
-import '../styles/globals.css'
 import { Stack } from '@mui/material';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 300,
-  backgroundColor: '#02090F',
-  borderRadius: '8px',
-  boxShadow: '0 0 12px 0 rgb(255, 254, 254)',
-  p: 2,
-};
 
 export default function MatchDeleteModal({ open, onClose, itemId }) {
   const theme = useTheme();

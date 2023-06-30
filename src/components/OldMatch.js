@@ -3,7 +3,7 @@ import { Box, IconButton, Modal, Stack } from '@mui/material'
 import { useMediaQuery, useTheme } from '@material-ui/core';
 import { FaPen } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
-import '../styles/globals.css'
+// import '../styles/globals.css'
 import moment from 'moment';
 import MatchDeleteModal from './MatchDeleteModal';
 
@@ -29,8 +29,8 @@ const OldMatch = ({ size, sizeCoast, width, height, predicts }) => {
         <>
             {isMatch ? (
                 <Stack direction='column' marginLeft='-1rem' marginRight='-1rem'>
-                    {predicts?.map(match => (
-                        <Stack direction='column' spacing={4} className='stack-head-resp'>
+                    {predicts?.map((match, index) => (
+                        <Stack key={index} direction='column' spacing={4} className='stack-head-resp'>
 
                             <Stack direction='row' spacing={2} alignItems='center' justifyContent='space-between'>
                                 <Box className='box-champ' fontSize={size}>
@@ -99,8 +99,8 @@ const OldMatch = ({ size, sizeCoast, width, height, predicts }) => {
                 </Stack>
             ) : (
                 <>
-                    {predicts?.map(match => (
-                        <Stack direction='column' justifyContent='center'>
+                    {predicts?.map((match, index) => (
+                        <Stack key={index} direction='column' justifyContent='center'>
 
                             <Box className='box-champ' fontSize={size}>
                                 <img

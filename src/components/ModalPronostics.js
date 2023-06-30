@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { MdClose } from 'react-icons/md'
 import { useMediaQuery, useTheme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 import { connect, useDispatch } from "react-redux";
 import { fetchPredictRequest, addPredictRequest } from '../redux/predict/actions';
 import Select from 'react-select';
@@ -59,8 +59,12 @@ const ModalPronostics = (
 
     const dispatch = useDispatch();
     useEffect(() => {
-        const dateFrom= moment().format('YYYY-MM-DD');
-        dispatch(fetchPredictRequest({dateFrom}));
+        const dateFrom = new Date().toISOString().split('T')[0];
+        const type = '';
+        const search = '';
+        const page = 1;
+        const limit = 10;
+        dispatch(fetchPredictRequest({ dateFrom, type, search, page, limit }));
         console.log('Dispatched fetchPredictRequest');
     }, [dispatch]);
 

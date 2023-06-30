@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, makeStyles, Typography } from '@mat
 import { Box, Button } from '@mui/material';
 import { MdClose } from 'react-icons/md'
 import { useMediaQuery, useTheme } from '@material-ui/core';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 const useStyles = makeStyles(theme => ({
     dialogWrapper: {

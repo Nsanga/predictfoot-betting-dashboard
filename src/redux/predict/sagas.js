@@ -3,6 +3,7 @@ import * as types from './types';
 import { url } from '../../urlLoader';
 
 function* fetchPredictRequest(action) {
+  console.log('action', action)
   try {
     const { dateFrom, dateTo, type, search, page, limit } = action.payload;
     let link = `${url}/api/v1/predict/get?dateFrom=${dateFrom}`;
@@ -22,6 +23,7 @@ function* fetchPredictRequest(action) {
     if (limit) {
       link += `&limit=${limit}`;
     }
+    console.log('LIEN::', link);
     const response = yield call(fetch, link);
     const data = yield response.json();
     console.log('data::', data);
@@ -87,7 +89,7 @@ function* addPredictRequest(action) {
 
 
 export default function* PredictSaga() {
-  yield takeLatest(types.GET_PREDICT_REQUEST, fetchPredictRequest);
+  yield takeEvery(types.GET_PREDICT_REQUEST, fetchPredictRequest);
   yield takeLatest(types.ADD_PREDICT_REQUEST, addPredictRequest);
   yield takeLatest(types.DELETE_PREDICT_REQUEST, deletePredictRequest);
 }

@@ -5,7 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import ModalForm from './Modal';
 import { useMediaQuery, useTheme } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

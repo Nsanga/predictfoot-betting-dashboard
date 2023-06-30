@@ -1,6 +1,6 @@
 import { Button } from '@mui/material'
 import React from 'react'
-import '../styles/globals.css';
+// import '../styles/globals.css';
 
 const AdvertisementForm = () => {
     const [title, setTitle] = React.useState('');

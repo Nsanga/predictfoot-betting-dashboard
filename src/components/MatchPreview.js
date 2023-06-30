@@ -3,7 +3,7 @@ import { Box, IconButton, Modal, Stack } from '@mui/material'
 import { useMediaQuery, useTheme } from '@material-ui/core';
 import { FaPen } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
-import '../styles/globals.css'
+// import '../styles/globals.css'
 import moment from 'moment';
 import { connect } from "react-redux";
 import MatchDeleteModal from './MatchDeleteModal';

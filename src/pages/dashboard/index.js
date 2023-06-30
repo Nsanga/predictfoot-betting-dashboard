@@ -8,11 +8,10 @@ import Table from '../../components/Table'
 import GraphicsPerformance from '../../components/GraphicsPerformance'
 import Grid from '@mui/material/Grid';
 import { useMediaQuery, useTheme } from '@material-ui/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DateFilter from '../../components/DateFilter'
-import Layout from '../../components/Layout'
 
-export default function Home() {
+export default function Home({setPageTitle}) {
 
   const theme = useTheme();
   console.log(theme);
@@ -20,6 +19,10 @@ export default function Home() {
   console.log(isMatch);
 
   const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    setPageTitle('Dashboard', null);
+  }, [setPageTitle]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -159,7 +162,6 @@ export default function Home() {
     <>
       {isMatch ? (
         <Stack spacing={6}>
-          <Title titre='Dashboard' />
 
           <Stack spacing={4} padding='8px'>
 
@@ -173,7 +175,7 @@ export default function Home() {
           </Stack>
 
           <Stack spacing={4} padding='0px 8px 8px 8px'>
-            <Box className={styles.performanceTitle}>Performances de la journée</Box>
+            <Box className='{styles.performanceTitle}'>Performances de la journée</Box>
             <Stack direction="column" spacing={2}>
               <Stack direction="row" spacing={2}>
                 <Card
@@ -202,7 +204,7 @@ export default function Home() {
 
           <Stack spacing={4} className={styles.stacktable}>
             <Stack direction='row' justifyContent='space-between' alignItems='center'>
-              <Box className={styles.transactionsTitle}>Transactions récentes</Box>
+              <Box className='{styles.transactionsTitle}'>Transactions récentes</Box>
               <DateFilter onDateChange={handleDateChange} />
             </Stack>
             <Table data={data} columns={columns} action={true} />
@@ -210,13 +212,7 @@ export default function Home() {
         </Stack>
       ) : (
         <>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={3} className='nav'>
-                <Layout />
-              </Grid>
-              <Grid item xs={9}>
-                <Stack spacing={6}>
+          <Stack spacing={6}>
                   <Title titre='Dashboard' />
 
                   <Stack spacing={4}>
@@ -258,7 +254,7 @@ export default function Home() {
                   </Stack>
 
                   <Stack spacing={3} className={styles.performance}>
-                    <Box className={styles.performanceTitle}>Performances de la journée</Box>
+                    <Box className='{styles.performanceTitle}'>Performances de la journée</Box>
                     <Stack direction="row" spacing={2}>
                       <Card
                         titre='Utilisateurs'
@@ -287,9 +283,6 @@ export default function Home() {
                     <Table data={data} columns={columns} />
                   </Stack>
                 </Stack>
-              </Grid>
-            </Grid>
-          </Box>
         </>
 
       )}

@@ -95,7 +95,7 @@ a {
 
 .nav {
   background-color: #040b11;
-  /* height: 102vh; */
+  height: auto;
 }
 
 .containeNav {
@@ -142,7 +142,8 @@ a {
 .predictfootLogo {
   display: flex;
   margin: 1rem 0 5rem 0;
-  justify-content: center
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {
@@ -163,6 +164,11 @@ a {
 }
 
 @media screen and (max-width: 767px) {
+  .nav {
+    background-color: transparent;
+    height: auto;
+    padding: 2rem 1rem 1rem 1rem;
+  }
   .box-custom {
     flex-direction: row;
     justify-content: space-between;

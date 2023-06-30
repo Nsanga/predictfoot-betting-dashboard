@@ -4,9 +4,10 @@ import { IoSearch } from 'react-icons/io5'
 import Profile from './Profile';
 import MenuBar from './Menu';
 import { useMediaQuery, useTheme } from '@material-ui/core';
-import '../styles/globals.css'
+import Menu from './Menu';
+// import '../styles/globals.css'
 
-const Title = ({ titre, subtitle }) => {
+const Title = ({ titre, subtitle, pageTitle, subTitle }) => {
     const theme = useTheme();
     console.log(theme);
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -17,12 +18,12 @@ const Title = ({ titre, subtitle }) => {
             {isMatch ? (
                 <>
                     <Box className='box-custom' >
+                        <Menu />
 
-                        <Box className='stack-custom'>
-                            <MenuBar />
-                            <Box className='title-layout'>{titre}</Box>
+                        <Box className="stack-custom">
+                            <Box className="title-layout">{pageTitle}</Box>
 
-                            {subtitle && <Box className='subtitle-layout'>| {subtitle}</Box>}
+                            {subTitle && <Box className="subtitle-layout">| {subTitle}</Box>}
                         </Box>
 
 

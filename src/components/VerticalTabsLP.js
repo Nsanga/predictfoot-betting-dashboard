@@ -3,7 +3,7 @@ import { Box, Stack, Button, Grid, Tabs, Tab, Typography } from '@mui/material';
 import Table from './Table';
 import ModalForm from './Modal';
 import { useMediaQuery, useTheme } from '@material-ui/core';
-import '../styles/globals.css'
+// import '../styles/globals.css'
 import StatForm from './StatForm';
 import HeadBandForm from './HeadBandForm';
 import AdvertisementForm from './AdvertisementForm';
