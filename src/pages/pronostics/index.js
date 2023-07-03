@@ -18,6 +18,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { connect, useDispatch } from "react-redux";
 import { fetchPredictRequest } from '../../redux/predict/actions';
 import Pagination from '@material-ui/lab/Pagination';
+import Export from '../../components/Button/Export';
 
 
 moment.locale('fr');
@@ -83,7 +84,7 @@ const Pronostics = (
                                         <DateFilter predicts={predicts} />
                                         <Box className='box-pronostic'>
                                             <Box marginRight='8px'>
-                                                <Button variant="contained" sx={{ textTransform: 'none', fontSize: '10px' }}>Exporter</Button>
+                                                <Export />
                                             </Box>
                                             <ModalPronostics
                                                 titleModal='Ajouter un Week tip'
@@ -114,7 +115,7 @@ const Pronostics = (
                                         <DateFilter predicts={predicts} />
                                         <Box className='box-pronostic'>
                                             <Box marginRight='8px'>
-                                                <Button variant="contained" sx={{ textTransform: 'none', fontSize: '10px' }}>Exporter</Button>
+                                                <Export />
                                             </Box>
                                             <ModalPronostics
                                                 titleModal='Ajouter un VIP tip'
@@ -185,7 +186,7 @@ const Pronostics = (
                                             <Stack direction='row' spacing={2} justifyContent="space-between" margin='1rem'>
                                                 <DateFilter predicts={predicts} />
                                                 <Stack direction='row' spacing={2} justifyContent="flex-end" margin='1rem'>
-                                                    <Button variant="contained" sx={{ textTransform: 'none' }}>Exporter</Button>
+                                                    <Export />
                                                     <ModalPronostics
                                                         titleModal='Ajouter un Week tip'
                                                         predictionType='Week Tips' />
@@ -216,7 +217,7 @@ const Pronostics = (
                                             <Stack direction='row' spacing={2} justifyContent="space-between" margin='1rem'>
                                                 <DateFilter predicts={predicts} />
                                                 <Stack direction='row' spacing={2} justifyContent="flex-end" margin='1rem'>
-                                                    <Button variant="outlined" sx={{ textTransform: 'none' }}>Exporter</Button>
+                                                    <Export />
                                                     <ModalPronostics
                                                         titleModal='Ajouter un VIP tip'
                                                         predictionType='VIP Tips' />

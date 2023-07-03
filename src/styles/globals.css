@@ -733,11 +733,6 @@ option {
     display: none;
   }
 
-  .button-exporter {
-    text-transform: none;
-    font-size: 10px;
-  }
-
   .performance-chart {
     font-size: 10px;
   }

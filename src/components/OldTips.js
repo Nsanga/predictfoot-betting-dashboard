@@ -9,6 +9,7 @@ import OldMatch from './OldMatch';
 import { connect, useDispatch } from "react-redux";
 import Pagination from '@material-ui/lab/Pagination';
 import { fetchPredictRequest } from '../redux/predict/actions';
+import Export from './Button/Export';
 
 
 moment.locale('fr');
@@ -34,19 +35,19 @@ const OldTips = (
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
-          const dateFrom = moment().subtract(5, 'days').format('YYYY-MM-DD');
-          const dateTo = moment().subtract(1, 'days').format('YYYY-MM-DD');
-          const search = '';
-          const page = 1;
-          const limit = 10;
-      
-          await dispatch(fetchPredictRequest({ dateFrom, dateTo, search, page, limit }));
+            const dateFrom = moment().subtract(5, 'days').format('YYYY-MM-DD');
+            const dateTo = moment().subtract(1, 'days').format('YYYY-MM-DD');
+            const search = '';
+            const page = 1;
+            const limit = 10;
+
+            await dispatch(fetchPredictRequest({ dateFrom, dateTo, search, page, limit }));
         };
-      
+
         fetchData();
-      }, []);
-      
-      
+    }, []);
+
+
 
     const handlePageChange = (event, page) => {
         const limit = 3;
@@ -72,7 +73,7 @@ const OldTips = (
                                 <DateFilter onDateChange={handleDateChange} />
                             </Box>
                             <Box>
-                                <Button variant="contained" style={{ textTransform: 'none', fontSize: '10px' }}>Exporter</Button>
+                                <Export />
                             </Box>
                         </Box>
 
@@ -96,7 +97,7 @@ const OldTips = (
                 <Box className='div-old-tips'>
                     <Box className='box-old-tip'>
                         <Box>Old tips</Box>
-                        <Button variant="contained" style={{ textTransform: 'none' }}>Exporter</Button>
+                        <Export />
                     </Box>
                     <Stack direction='row' margin='1rem'>
                         <DateFilter onDateChange={handleDateChange} />

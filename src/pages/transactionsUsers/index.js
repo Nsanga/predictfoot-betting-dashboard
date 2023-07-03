@@ -8,6 +8,7 @@ import { GiMoneyStack } from 'react-icons/gi'
 import DetailUserTransaction from '../../components/DetailUserTransaction'
 import { useMediaQuery, useTheme } from '@material-ui/core';
 import DateFilter from '../../components/DateFilter';
+import Export from '../../components/Button/Export'
 
 const TransactionUsers = ({ setPageTitle, setSubTitle }) => {
     const theme = useTheme();
@@ -83,7 +84,7 @@ const TransactionUsers = ({ setPageTitle, setSubTitle }) => {
                                     <DateFilter onDateChange={handleDateChange} />
                                 </Box>
                                 <Box>
-                                    <Button variant="contained" style={{ textTransform: 'none', fontSize: '10px' }}>Exporter</Button>
+                                    <Export />
                                 </Box>
                             </Stack>
 
@@ -102,7 +103,7 @@ const TransactionUsers = ({ setPageTitle, setSubTitle }) => {
                 <>
                     <Title titre='Transactions' subtitle='User' />
 
-                    <Stack direction='row' spacing={2} style={{color:'#fff'}}>
+                    <Stack direction='row' spacing={2} style={{ color: '#fff' }}>
                         <Card
                             titre='Montant transactions réussites'
                             icone={GiMoneyStack}
@@ -125,7 +126,7 @@ const TransactionUsers = ({ setPageTitle, setSubTitle }) => {
 
                                     <Stack direction='row' spacing={2} justifyContent="space-between" paddingRight='2rem'>
                                         <DateFilter onDateChange={handleDateChange} />
-                                        <Button variant="contained" style={{textTransform:'none'}}>Exporter</Button>
+                                        <Export />
                                     </Stack>
 
                                     <Table data={data} columns={columns} />
