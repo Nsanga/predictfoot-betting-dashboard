@@ -120,7 +120,8 @@ const Users = ({ setPageTitle }) => {
                                         </Box>
                                         <TabPanel value={1}>
                                             <Stack direction='row' spacing={2} justifyContent="flex-end" margin='1rem' alignItems="center">
-                                                <FaUsers fontSize="x-large" /> <Box>200</Box>
+                                                <FaUsers fontSize="x-large" style={{ color: '#fff' }} />
+                                                <Box style={{ color: '#fff', fontFamily: 'Raleway' }}>200</Box>
                                             </Stack>
 
                                             <Box margin='0rem -1rem 0rem -1.5rem'>
@@ -129,7 +130,8 @@ const Users = ({ setPageTitle }) => {
                                         </TabPanel>
                                         <TabPanel value={2}>
                                             <Stack direction='row' spacing={2} justifyContent="flex-end" margin='1rem' alignItems="center">
-                                                <FaUsers fontSize="x-large" /> <Box>200</Box>
+                                                <FaUsers fontSize="x-large" style={{ color: '#fff' }} />
+                                                <Box style={{ color: '#fff', fontFamily: 'Raleway' }}>200</Box>
                                             </Stack>
 
                                             <Box margin='0rem -1rem 0rem -1.5rem'>

@@ -1,15 +1,15 @@
 import React from 'react'
-import { Stack, Box, Button } from '@mui/material'
-import { MdClose } from 'react-icons/md'
+import { Stack, Box, Button, IconButton } from '@mui/material'
+import { MdOutlineClose } from 'react-icons/md'
 import { HiDownload } from 'react-icons/hi'
-// import '../styles/globals.css'
+import '../styles/globals.css'
 
 const DetailUserTransaction = () => {
     return (
         <Stack direction="column" spacing={4} justifyContent="space-between" className='card-details'>
             <Box className='detail-transaction'>
                 <Box>Détails de la transaction</Box>
-                <Button className='close-button'><MdClose /></Button>
+                <Button sx={{color:'#fff'}}><MdOutlineClose /></Button>
             </Box>
 
             <Box>
@@ -21,7 +21,7 @@ const DetailUserTransaction = () => {
                         </Box>
                         <Box className='box-details-value'>xxxxxxxxxxxxx</Box>
                     </Box>
-                    <Button variant="contained" startIcon={<HiDownload />} style={{textTransform:'none'}}>
+                    <Button variant="contained" startIcon={<HiDownload />} style={{ textTransform: 'none' }}>
                         Télécharger
                     </Button>
                 </Stack>

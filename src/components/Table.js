@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import { FaPen } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
+import { Button, IconButton, Stack } from '@mui/material';
 
 const AvatarTextCell = ({ avatar, text }) => (
     <div style={{ display: "flex", alignItems: "center" }}>
@@ -45,9 +46,16 @@ export default function Table({ data: initialData, columns, action }) {
                             </td>
                         ))}
                         {action ? (
-                            <td style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                {/* <button onClick={() => handleEditRow(index, {columnToUpdate: newValue})} className='button-table-action'>{<FaPen/>}</button> */}
-                                <button className='button-table-action'>{<MdDelete />}</button>
+                            <td>
+                                <Stack direction="row" spacing={1} alignItems='center' justifyContent='center'>
+                                    <IconButton aria-label="delete" size="small" style={{color:'#fff'}}>
+                                        <FaPen />
+                                    </IconButton>
+                                    <IconButton aria-label="delete" size="small" style={{color:'#fff'}}>
+                                        <MdDelete />
+                                    </IconButton>
+                                </Stack>
+
                             </td>
                         ) : (
                             <td />

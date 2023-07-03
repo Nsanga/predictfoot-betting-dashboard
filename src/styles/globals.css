@@ -469,16 +469,13 @@ thead {
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
+  color: #fff;
 }
 
 .delete {
   display: flex;
   justify-content: flex-end;
-}
-
-.button-download {
-  text-transform: none;
-  font-size: small;
+  color: #fff;
 }
 
 .detail-transaction {
@@ -487,15 +484,6 @@ thead {
   color: white;
   font-size: smaller;
   font-style: italic;
-}
-
-.close-button {
-  background: transparent;
-  border: none;
-  border-radius: 100%;
-  font-size: large;
-  cursor: pointer;
-  color: #fff;
 }
 
 .amount-transaction {
@@ -840,6 +828,7 @@ option {
 
 .filter-icon {
   margin-right: 1rem;
+  color: #fff;
 }
 
 .date-picker {
@@ -849,6 +838,7 @@ option {
   font-size: small;
   padding: 1rem;
   height: 2rem;
+  color: #fff;
 }
 
 .logo-team {

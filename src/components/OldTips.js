@@ -46,6 +46,7 @@ const OldTips = (
         fetchData();
       }, []);
       
+      
 
     const handlePageChange = (event, page) => {
         const limit = 3;
@@ -119,6 +120,7 @@ const OldTips = (
                             count={totalPages}
                             page={page}
                             onChange={handlePageChange}
+                            color='primary'
                         />
 
                     </Box>

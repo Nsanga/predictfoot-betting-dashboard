@@ -102,7 +102,7 @@ const TransactionUsers = ({ setPageTitle, setSubTitle }) => {
                 <>
                     <Title titre='Transactions' subtitle='User' />
 
-                    <Stack direction='row' spacing={2}>
+                    <Stack direction='row' spacing={2} style={{color:'#fff'}}>
                         <Card
                             titre='Montant transactions réussites'
                             icone={GiMoneyStack}

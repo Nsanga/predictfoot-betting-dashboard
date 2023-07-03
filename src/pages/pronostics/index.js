@@ -207,6 +207,7 @@ const Pronostics = (
                                                     count={totalPages}
                                                     page={page}
                                                     onChange={handlePageChange}
+                                                    color="primary"
                                                 />
 
                                             </Box>
@@ -215,7 +216,7 @@ const Pronostics = (
                                             <Stack direction='row' spacing={2} justifyContent="space-between" margin='1rem'>
                                                 <DateFilter predicts={predicts} />
                                                 <Stack direction='row' spacing={2} justifyContent="flex-end" margin='1rem'>
-                                                    <Button variant="contained" sx={{ textTransform: 'none' }}>Exporter</Button>
+                                                    <Button variant="outlined" sx={{ textTransform: 'none' }}>Exporter</Button>
                                                     <ModalPronostics
                                                         titleModal='Ajouter un VIP tip'
                                                         predictionType='VIP Tips' />
@@ -237,6 +238,7 @@ const Pronostics = (
                                                     count={totalPages}
                                                     page={page}
                                                     onChange={handlePageChange}
+                                                    color="primary"
                                                 />
                                             </Box>
 

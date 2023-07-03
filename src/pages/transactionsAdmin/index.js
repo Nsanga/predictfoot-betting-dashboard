@@ -94,19 +94,9 @@ const TransactionsAdmin = ({ setPageTitle, setSubTitle }) => {
                 </>
             ) : (
                 <>
-                    {/* <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={3} className='nav'>
-                                <Layout />
-                            </Grid>
-                            <Grid item xs={9}>
-                                
-                            </Grid>
-                        </Grid>
-                    </Box> */}
                     <Title titre='Transactions' subtitle='Admin' />
 
-                    <Stack direction='row' spacing={2}>
+                    <Stack direction='row' spacing={2} style={{color:'#fff'}}>
                         <Card
                             titre='Fond de caisse'
                             icone={GiMoneyStack}

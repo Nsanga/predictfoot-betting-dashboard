@@ -18,16 +18,6 @@ const DateFilter = ({ predicts, onDateChange }) => {
     setDateTo(team_name);
   };
 
-  // useEffect(() => {
-  //   const delay = setTimeout(() => {
-  //     dispatch(fetchPredictRequest(dateFrom, dateTo, search));
-  //   }, 500); // Délai d'attente de 500 ms avant d'exécuter la recherche
-
-  //   return () => clearTimeout(delay); // Annuler le délai si l'utilisateur continue de saisir
-  // }, [dateFrom, dateTo, search, dispatch]);
-
-  // console.log('by date::', predicts);
-
   return (
     <div className='filter'>
       <label htmlFor="date-picker">

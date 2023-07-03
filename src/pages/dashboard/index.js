@@ -207,7 +207,7 @@ export default function Home({ setPageTitle }) {
               <Box className='{styles.transactionsTitle}'>Transactions récentes</Box>
               <DateFilter onDateChange={handleDateChange} />
             </Stack>
-            <Table data={data} columns={columns} action={true} />
+            <Table data={data} columns={columns}/>
           </Stack>
         </Stack>
       ) : (

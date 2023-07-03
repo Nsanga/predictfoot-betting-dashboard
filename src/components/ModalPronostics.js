@@ -9,7 +9,6 @@ import { connect, useDispatch } from "react-redux";
 import { fetchPredictRequest, addPredictRequest } from '../redux/predict/actions';
 import Select from 'react-select';
 import moment from 'moment';
-import 'moment/locale/fr';
 
 const useStyles = makeStyles((theme) => ({
     dialogWrapper: {
