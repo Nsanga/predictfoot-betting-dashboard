@@ -15,13 +15,13 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-const Settings = ({setPageTitle}) => {
+const Settings = ({ setPageTitle }) => {
     const theme = useTheme();
     console.log(theme);
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     console.log(isMatch);
 
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = React.useState(1);
 
     useEffect(() => {
         setPageTitle('Settings');
@@ -135,43 +135,72 @@ const Settings = ({setPageTitle}) => {
 
             ) : (
                 <>
-                    {/* <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={3} className='nav'>
-                                <Layout />
-                            </Grid>
-                            <Grid item xs={9}>
-                                
-
-                            </Grid>
-                        </Grid>
-                    </Box> */}
                     <Title titre='Settings' />
                     <Box sx={{ width: '100%', typography: 'body1' }}>
                         <TabContext value={value}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="inherit">
-                                    <Tab label="Pronostics" value='1' style={{ textTransform: 'none', fontSize: '16px' }} />
-                                    <Tab label="Paiements" value='2' style={{ textTransform: 'none', fontSize: '16px' }} />
-                                    <Tab label="Forfaits" value='3' style={{ textTransform: 'none', fontSize: '16px' }} />
-                                    <Tab label="Notifications automatiques" value='4' style={{ textTransform: 'none', fontSize: '16px' }} />
+                            <Box>
+                                <TabList onChange={handleChange}>
+                                    <Tab
+                                        label="Pronostics"
+                                        value={1}
+                                        style={{
+                                            textTransform: 'none',
+                                            fontSize: value !== 1 ? '16px' : '16px',
+                                            fontFamily: 'Raleway',
+                                            fontWeight: value !== 1 ? '' : 'bold',
+                                            color: value !== 1 ? 'white' : '',
+                                        }}
+                                    />
+                                    <Tab
+                                        label="Paiements"
+                                        value={2}
+                                        style={{
+                                            textTransform: 'none',
+                                            fontSize: value !== 2 ? '16px' : '16px',
+                                            fontFamily: 'Raleway',
+                                            fontWeight: value !== 2 ? '' : 'bold',
+                                            color: value !== 2 ? 'white' : '',
+                                        }}
+                                    />
+                                    <Tab
+                                        label="Forfaits"
+                                        value={3}
+                                        style={{
+                                            textTransform: 'none',
+                                            fontSize: value !== 3 ? '16px' : '16px',
+                                            fontFamily: 'Raleway',
+                                            fontWeight: value !== 3 ? '' : 'bold',
+                                            color: value !== 3 ? 'white' : '',
+                                        }}
+                                    />
+                                    <Tab
+                                        label="Notifications automatiques"
+                                        value={4}
+                                        style={{
+                                            textTransform: 'none',
+                                            fontSize: value !== 4 ? '16px' : '16px',
+                                            fontFamily: 'Raleway',
+                                            fontWeight: value !== 4 ? '' : 'bold',
+                                            color: value !== 4 ? 'white' : '',
+                                        }}
+                                    />
                                 </TabList>
                             </Box>
-                            <TabPanel value="1">
-                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                            <TabPanel value={1}>
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -1.5rem'>
                                     <ModalForm
                                         titleModal='Ajouter un type de pronostic'
                                         titre='titre'
                                         description='description' />
                                 </Stack>
 
-                                <Box className='table-user'>
+                                <Box margin='0rem 0rem 0rem -1.5rem'>
                                     <Table data={matchPredictions} columns={columns} action={true} />
                                 </Box>
 
                             </TabPanel>
-                            <TabPanel value="2">
-                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                            <TabPanel value={2}>
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -1.5rem'>
                                     <ModalForm
                                         titleModal='Ajouter un mode de paiement'
                                         titre='titre'
@@ -179,12 +208,12 @@ const Settings = ({setPageTitle}) => {
                                         avatar='avatar' />
                                 </Stack>
 
-                                <Box className='table-user'>
+                                <Box margin='0rem 0rem 0rem -1.5rem'>
                                     <Table data={paiements} columns={columns} action={true} />
                                 </Box>
                             </TabPanel>
-                            <TabPanel value="3">
-                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                            <TabPanel value={3}>
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -1.5rem'>
                                     <ModalForm
                                         titleModal='Ajouter un forfait'
                                         type='type'
@@ -192,11 +221,11 @@ const Settings = ({setPageTitle}) => {
                                         prix='prix' />
                                 </Stack>
 
-                                <Box className='table-user'>
+                                <Box margin='0rem 0rem 0rem -1.5rem'>
                                     <Table data={forfaits} columns={columnsForfaits} action={true} />
                                 </Box>
                             </TabPanel>
-                            <TabPanel value="4">
+                            <TabPanel value={4}>
                                 <VerticalTabs />
                             </TabPanel>
                         </TabContext>

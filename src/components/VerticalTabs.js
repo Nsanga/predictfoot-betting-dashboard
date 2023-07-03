@@ -142,7 +142,7 @@ export default function VerticalTabs() {
         </Box>
       ) : (
         <Box
-          sx={{ flexGrow: 1, display: 'flex', color: 'white', margin: '1rem' }}
+          sx={{ flexGrow: 1, display: 'flex', color: 'white', margin: '1rem 1rem 1rem -1.5rem' }}
         >
 
           <Grid container spacing={1}>

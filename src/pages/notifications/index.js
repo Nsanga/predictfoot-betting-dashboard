@@ -16,13 +16,13 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
 
-const Notifications = ({setPageTitle}) => {
+const Notifications = ({ setPageTitle }) => {
     const theme = useTheme();
     console.log(theme);
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     console.log(isMatch);
 
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = React.useState(1);
 
     useEffect(() => {
         setPageTitle('Notifications', null);
@@ -93,50 +93,61 @@ const Notifications = ({setPageTitle}) => {
 
             ) : (
                 <>
-                    {/* <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={3} className='nav'>
-                                <Layout />
-                            </Grid>
-                            <Grid item xs={9}>
-                                                            </Grid>
-                        </Grid>
-                    </Box> */}
                     <Title titre='Notifications' />
 
-                    <Box sx={{ flexGrow: 1 }} className='box-custom-old'>
-                        <Grid container spacing={2}>
+                    <Box >
+                        <Grid container >
                             <Grid item xs={8} >
 
                                 <Box sx={{ width: '100%', typography: 'body1' }}>
                                     <TabContext value={value}>
-                                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                            <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="inherit">
-                                                <Tab label="Manuelles" value="1" style={{ textTransform: 'none', fontSize: '16px' }} />
-                                                <Tab label="Automatiques" value="2" style={{ textTransform: 'none', fontSize: '16px' }} />
+                                        <Box>
+                                            <TabList onChange={handleChange}>
+                                                <Tab
+                                                    label="Manuelles"
+                                                    value={1}
+                                                    style={{
+                                                        textTransform: 'none',
+                                                        fontSize: value !== 1 ? '16px':'16px',
+                                                        fontFamily: 'Raleway',
+                                                        fontWeight: value !== 1 ? '':'bold',
+                                                        color: value !== 1 ? 'white' : '',
+                                                    }}
+                                                />
+                                                <Tab
+                                                    label="Automatiques"
+                                                    value={2}
+                                                    style={{
+                                                        textTransform: 'none',
+                                                        fontSize: value !== 2 ? '16px':'16px',
+                                                        fontFamily: 'Raleway',
+                                                        fontWeight: value !== 2 ? '':'bold',
+                                                        color: value !== 2 ? 'white' : '',
+                                                    }}
+                                                />
                                             </TabList>
                                         </Box>
-                                        <TabPanel value="1">
-                                            <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                        <TabPanel value={1}>
+                                            <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -1.5rem'>
                                                 <ModalForm
                                                     titleModal='Ajouter une notification manuelle'
                                                     titre='titre'
                                                     description='description' />
                                             </Stack>
 
-                                            <Box className='table-user'>
+                                            <Box margin='0rem -4rem 0rem -1.5rem'>
                                                 <Table data={notifications} columns={columns} action={true} />
                                             </Box>
                                         </TabPanel>
-                                        <TabPanel value="2">
-                                            <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                        <TabPanel value={2}>
+                                            <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -1.5rem'>
                                                 <ModalForm
                                                     titleModal='Ajouter une notification automatique'
                                                     titre='titre'
                                                     description='description' />
                                             </Stack>
 
-                                            <Box className='table-user'>
+                                            <Box margin='0rem -4rem 0rem -1.5rem'>
                                                 <Table data={notifications} columns={columns} action={true} />
                                             </Box>
                                         </TabPanel>

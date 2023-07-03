@@ -11,7 +11,7 @@ import { useMediaQuery, useTheme } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import DateFilter from '../../components/DateFilter'
 
-export default function Home({setPageTitle}) {
+export default function Home({ setPageTitle }) {
 
   const theme = useTheme();
   console.log(theme);
@@ -213,76 +213,78 @@ export default function Home({setPageTitle}) {
       ) : (
         <>
           <Stack spacing={6}>
-                  <Title titre='Dashboard' />
+            <Title titre='Dashboard' />
 
-                  <Stack spacing={4}>
+            <Stack spacing={4}>
+
+              <GraphicsPerformance
+                titre='Performances'
+                xAxisDataKey='date'
+                dataPerformances={performance}
+                stroke='#2d80c8'
+                height={400} />
+
+              <Box sx={{ width: '98%' }}>
+
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                  <Grid item xs={6}>
 
                     <GraphicsPerformance
-                      titre='Performances'
+                      titre='Performances Financières'
                       xAxisDataKey='date'
-                      dataPerformances={performance}
-                      stroke='#2d80c8'
-                      height={400} />
+                      dataPerformances={finances}
+                      stroke='#2dc830'
+                      height={250} />
 
-                    <Box sx={{ width: '98%' }}>
+                  </Grid>
 
-                      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={6}>
+                  <Grid item xs={6}>
 
-                          <GraphicsPerformance
-                            titre='Performances Financières'
-                            xAxisDataKey='date'
-                            dataPerformances={finances}
-                            stroke='#2dc830'
-                            height={250} />
+                    <GraphicsPerformance
+                      titre='Performances des transactions'
+                      xAxisDataKey='date'
+                      dataPerformances={transactions}
+                      stroke='#e020c6'
+                      height={250} />
 
-                        </Grid>
+                  </Grid>
+                </Grid>
+              </Box>
 
-                        <Grid item xs={6}>
+            </Stack>
 
-                          <GraphicsPerformance
-                            titre='Performances des transactions'
-                            xAxisDataKey='date'
-                            dataPerformances={transactions}
-                            stroke='#e020c6'
-                            height={250} />
+            <Stack spacing={3} className={styles.performance}>
+              <Box className='{styles.performanceTitle}'>Performances de la journée</Box>
+              <Stack direction="row" spacing={2}>
+                <Card
+                  titre='Utilisateurs'
+                  icone={FaUsers}
+                />
+                <Card
+                  titre='Transactions'
+                  icone={AiOutlineTransaction}
+                />
+                <Card
+                  titre='Visites'
+                  icone={FaUsers}
+                />
+                <Card
+                  titre='Pronostics'
+                  icone={AiOutlineUnorderedList}
+                />
+              </Stack>
+            </Stack>
 
-                        </Grid>
-                      </Grid>
-                    </Box>
-
-                  </Stack>
-
-                  <Stack spacing={3} className={styles.performance}>
-                    <Box className='{styles.performanceTitle}'>Performances de la journée</Box>
-                    <Stack direction="row" spacing={2}>
-                      <Card
-                        titre='Utilisateurs'
-                        icone={FaUsers}
-                      />
-                      <Card
-                        titre='Transactions'
-                        icone={AiOutlineTransaction}
-                      />
-                      <Card
-                        titre='Visites'
-                        icone={FaUsers}
-                      />
-                      <Card
-                        titre='Pronostics'
-                        icone={AiOutlineUnorderedList}
-                      />
-                    </Stack>
-                  </Stack>
-
-                  <Stack spacing={4} className={styles.stacktable}>
-                    <Stack direction='row' justifyContent='space-between' alignItems='center'>
-                      <Box className={styles.transactionsTitle}>Transactions récentes</Box>
-                      <DateFilter onDateChange={handleDateChange} />
-                    </Stack>
-                    <Table data={data} columns={columns} />
-                  </Stack>
-                </Stack>
+            <Stack spacing={4} className={styles.stacktable}>
+              <Stack direction='row' justifyContent='space-between' alignItems='center'>
+                <Box className={styles.transactionsTitle}>Transactions récentes</Box>
+                <DateFilter onDateChange={handleDateChange} />
+              </Stack>
+              <Box style={{margin:'1rem 3rem 1rem 0rem'}}>
+                <Table data={data} columns={columns} />
+              </Box>
+            </Stack>
+          </Stack>
         </>
 
       )}

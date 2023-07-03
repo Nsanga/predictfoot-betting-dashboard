@@ -15,10 +15,6 @@
   font-size: 24px;
 }
 
-.stacktable {
-  margin: 20px;
-}
-
 @media (max-width: 768px) {
   .performanceTitle {
     font-size: 16px;

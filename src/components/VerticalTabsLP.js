@@ -227,14 +227,14 @@ export default function VerticalTabs() {
                                     borderRight: 1, borderColor: 'divider', marginTop: '1rem', marginBottom: '1rem'
                                 }}
                             >
-                                <Tab label="Bandeau" {...a11yProps(0)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
-                                <Tab label="Service" {...a11yProps(1)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
-                                <Tab label="Statistiques" {...a11yProps(2)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
-                                <Tab label="Forfaits" {...a11yProps(3)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
-                                <Tab label="Client" {...a11yProps(4)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
-                                <Tab label="Publicité" {...a11yProps(5)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
-                                <Tab label="A propos de nous" {...a11yProps(6)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
-                                <Tab label="Prise en main" {...a11yProps(7)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start' }} />
+                                <Tab label="Bandeau" {...a11yProps(0)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
+                                <Tab label="Service" {...a11yProps(1)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
+                                <Tab label="Statistiques" {...a11yProps(2)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
+                                <Tab label="Forfaits" {...a11yProps(3)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
+                                <Tab label="Client" {...a11yProps(4)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
+                                <Tab label="Publicité" {...a11yProps(5)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
+                                <Tab label="A propos de nous" {...a11yProps(6)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
+                                <Tab label="Prise en main" {...a11yProps(7)} sx={{ color: 'white', textTransform: 'none', textAlign: 'start', fontFamily:'Raleway' }} />
 
                             </Tabs>
                         </Grid>
@@ -245,7 +245,7 @@ export default function VerticalTabs() {
                             </TabPanel>
                             <TabPanel value={value} index={1}>
 
-                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -2px'>
                                     <ModalForm
                                         titleModal='Ajouter un service'
                                         numero='numero'
@@ -271,7 +271,7 @@ export default function VerticalTabs() {
                             </TabPanel>
                             <TabPanel value={value} index={4}>
 
-                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -2px'>
                                     <ModalForm
                                         titleModal= "Ajouter un avis d'un client"
                                         description='description'
@@ -296,7 +296,7 @@ export default function VerticalTabs() {
                             </TabPanel>
                             <TabPanel value={value} index={7}>
 
-                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem'>
+                                <Stack direction='row' spacing={2} justifyContent="flex-start" margin='1rem 1rem 1rem -2px'>
                                     <ModalForm
                                         titleModal='Ajouter une prise en main'
                                         titreRegister='titre'

@@ -284,11 +284,12 @@ a {
 }
 
 .table {
-  width: 95%;
-  margin: 1rem;
+  width: 100%;
   border-collapse: collapse;
   background: #02090F;
   border-radius: 8px;
+  color: #fff;
+  font-family: 'Raleway';
 }
 
 th,
@@ -509,9 +510,10 @@ span {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  font-weight: 100;
+  font-weight: 500;
   font-size: smaller;
   color: #ffffff;
+  font-family:'Raleway'
 }
 
 .rencontre-title {

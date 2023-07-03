@@ -34,7 +34,6 @@ const Pronostics = (
     const theme = useTheme();
     console.log(theme);
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-    console.log(isMatch);
 
     useEffect(() => {
         setPageTitle('Pronostics', null);
@@ -56,7 +55,7 @@ const Pronostics = (
         dispatch(fetchPredictRequest(page, limit));
     };
 
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = React.useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -129,7 +128,8 @@ const Pronostics = (
                                             width={25}
                                             height={35}
                                             type="VIP Tips"
-                                            predicts={predicts} />
+                                            predicts={predicts}
+                                        />
 
                                         <Pagination
                                             count={totalPages}
@@ -155,13 +155,33 @@ const Pronostics = (
 
                                 <Box sx={{ width: '100%', typography: 'body1' }}>
                                     <TabContext value={value}>
-                                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                            <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="inherit">
-                                                <Tab label="Week Tips" value="1" style={{ textTransform: 'none', fontSize: '16px', fontFamily: 'Raleway' }} />
-                                                <Tab label="VIP Tips" value="2" style={{ textTransform: 'none', fontSize: '16px', fontFamily: 'Raleway' }} />
+                                        <Box>
+                                            <TabList onChange={handleChange}>
+                                                <Tab
+                                                    label="Week Tips"
+                                                    value={1}
+                                                    style={{
+                                                        textTransform: 'none',
+                                                        fontSize: value !== 1 ? '16px' : '16px',
+                                                        fontFamily: 'Raleway',
+                                                        fontWeight: value !== 1 ? '' : 'bold',
+                                                        color: value !== 1 ? 'white' : '',
+                                                    }}
+                                                />
+                                                <Tab
+                                                    label="VIP Tips"
+                                                    value={2}
+                                                    style={{
+                                                        textTransform: 'none',
+                                                        fontSize: value !== 2 ? '16px' : '16px',
+                                                        fontFamily: 'Raleway',
+                                                        fontWeight: value !== 2 ? '' : 'bold',
+                                                        color: value !== 2 ? 'white' : '',
+                                                    }}
+                                                />
                                             </TabList>
                                         </Box>
-                                        <TabPanel value="1">
+                                        <TabPanel value={1}>
                                             <Stack direction='row' spacing={2} justifyContent="space-between" margin='1rem'>
                                                 <DateFilter predicts={predicts} />
                                                 <Stack direction='row' spacing={2} justifyContent="flex-end" margin='1rem'>
@@ -191,7 +211,7 @@ const Pronostics = (
 
                                             </Box>
                                         </TabPanel>
-                                        <TabPanel value="2">
+                                        <TabPanel value={2}>
                                             <Stack direction='row' spacing={2} justifyContent="space-between" margin='1rem'>
                                                 <DateFilter predicts={predicts} />
                                                 <Stack direction='row' spacing={2} justifyContent="flex-end" margin='1rem'>

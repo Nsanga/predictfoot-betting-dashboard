@@ -27,16 +27,6 @@ const LandigPageAccueil = ({ setPageTitle, setSubTitle }) => {
         </>
 
       ) : (
-        // <Box sx={{ flexGrow: 1 }}>
-        //   <Grid container spacing={2}>
-        //     <Grid item xs={3} className='nav'>
-        //       <Layout />
-        //     </Grid>
-        //     <Grid item xs={9}>
-
-        //     </Grid>
-        //   </Grid>
-        // </Box>
         <div>
           <Title titre='Landing Page' subtitle='Accueil' />
 

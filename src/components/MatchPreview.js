@@ -165,8 +165,5 @@ const MatchPreview = ({ size, width, height, predicts, type }) => {
 
     )
 }
-const mapStateToProps = ({ PredictReducer }) => ({
-    predicts: PredictReducer.predicts
-});
 
-export default connect(mapStateToProps)(MatchPreview);
+export default MatchPreview;

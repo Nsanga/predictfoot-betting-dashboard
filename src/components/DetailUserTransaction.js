@@ -21,7 +21,7 @@ const DetailUserTransaction = () => {
                         </Box>
                         <Box className='box-details-value'>xxxxxxxxxxxxx</Box>
                     </Box>
-                    <Button variant="contained" startIcon={<HiDownload />} className='button-download'>
+                    <Button variant="contained" startIcon={<HiDownload />} style={{textTransform:'none'}}>
                         Télécharger
                     </Button>
                 </Stack>

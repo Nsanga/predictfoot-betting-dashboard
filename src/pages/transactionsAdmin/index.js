@@ -129,7 +129,7 @@ const TransactionsAdmin = ({ setPageTitle, setSubTitle }) => {
 
                                     <Stack direction='row' spacing={2} justifyContent="space-between" paddingRight='2rem'>
                                         <DateFilter onDateChange={handleDateChange} />
-                                        <Button variant="contained" className='button-exporter'>Exporter</Button>
+                                        <Button variant="contained" style={{textTransform:'none'}}>Exporter</Button>
                                     </Stack>
 
                                     <Table data={data} columns={columns} />

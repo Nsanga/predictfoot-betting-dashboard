@@ -100,16 +100,6 @@ const TransactionUsers = ({ setPageTitle, setSubTitle }) => {
                 </>
             ) : (
                 <>
-                    {/* <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={3} className='nav'>
-                                <Layout />
-                            </Grid>
-                            <Grid item xs={9}>
-                                
-                            </Grid>
-                        </Grid>
-                    </Box> */}
                     <Title titre='Transactions' subtitle='User' />
 
                     <Stack direction='row' spacing={2}>
@@ -135,7 +125,7 @@ const TransactionUsers = ({ setPageTitle, setSubTitle }) => {
 
                                     <Stack direction='row' spacing={2} justifyContent="space-between" paddingRight='2rem'>
                                         <DateFilter onDateChange={handleDateChange} />
-                                        <Button variant="contained" className='button-exporter'>Exporter</Button>
+                                        <Button variant="contained" style={{textTransform:'none'}}>Exporter</Button>
                                     </Stack>
 
                                     <Table data={data} columns={columns} />
