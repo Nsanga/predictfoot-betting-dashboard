@@ -36,61 +36,74 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange }) => {
                                 <IconButton aria-label='update' mr='2' color={iconColor} icon={<BiExport size='24px' />} />
                             </Flex>
                         </Flex>
-                        <Card bg={bg} p='12px'>
-                            <Flex direction='column' >
-                                <Flex direction='row' align='center' justify='space-between'>
-                                    <Text
-                                        // align='center'
-                                        color={textColorSecondary}
-                                        fontWeight='500'
-                                        fontSize='12px'
-                                        mb='2'>
-                                        Prédictions d'hier
-                                    </Text>
-                                    <Box bg={bgColorPrimary} borderRadius={4}>
-                                        <Text
-                                            color={textColorCoast}
-                                            fontWeight='900'
-                                            fontSize='12px'
-                                            p='4px'
-                                        >
-                                            {totalOldCoast}
-                                        </Text>
-                                    </Box>
-                                </Flex>
+                        {oldPredicts.length === 0 ? (
+                            <Text
+                                color={bgColorPrimary}
+                                fontSize='20px'
+                                align='center'
+                                p={4}
+                            >
+                                Aucune prédiction pour la journée en cours.
+                            </Text>
+                        ) : (
+                            <>
+                                <Card bg={bg} p='12px'>
+                                    <Flex direction='column' >
+                                        <Flex direction='row' align='center' justify='space-between'>
+                                            <Text
+                                                // align='center'
+                                                color={textColorSecondary}
+                                                fontWeight='500'
+                                                fontSize='12px'
+                                                mb='2'>
+                                                Prédictions d'hier
+                                            </Text>
+                                            <Box bg={bgColorPrimary} borderRadius={4}>
+                                                <Text
+                                                    color={textColorCoast}
+                                                    fontWeight='900'
+                                                    fontSize='12px'
+                                                    p='4px'
+                                                >
+                                                    {totalOldCoast}
+                                                </Text>
+                                            </Box>
+                                        </Flex>
 
-                                <Flex direction='row' align='center' justify='space-between'>
-                                    <Text
-                                        color={textColorStat}
-                                        fontWeight='500'
-                                        fontSize='12px'
-                                    // mb='4px'
-                                    >
-                                        Statistiques de la journée
-                                    </Text>
+                                        <Flex direction='row' align='center' justify='space-between'>
+                                            <Text
+                                                color={textColorStat}
+                                                fontWeight='500'
+                                                fontSize='12px'
+                                            // mb='4px'
+                                            >
+                                                Statistiques de la journée
+                                            </Text>
 
-                                </Flex>
+                                        </Flex>
 
-                            </Flex>
-                        </Card>
-                        {filterTips(oldPredicts, "Week Tips")?.map((match, index) => (
-                            <FixtureOldTips
-                                key={index}
-                                boxShadow={cardShadow}
-                                mb='20px'
-                                flag={match.country.flag}
-                                country={match.country.name}
-                                championship={match.championship.name}
-                                score={match.fixture.score.fulltime}
-                                logoHomeTeam={match.fixture.homeTeam.logo}
-                                homeTeamName={match.fixture.homeTeam.team_name}
-                                logoAwayTeam={match.fixture.awayTeam.logo}
-                                awayTeamName={match.fixture.awayTeam.team_name}
-                                prediction={match.prediction}
-                                coast={match.coast}
-                                oldPredicts={oldPredicts}
-                            />
-                        ))}
+                                    </Flex>
+                                </Card>
+                                {filterTips(oldPredicts, "Week Tips")?.map((match, index) => (
+                                    <FixtureOldTips
+                                        key={index}
+                                        boxShadow={cardShadow}
+                                        mb='20px'
+                                        flag={match.country.flag}
+                                        country={match.country.name}
+                                        championship={match.championship.name}
+                                        score={match.fixture.score.fulltime}
+                                        logoHomeTeam={match.fixture.homeTeam.logo}
+                                        homeTeamName={match.fixture.homeTeam.team_name}
+                                        logoAwayTeam={match.fixture.awayTeam.logo}
+                                        awayTeamName={match.fixture.awayTeam.team_name}
+                                        prediction={match.prediction}
+                                        coast={match.coast}
+                                        oldPredicts={oldPredicts}
+                                    />
+                                ))}
+                            </>
+                        )}
 
                     </TabPanel>
                     <TabPanel>
@@ -100,59 +113,72 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange }) => {
                                 <IconButton aria-label='update' mr='2' color={iconColor} icon={<BiExport size='24px' />} />
                             </Flex>
                         </Flex>
-                        <Card bg={bg} p='12px'>
-                            <Flex direction='column' >
-                                <Flex direction='row' align='center' justify='space-between'>
-                                    <Text
-                                        // align='center'
-                                        color={textColorSecondary}
-                                        fontWeight='500'
-                                        fontSize='12px'
-                                        mb='2'>
-                                        Prédictions d'hier
-                                    </Text>
-                                    <Box bg={bgColorPrimary} borderRadius={4}>
-                                        <Text
-                                            color={textColorCoast}
-                                            fontWeight='900'
-                                            fontSize='12px'
-                                            p='4px'
-                                        >
-                                            {totalOldCoast}
-                                        </Text>
-                                    </Box>
-                                </Flex>
-                                <Flex direction='row' align='center' justify='space-between'>
-                                    <Text
-                                        color={textColorStat}
-                                        fontWeight='500'
-                                        fontSize='12px'
-                                    // mb='4px'
-                                    >
-                                        Statistiques de la journée
-                                    </Text>
-                                </Flex>
+                        {oldPredicts.length === 0 ? (
+                            <Text
+                                color={bgColorPrimary}
+                                fontSize='20px'
+                                align='center'
+                                p={4}
+                            >
+                                Aucune prédiction pour la journée en cours.
+                            </Text>
+                        ) : (
+                            <>
+                                <Card bg={bg} p='12px'>
+                                    <Flex direction='column' >
+                                        <Flex direction='row' align='center' justify='space-between'>
+                                            <Text
+                                                // align='center'
+                                                color={textColorSecondary}
+                                                fontWeight='500'
+                                                fontSize='12px'
+                                                mb='2'>
+                                                Prédictions d'hier
+                                            </Text>
+                                            <Box bg={bgColorPrimary} borderRadius={4}>
+                                                <Text
+                                                    color={textColorCoast}
+                                                    fontWeight='900'
+                                                    fontSize='12px'
+                                                    p='4px'
+                                                >
+                                                    {totalOldCoast}
+                                                </Text>
+                                            </Box>
+                                        </Flex>
+                                        <Flex direction='row' align='center' justify='space-between'>
+                                            <Text
+                                                color={textColorStat}
+                                                fontWeight='500'
+                                                fontSize='12px'
+                                            // mb='4px'
+                                            >
+                                                Statistiques de la journée
+                                            </Text>
+                                        </Flex>
 
-                            </Flex>
-                        </Card>
-                        {filterTips(oldPredicts, "VIP Tips")?.map((match, index) => (
-                            <FixtureOldTips
-                                key={index}
-                                boxShadow={cardShadow}
-                                mb='20px'
-                                flag={match.country.flag}
-                                country={match.country.name}
-                                championship={match.championship.name}
-                                score={match.fixture.score.fulltime}
-                                logoHomeTeam={match.fixture.homeTeam.logo}
-                                homeTeamName={match.fixture.homeTeam.team_name}
-                                logoAwayTeam={match.fixture.awayTeam.logo}
-                                awayTeamName={match.fixture.awayTeam.team_name}
-                                prediction={match.prediction}
-                                coast={match.coast}
-                                oldPredicts={oldPredicts}
-                            />
-                        ))}
+                                    </Flex>
+                                </Card>
+                                {filterTips(oldPredicts, "VIP Tips")?.map((match, index) => (
+                                    <FixtureOldTips
+                                        key={index}
+                                        boxShadow={cardShadow}
+                                        mb='20px'
+                                        flag={match.country.flag}
+                                        country={match.country.name}
+                                        championship={match.championship.name}
+                                        score={match.fixture.score.fulltime}
+                                        logoHomeTeam={match.fixture.homeTeam.logo}
+                                        homeTeamName={match.fixture.homeTeam.team_name}
+                                        logoAwayTeam={match.fixture.awayTeam.logo}
+                                        awayTeamName={match.fixture.awayTeam.team_name}
+                                        prediction={match.prediction}
+                                        coast={match.coast}
+                                        oldPredicts={oldPredicts}
+                                    />
+                                ))}
+                            </>
+                        )}
                     </TabPanel>
                 </TabPanels>
             </Tabs>
