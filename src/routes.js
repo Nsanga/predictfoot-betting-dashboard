@@ -7,6 +7,7 @@ import {
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
+  MdSettings,
 } from "react-icons/md";
 import { IoFootballSharp } from "react-icons/io5";
 
@@ -17,6 +18,9 @@ import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
+import Users from "views/admin/users";
+import Settings from "views/admin/settings";
+
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
@@ -36,6 +40,22 @@ const routes = [
     icon: <Icon as={IoFootballSharp} width='20px' height='20px' color='inherit' />,
     component: Pronostics,
   },
+  {
+    name: "Users",
+    layout: "/admin",
+    path: "/users",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: Users,
+  },
+  
+  {
+    name: "Settings",
+    layout: "/admin",
+    path: "/settings",
+    icon: <Icon as={MdSettings} width='20px' height='20px' color='inherit' />,
+    component: Settings,
+  },
+
   {
     name: "NFT Marketplace",
     layout: "/admin",
