@@ -6,7 +6,14 @@ import OldTips from "./components/OldTips";
 import { fetchPredictRequest } from "redux/predict/actions";
 import { connect, useDispatch } from "react-redux";
 
-const Pronostic = ({ predicts, loading, totalPages, page, oldPredicts, totalCoast }) => {
+const Pronostic = ({
+  predicts,
+  loading,
+  totalPages,
+  page,
+  oldPredicts,
+  totalCoast,
+}) => {
   // Chakra Color Mode
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
@@ -23,7 +30,16 @@ const Pronostic = ({ predicts, loading, totalPages, page, oldPredicts, totalCoas
     const page = 1;
     const limit = 10;
 
-    dispatch(fetchPredictRequest({ dateFrom: currentDate, dateTo: currentDate, type, search, page, limit }));
+    dispatch(
+      fetchPredictRequest({
+        dateFrom: currentDate,
+        dateTo: currentDate,
+        type,
+        search,
+        page,
+        limit,
+      })
+    );
     console.log("Dispatched fetchPredictRequest");
   }, [dispatch, type]);
 
@@ -40,10 +56,19 @@ const Pronostic = ({ predicts, loading, totalPages, page, oldPredicts, totalCoas
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2, "2xl": 6 }}
         gap="20px"
-        mb="20px"
+        spacingX="8rem"
       >
-        <Tabpane predicts={predicts} totalCoast={totalCoast} loading={loading} handleTabChange={handleTabChange}/>
-        <OldTips />
+        <Box boxSize={{ base: 'none', lg: "lg"}}>
+          <Tabpane
+            predicts={predicts}
+            totalCoast={totalCoast}
+            loading={loading}
+            handleTabChange={handleTabChange}
+          />
+        </Box>
+        <Box boxSize={{ base: 'none', lg: "md"}}>
+          <OldTips />
+        </Box>
       </SimpleGrid>
     </Box>
   );

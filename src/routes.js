@@ -8,6 +8,7 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdSettings,
+  MdNotifications,
 } from "react-icons/md";
 import { IoFootballSharp } from "react-icons/io5";
 
@@ -19,6 +20,7 @@ import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
 import Users from "views/admin/users";
+import Notifications from "views/admin/notifications";
 import Settings from "views/admin/settings";
 
 
@@ -46,6 +48,14 @@ const routes = [
     path: "/users",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Users,
+  },
+
+  {
+    name: "Notifications",
+    layout: "/admin",
+    path: "/notifications",
+    icon: <Icon as={MdNotifications} width='20px' height='20px' color='inherit' />,
+    component: Notifications,
   },
   
   {

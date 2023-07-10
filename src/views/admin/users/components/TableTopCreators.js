@@ -177,6 +177,7 @@ function TopCreatorTable(props) {
             })}
 
           </Tbody>
+          
           <UserDetails isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </Table>
       </Flex>

@@ -39,11 +39,11 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange }) => {
                         {oldPredicts.length === 0 ? (
                             <Text
                                 color={bgColorPrimary}
-                                fontSize='20px'
+                                fontSize='16px'
                                 align='center'
                                 p={4}
                             >
-                                Aucune prédiction pour la journée en cours.
+                                Aucune prédiction pour la journée précedente.
                             </Text>
                         ) : (
                             <>
@@ -116,11 +116,11 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange }) => {
                         {oldPredicts.length === 0 ? (
                             <Text
                                 color={bgColorPrimary}
-                                fontSize='20px'
+                                fontSize='16px'
                                 align='center'
                                 p={4}
                             >
-                                Aucune prédiction pour la journée en cours.
+                                Aucune prédiction pour la journée précedente.
                             </Text>
                         ) : (
                             <>

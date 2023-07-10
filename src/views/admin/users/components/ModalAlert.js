@@ -33,7 +33,6 @@ const ModalAlert = ({ itemId }) => {
     const dispatch = useDispatch();
 
     const handleConfirmDelete = () => {
-        console.log(itemId, 'ggggggg')
         dispatch(deletePredictRequest(itemId));
         onClose();
     };
@@ -58,7 +57,6 @@ const ModalAlert = ({ itemId }) => {
                 {overlay}
                 <ModalContent>
                     <ModalHeader>Confirmation de suppression</ModalHeader>
-                    {/* <ModalCloseButton /> */}
                     <ModalBody>
                         <Text>Voulez-vous vraiment supprimer cet utilisateur?</Text>
                     </ModalBody>
