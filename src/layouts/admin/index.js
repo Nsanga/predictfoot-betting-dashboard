@@ -13,8 +13,8 @@ import routes from 'routes.js';
 export default function Dashboard(props) {
 	const { ...rest } = props;
 	// states and functions
-	const [ fixed ] = useState(false);
-	const [ toggleSidebar, setToggleSidebar ] = useState(false);
+	const [fixed] = useState(false);
+	const [toggleSidebar, setToggleSidebar] = useState(false);
 	// functions for changing the states from components
 	const getRoute = () => {
 		return window.location.pathname !== '/admin/full-screen-maps';
@@ -85,7 +85,40 @@ export default function Dashboard(props) {
 	const getRoutes = (routes) => {
 		return routes.map((prop, key) => {
 			if (prop.layout === '/admin') {
-				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
+				if (prop.children) {
+					// Si la propriété "children" existe
+					const childRoutes = prop.children.map((childProp, childKey) => (
+						<Route
+							key={childKey}
+							path={childProp.layout + childProp.path}
+							component={childProp.component}
+						/>
+					));
+					return [
+						<Route
+							key={key}
+							path={prop.layout + prop.path}
+							render={() => (
+								<>
+									{/* Rendu du composant associé à la route principale */}
+									{prop.component}
+									{/* Rendu des composants enfants */}
+									{childRoutes}
+								</>
+							)}
+						/>,
+						// Ajoutez d'autres routes principales ici si nécessaire
+					];
+				} else {
+					// Si la propriété "children" n'existe pas
+					return (
+						<Route
+							key={key}
+							path={prop.layout + prop.path}
+							component={prop.component}
+						/>
+					);
+				}
 			}
 			if (prop.collapse) {
 				return getRoutes(prop.items);

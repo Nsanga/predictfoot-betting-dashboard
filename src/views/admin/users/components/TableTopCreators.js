@@ -1,9 +1,7 @@
 import {
   Avatar,
   Box,
-  Button,
   Flex,
-  IconButton,
   Progress,
   Table,
   Tbody,
@@ -89,18 +87,6 @@ function TopCreatorTable(props) {
                     </Flex>
                   </Th>
                 ))}
-                <Th
-                  pe='10px'
-                  key={index}
-                  borderColor='transparent'>
-                  <Flex
-                    justify='space-between'
-                    align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                    Actions
-                  </Flex>
-                </Th>
               </Tr>
             ))}
           </Thead>
@@ -165,13 +151,6 @@ function TopCreatorTable(props) {
                       </Td>
                     );
                   })}
-                  <Td
-                    key={index}
-                    fontSize={{ sm: "14px" }}
-                    minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                    borderColor='transparent'>
-                      <ModalAlert isOpen={isModalDeleteOpen} onClose={() => setIsModalDeleteOpen(false)}/>
-                  </Td>
                 </Tr>
               );
             })}

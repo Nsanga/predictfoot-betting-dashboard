@@ -46,7 +46,6 @@ const ModalAlert = ({ itemId }) => {
                 }}
             >
                 <Flex align='center'>
-                    <Icon as={MdDelete} h='16px' w='16px' me='8px' />
                     <Text fontSize='sm' fontWeight='400'>
                         Supprimer
                     </Text>

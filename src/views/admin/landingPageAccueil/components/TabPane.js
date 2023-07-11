@@ -29,11 +29,15 @@ const Tabpane = (
     return (
         <div>
             <Tabs isFitted orientation="vertical">
-                <TabList >
-                    <Tab fontWeight='700'fontSize={{base:"12px", lg:'md'}} >Pronostics</Tab>
-                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Paiements</Tab>
+                <TabList alignItems='flex-start' w='30%'>
+                    <Tab fontWeight='700'fontSize={{base:"12px", lg:'md'}} >Bandeau</Tab>
+                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >service</Tab>
+                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Statistiques</Tab>
                     <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Packages</Tab>
-                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Notifications automatiques</Tab>
+                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Client</Tab>
+                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Publicité</Tab>
+                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >A propos de nous</Tab>
+                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Prise en main</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>

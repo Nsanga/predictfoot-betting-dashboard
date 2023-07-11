@@ -11,6 +11,7 @@ import {
   MdNotifications,
 } from "react-icons/md";
 import { IoFootballSharp } from "react-icons/io5";
+import { PiScreencastFill } from "react-icons/pi";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
@@ -22,6 +23,8 @@ import RTL from "views/admin/rtl";
 import Users from "views/admin/users";
 import Notifications from "views/admin/notifications";
 import Settings from "views/admin/settings";
+import Accueil from "views/admin/landingPageAccueil";
+import Blog from "views/admin/settings";
 
 
 // Auth Imports
@@ -57,7 +60,30 @@ const routes = [
     icon: <Icon as={MdNotifications} width='20px' height='20px' color='inherit' />,
     component: Notifications,
   },
-  
+
+  {
+    name: "Landing-page",
+    layout: "/admin",
+    path: "/landing-page",
+    icon: <Icon as={PiScreencastFill} width='20px' height='20px' color='inherit' />,
+    children: [
+      {
+        name: "Accueil",
+        layout: "/admin",
+        path: "/landing-page/accueil",
+        icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+        component: Accueil,
+      },
+      {
+        name: "Blog",
+        layout: "/admin",
+        path: "/landing-page/blog",
+        icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+        component: Blog,
+      },
+    ]
+  },
+
   {
     name: "Settings",
     layout: "/admin",

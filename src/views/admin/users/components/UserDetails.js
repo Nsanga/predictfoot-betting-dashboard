@@ -1,15 +1,16 @@
-import { 
-    Modal, 
-    ModalOverlay, 
-    ModalContent, 
-    ModalBody, 
-    ModalFooter, 
-    Button, 
-    Text, 
-    Flex, 
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
+    ModalFooter,
+    Button,
+    Text,
+    Flex,
     Avatar
 } from '@chakra-ui/react';
 import React from 'react';
+import ModalAlert from './ModalAlert';
 
 const UserDetails = ({ isOpen, onClose }) => {
     return (
@@ -32,90 +33,90 @@ const UserDetails = ({ isOpen, onClose }) => {
                             />
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Nom d'utilisateur:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 username
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Email:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 username
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Téléphone:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Téléphone
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Pays:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Pays
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Statut:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Statut
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Type de prédiction:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Type_de_prédiction
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Abonnement:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Abonnement
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Montant abonnement:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Montant_abonnement
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Mode de paiement:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Mode_de_paiement
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Date de souscription:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Date_de_souscription
                             </Text>
                         </Flex>
                         <Flex justify='space-between'>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Dernière connexion:
                             </Text>
-                            <Text fontSize={{base:"12px", lg:'md'}}>
+                            <Text fontSize={{ base: "12px", lg: 'md' }}>
                                 Dernière_connexion
                             </Text>
                         </Flex>
@@ -124,9 +125,9 @@ const UserDetails = ({ isOpen, onClose }) => {
 
                 <ModalFooter>
                     <Button colorScheme='blue' mr={3}>
-                        Supprimer
+                        <ModalAlert />
                     </Button>
-                    <Button onClick={onClose}>Fermer</Button>
+                    <Button onClick={onClose} colorScheme='red' variant='solid'>Fermer</Button>
                 </ModalFooter>
             </ModalContent>
         </Modal>

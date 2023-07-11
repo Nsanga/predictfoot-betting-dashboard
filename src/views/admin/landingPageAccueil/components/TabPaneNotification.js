@@ -8,14 +8,10 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import banner from "../../../../assets/img/auth/banner.png";
 import avatar from "../../../../assets/img/avatars/avatar4.png";
-import PronosticsTable from './SettingsTable';
 import Add from './Add';
-import PackagesTable from './PackagesTable';
-import TabpaneNotification from './TabPaneNotification';
+import NotificationTable from './NotificationTable';
 
-const Tabpane = (
-    { predicts, totalCoast, handleTabChange }
-) => {
+const TabpaneNotification = () => {
     const iconColor = useColorModeValue("brand.500", "white");
     const cardShadow = useColorModeValue(
         "0px 18px 40px rgba(112, 144, 176, 0.12)",
@@ -28,34 +24,32 @@ const Tabpane = (
 
     return (
         <div>
-            <Tabs isFitted orientation="vertical">
-                <TabList >
-                    <Tab fontWeight='700'fontSize={{base:"12px", lg:'md'}} >Pronostics</Tab>
-                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Paiements</Tab>
-                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Packages</Tab>
-                    <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Notifications automatiques</Tab>
+            <Tabs variant='soft-rounded' colorScheme='blue'>
+                <TabList m={6}>
+                    <Tab>Types de campagne</Tab>
+                    <Tab>Chaines de communication</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>
-                        <Card mb={{ base: "0px", "2xl": "20px" }}>
+                    <Card mb={{ base: "0px", "2xl": "20px" }}>
                             <Flex direction='row' justify='flex-end' mb={2}>
                                 <Add />
                             </Flex>
-                            <PronosticsTable
+                            <NotificationTable
                                 boxShadow={cardShadow}
                                 mb='20px'
                                 name='Name'
                                 description='Description'
                             />
 
-                            <PronosticsTable
+                            <NotificationTable
                                 boxShadow={cardShadow}
                                 mb='20px'
                                 name='Name'
                                 description='Description'
                             />
 
-                            <PronosticsTable
+                            <NotificationTable
                                 boxShadow={cardShadow}
                                 mb='20px'
                                 name='Name'
@@ -69,59 +63,28 @@ const Tabpane = (
                             <Flex direction='row' justify='flex-end' mb={2}>
                                 <Add />
                             </Flex>
-                            <PronosticsTable
+                            <NotificationTable
                                 boxShadow={cardShadow}
                                 mb='20px'
-                                name='Nom'
-                                description='Description'
+                                name='Name'
+                                // description='Description'
                             />
 
-                            <PronosticsTable
+                            <NotificationTable
                                 boxShadow={cardShadow}
                                 mb='20px'
-                                name='Nom'
-                                description='Description'
+                                name='Name'
+                                // description='Description'
                             />
 
-                            <PronosticsTable
+                            <NotificationTable
                                 boxShadow={cardShadow}
                                 mb='20px'
-                                name='Nom'
-                                description='Description'
-                            />
-
-                        </Card>
-                    </TabPanel>
-                    <TabPanel>
-                    <Card mb={{ base: "0px", "2xl": "20px" }}>
-                            <Flex direction='row' justify='flex-end' mb={2}>
-                                <Add />
-                            </Flex>
-                            <PackagesTable
-                                boxShadow={cardShadow}
-                                mb='20px'
-                                duree='Duree'
-                                price='Price'
-                            />
-
-                            <PackagesTable
-                                boxShadow={cardShadow}
-                                mb='20px'
-                                duree='Duree'
-                                price='Price'
-                            />
-
-                            <PackagesTable
-                                boxShadow={cardShadow}
-                                mb='20px'
-                                duree='Duree'
-                                price='Price'
+                                name='Name'
+                                // description='Description'
                             />
 
                         </Card>
-                    </TabPanel>
-                    <TabPanel>
-                        <TabpaneNotification />
                     </TabPanel>
                 </TabPanels>
             </Tabs>
@@ -129,4 +92,4 @@ const Tabpane = (
     )
 }
 
-export default Tabpane;
+export default TabpaneNotification;
