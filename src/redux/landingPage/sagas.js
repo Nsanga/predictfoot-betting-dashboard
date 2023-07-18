@@ -426,12 +426,22 @@ function* deleteGripRequest(action) {
 }
 function* addGripRequest(action) {
   try {
+    const { number, title, description, image } = action.payload;
+
+    const formData = new FormData();
+    formData.append('number', number);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('image', image);
+
+    const boundary = '---------------------------' + Date.now().toString(16);
+
     const response = yield call(fetch, `${url}/api/v1/landing-page/grip/create`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': `multipart/form-data; boundary=${boundary}`,
       },
-      body: action.payload,
+      body: formData,
     });
 
     if (response.ok) {
@@ -446,6 +456,7 @@ function* addGripRequest(action) {
     yield put({ type: types.ADD_GRIP_FAILED, payload: error });
   }
 }
+
 export default function* LandingSaga() {
   yield takeLatest(types.GET_HEADER_REQUEST, fetchHeaderRequest);
   yield takeLatest(types.UPDATE_HEADER_REQUEST, updateHeaderRequest);
