@@ -1,36 +1,18 @@
 import React from 'react'
 import {
-    Modal,
     ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
     useDisclosure,
     IconButton,
     useColorModeValue,
-    Text,
-    Button,
 } from '@chakra-ui/react'
 import { BsPlusCircleFill } from 'react-icons/bs'
-import AddPredictForm from './AddForm'
-import ModalPredict from './ModalSettings'
+import ModalGrip from './ModalGrip'
 
-const Add = () => {
+const Service = () => {
     const OverlayOne = () => (
         <ModalOverlay
             bg='blackAlpha.300'
             backdropFilter='blur(10px) hue-rotate(90deg)'
-        />
-    )
-
-    const OverlayTwo = () => (
-        <ModalOverlay
-            bg='none'
-            backdropFilter='auto'
-            backdropInvert='80%'
-            backdropBlur='2px'
         />
     )
 
@@ -50,9 +32,9 @@ const Add = () => {
                     onOpen()
                 }} />
 
-            <ModalPredict isOpen={isOpen} onClose={onClose} />
+            <ModalGrip isOpen={isOpen} onClose={onClose} />
         </>
     )
 }
 
-export default Add
+export default Service

@@ -9,9 +9,9 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
-import AddForm from './StatisticForm';
+import AddForm from './AddForm';
 
-const ModalPredict = ({ isOpen, onClose }) => {
+const ModalArticle = ({ isOpen, onClose }) => {
     const overlay = (
         <ModalOverlay
           bg='blackAlpha.300'
@@ -22,11 +22,11 @@ const ModalPredict = ({ isOpen, onClose }) => {
         <Modal isCentered isOpen={isOpen} onClose={onClose} size='2xl'>
       {overlay}
       <ModalContent>
-        <ModalHeader>Ajouter une prédiction</ModalHeader>
+        <ModalHeader>Ajouter un article</ModalHeader>
         <ModalBody>
           <AddForm />
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter mt={-24}>
           <Button onClick={onClose} colorScheme='blue' variant='solid'>
             Ajouter
           </Button>
@@ -36,4 +36,4 @@ const ModalPredict = ({ isOpen, onClose }) => {
     )
 }
 
-export default ModalPredict
+export default ModalArticle

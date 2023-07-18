@@ -24,11 +24,16 @@ import Users from "views/admin/users";
 import Notifications from "views/admin/notifications";
 import Settings from "views/admin/settings";
 import Accueil from "views/admin/landingPageAccueil";
-import Blog from "views/admin/settings";
+import Blog from "views/admin/landingPageBlog";
+import UsersTransaction from "views/admin/transactionUsers";
 
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
+import { FaBlog, FaUsers } from "react-icons/fa";
+import { BiTransferAlt } from "react-icons/bi";
+import { RiUserSettingsFill } from "react-icons/ri";
+import Admin from "views/admin/transactionsAdmin";
 
 const routes = [
   {
@@ -51,6 +56,29 @@ const routes = [
     path: "/users",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Users,
+  },
+
+  {
+    name: "Transactions",
+    layout: "/admin",
+    path: "/transaction",
+    icon: <Icon as={BiTransferAlt} width='20px' height='20px' color='inherit' />,
+    children: [
+      {
+        name: "Users",
+        layout: "/admin",
+        path: "/transaction/users",
+        icon: <Icon as={FaUsers} width='20px' height='20px' color='inherit' />,
+        component: UsersTransaction,
+      },
+      {
+        name: "Admin",
+        layout: "/admin",
+        path: "/transaction/admin",
+        icon: <Icon as={RiUserSettingsFill} width='20px' height='20px' color='inherit' />,
+        component: Admin,
+      },
+    ]
   },
 
   {
@@ -78,7 +106,7 @@ const routes = [
         name: "Blog",
         layout: "/admin",
         path: "/landing-page/blog",
-        icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+        icon: <Icon as={FaBlog} width='20px' height='20px' color='inherit' />,
         component: Blog,
       },
     ]

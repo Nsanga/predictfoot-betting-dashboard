@@ -8,8 +8,8 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import banner from "../../../../assets/img/auth/banner.png";
 import avatar from "../../../../assets/img/avatars/avatar4.png";
-import Add from './Add';
-import NotificationTable from './NotificationTable';
+import Add from './HeaderForm';
+import NotificationTable from './AdvertisementForm';
 
 const TabpaneNotification = () => {
     const iconColor = useColorModeValue("brand.500", "white");

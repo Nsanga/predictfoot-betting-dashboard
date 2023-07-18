@@ -2,8 +2,10 @@ import {
   Avatar,
   Box,
   Flex,
+  Icon,
   Progress,
   Table,
+  TableContainer,
   Tbody,
   Td,
   Text,
@@ -23,6 +25,7 @@ import SearchBars from './searchBar';
 import UserDetails from "./UserDetails";
 import { DeleteIcon } from "@chakra-ui/icons";
 import ModalAlert from "./ModalAlert";
+import { MdCancel, MdCheckCircle, MdOutlineError } from "react-icons/md";
 
 function TopCreatorTable(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,7 +54,8 @@ function TopCreatorTable(props) {
 
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = useColorModeValue("secondaryGray.600", "white");
-
+  const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+  const iconColor = useColorModeValue("brand.500", "white");
   return (
     <>
       <Flex
@@ -68,97 +72,126 @@ function TopCreatorTable(props) {
           boxShadow='0px 40px 58px -20px rgba(112, 144, 176, 0.26)'>
           <SearchBars />
         </Flex>
-        <Table {...getTableProps()} variant='simple' color='gray.500'>
-          <Thead>
-            {headerGroups.map((headerGroup, index) => (
-              <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
-                {headerGroup.headers.map((column, index) => (
-                  <Th
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    pe='10px'
-                    key={index}
-                    borderColor='transparent'>
-                    <Flex
-                      justify='space-between'
-                      align='center'
-                      fontSize={{ sm: "10px", lg: "12px" }}
-                      color='gray.400'>
-                      {column.render("Header")}
-                    </Flex>
-                  </Th>
-                ))}
+        <TableContainer px='25px'>
+          <Table size='md' variant='simple' color='gray.500' mb='24px'>
+            <Thead>
+              <Tr>
+                <Th pe='10px' borderColor={borderColor}>
+                  <Flex
+                    justify='space-between'
+                    align='center'
+                    fontSize={{ sm: "10px", lg: "12px" }}
+                    color='gray.400'>
+                    Téléphone
+                  </Flex>
+                </Th>
+                <Th pe='10px' borderColor={borderColor}>
+                  <Flex
+                    justify='space-between'
+                    align='center'
+                    fontSize={{ sm: "10px", lg: "12px" }}
+                    color='gray.400'>
+                    E-mail
+                  </Flex>
+
+                </Th>
+                <Th pe='10px' borderColor={borderColor}>
+                  <Flex
+                    justify='space-between'
+                    align='center'
+                    fontSize={{ sm: "10px", lg: "12px" }}
+                    color='gray.400'>
+                    Statut
+                  </Flex>
+                </Th>
+                <Th pe='10px' borderColor={borderColor}>
+                  <Flex
+                    justify='space-between'
+                    align='center'
+                    fontSize={{ sm: "10px", lg: "12px" }}
+                    color='gray.400'>
+                    Dernière connexion
+                  </Flex>
+                </Th>
               </Tr>
-            ))}
-          </Thead>
-
-          <Tbody {...getTableBodyProps()}>
-            {page.map((row, index) => {
-              prepareRow(row);
-              return (
-                <Tr
-                  {...row.getRowProps()}
-                  key={index}
-                  onClick={() => setIsModalOpen(true)}
-                  cursor="pointer"
-                >
-                  {row.cells.map((cell, index) => {
-                    let data = "";
-                    if (cell.column.Header === "Name") {
-                      data = (
-                        <Flex align='center'>
-                          <Avatar
-                            src={cell.value[1]}
-                            w='30px'
-                            h='30px'
-                            me='8px'
+            </Thead>
+            <Tbody>
+              <Tr onClick={() => setIsModalOpen(true)} cursor="pointer">
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Téléphone
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  E-mail
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Statut
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Dernière connexion
+                </Td>
+                {/* <Flex align='center'>
+                          <Icon
+                            w='24px'
+                            h='24px'
+                            me='5px'
+                            color={
+                              cell.value === "Approved"
+                                ? "green.500"
+                                : cell.value === "Disable"
+                                ? "red.500"
+                                : cell.value === "Error"
+                                ? "orange.500"
+                                : null
+                            }
+                            as={
+                              cell.value === "Approved"
+                                ? MdCheckCircle
+                                : cell.value === "Disable"
+                                ? MdCancel
+                                : cell.value === "Error"
+                                ? MdOutlineError
+                                : null
+                            }
                           />
-                          <Text
-                            color={textColor}
-                            fontSize='sm'
-                            fontWeight='600'>
-                            {cell.value[0]}
+                          <Text color={textColor} fontSize='sm' fontWeight='700'>
+                            {cell.value}
                           </Text>
-                        </Flex>
-                      );
-                    } else if (cell.column.Header === "Artworks") {
-                      data = (
-                        <Text
-                          color={textColorSecondary}
-                          fontSize='sm'
-                          fontWeight='500'>
-                          {cell.value}
-                        </Text>
-                      );
-                    } else if (cell.column.Header === "Rating") {
-                      data = (
-                        <Box>
-                          <Progress
-                            variant='table'
-                            colorScheme='brandScheme'
-                            value={cell.value}
-                          />
-                        </Box>
-                      );
-                    }
-                    return (
-                      <Td
-                        {...cell.getCellProps()}
-                        key={index}
-                        fontSize={{ sm: "14px" }}
-                        minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                        borderColor='transparent'>
-                        {data}
-                      </Td>
-                    );
-                  })}
-                </Tr>
-              );
-            })}
+                        </Flex> */}
 
-          </Tbody>
-          
-          <UserDetails isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        </Table>
+              </Tr>
+              <Tr onClick={() => setIsModalOpen(true)} cursor="pointer">
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Téléphone
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  E-mail
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Statut
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Dernière connexion
+                </Td>
+              </Tr>
+
+              <Tr onClick={() => setIsModalOpen(true)} cursor="pointer">
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Téléphone
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  E-mail
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Statut
+                </Td>
+                <Td Text color={textColor} fontSize='sm' fontWeight='700'>
+                  Dernière connexion
+                </Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <UserDetails isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </Flex>
     </>
   );

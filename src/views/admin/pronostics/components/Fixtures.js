@@ -98,8 +98,8 @@ export default function Fixture(props) {
                                 </Text>
                             </Flex>
                             {predicts && predicts.length > 0 && (
-                        <Popup itemId={predicts[0]._id} />
-                    )}
+                                <Popup itemId={predicts[0]._id} />
+                            )}
                         </Flex>
                         <Flex direction='row' align='center' justify='space-between'>
                             <Flex>

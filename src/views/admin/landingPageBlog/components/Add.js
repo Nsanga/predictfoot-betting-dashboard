@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -14,14 +14,22 @@ import {
     Button,
 } from '@chakra-ui/react'
 import { BsPlusCircleFill } from 'react-icons/bs'
-import AddPredictForm from './AddPredictForm'
-import ModalPredict from './ModalPredict'
+import ModalArticle from './ModalArticle'
 
-const AddPredict = ({predictType}) => {
+const Add = () => {
     const OverlayOne = () => (
         <ModalOverlay
             bg='blackAlpha.300'
             backdropFilter='blur(10px) hue-rotate(90deg)'
+        />
+    )
+
+    const OverlayTwo = () => (
+        <ModalOverlay
+            bg='none'
+            backdropFilter='auto'
+            backdropInvert='80%'
+            backdropBlur='2px'
         />
     )
 
@@ -40,9 +48,10 @@ const AddPredict = ({predictType}) => {
                     setOverlay(<OverlayOne />)
                     onOpen()
                 }} />
-            <ModalPredict isOpen={isOpen} onClose={onClose} predictType={predictType}/>
+
+            <ModalArticle isOpen={isOpen} onClose={onClose} />
         </>
     )
 }
 
-export default AddPredict
+export default Add

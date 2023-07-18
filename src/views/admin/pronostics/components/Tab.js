@@ -28,6 +28,11 @@ const Tabpane = (
     const filterTips = (array = [], type) => {
         return array.filter((ele) => ele.type_prediction === type)
     }
+    const [activeTab, setActiveTab] = useState('Week Tips');
+
+    const handleTabChanges = (type) => {
+        setActiveTab(type);
+    };
 
     return (
         <div>
@@ -42,18 +47,18 @@ const Tabpane = (
                             <SearchBars />
                             <Flex>
                                 <IconButton aria-label='update' color={iconColor} mr='4' icon={<BiExport size='24px' />} />
-                                <AddPredict />
+                                <AddPredict predictType='Week Tips' />
                             </Flex>
                         </Flex>
                         {predicts.length === 0 ? (
                             <Text
-                            color={bgColorPrimary}
-                            fontSize='20px'
-                            align='center'
-                            p={4}
-                        >
-                            Aucune prédiction pour la journée en cours.
-                        </Text>
+                                color={bgColorPrimary}
+                                fontSize='20px'
+                                align='center'
+                                p={4}
+                            >
+                                Aucune prédiction pour la journée en cours.
+                            </Text>
                         ) : (
                             <>
                                 <Card bg={bg} p='12px'>
@@ -106,8 +111,8 @@ const Tabpane = (
                         <Flex direction='row' justify='space-between' align='center' mb='4'>
                             <SearchBars />
                             <Flex>
-                                <IconButton aria-label='update' mr='4' color={iconColor} icon={<BiExport size='24px' />} />
-                                <IconButton aria-label='add' color={iconColor} icon={<BsPlusCircleFill size='24px' />} />
+                                <IconButton aria-label='update' color={iconColor} mr='4' icon={<BiExport size='24px' />} />
+                                <AddPredict predictType='VIP Tips' />
                             </Flex>
                         </Flex>
                         {predicts.length === 0 ? (

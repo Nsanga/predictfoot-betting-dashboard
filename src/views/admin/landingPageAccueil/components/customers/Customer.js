@@ -1,23 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
-    Modal,
     ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
     useDisclosure,
     IconButton,
     useColorModeValue,
-    Text,
-    Button,
 } from '@chakra-ui/react'
 import { BsPlusCircleFill } from 'react-icons/bs'
-import AddPredictForm from './AddPredictForm'
-import ModalPredict from './ModalPredict'
+import ModalCustomer from './ModalCustomer'
 
-const AddPredict = ({predictType}) => {
+const Service = () => {
     const OverlayOne = () => (
         <ModalOverlay
             bg='blackAlpha.300'
@@ -40,9 +31,10 @@ const AddPredict = ({predictType}) => {
                     setOverlay(<OverlayOne />)
                     onOpen()
                 }} />
-            <ModalPredict isOpen={isOpen} onClose={onClose} predictType={predictType}/>
+
+            <ModalCustomer isOpen={isOpen} onClose={onClose} />
         </>
     )
 }
 
-export default AddPredict
+export default Service

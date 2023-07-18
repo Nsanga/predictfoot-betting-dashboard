@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { BsPlusCircleFill } from 'react-icons/bs'
 import AddPredictForm from './AddForm'
-import ModalPredict from './ModalSettings'
+import ModalSetting from './ModalSettings'
 
 const Add = () => {
     const OverlayOne = () => (
@@ -50,7 +50,7 @@ const Add = () => {
                     onOpen()
                 }} />
 
-            <ModalPredict isOpen={isOpen} onClose={onClose} />
+            <ModalSetting isOpen={isOpen} onClose={onClose} />
         </>
     )
 }

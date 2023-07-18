@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import AddForm from './AddForm';
 
-const ModalPredict = ({ isOpen, onClose }) => {
+const ModalService = ({ isOpen, onClose }) => {
     const overlay = (
         <ModalOverlay
           bg='blackAlpha.300'
@@ -36,4 +36,4 @@ const ModalPredict = ({ isOpen, onClose }) => {
     )
 }
 
-export default ModalPredict
+export default ModalService

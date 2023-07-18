@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import PredictReducer from '../predict/reducers';
+import LandingReducer from '../landingPage/reducers';
 
 
 /**
@@ -7,6 +8,7 @@ import PredictReducer from '../predict/reducers';
  */
 const rootReducer = combineReducers({
   PredictReducer,
+  LandingReducer
 });
 
 export default rootReducer;
