@@ -11,10 +11,8 @@ const ServiceForm = (
         handleNumberChange,
         handleTitleChange,
         handleDescriptionChange,
-        service
     }
 ) => {
-    console.log(service)
     const iconColor = useColorModeValue("brand.500", "white");
 
     return (
