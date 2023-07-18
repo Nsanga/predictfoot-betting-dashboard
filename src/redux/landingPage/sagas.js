@@ -204,7 +204,7 @@ function* updateServiceRequest(action) {
     const { serviceId } = action.payload;
     const response = yield call(fetch, `${url}/api/v1/landing-page/service/update?Id=${serviceId}`, {
       method: 'PUT',
-      body: JSON.stringify(action.payload.data),
+      body: JSON.stringify(action.payload.updatedData), 
       headers: {
         'Content-Type': 'application/json',
       },
