@@ -24,7 +24,6 @@ const ModalGrip = ({ isOpen, onClose }) => {
   const [number, setNumber] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
   const [image, setImage] = useState('');
 
   const handleNumberChange = (event) => {
@@ -39,9 +38,7 @@ const ModalGrip = ({ isOpen, onClose }) => {
   };
 
   const handleImageChange = (imageURL, fileName) => {
-    // setSelectedImage(imageURL);
     setImage(fileName);
-    // console.log('Image URL:', imageURL);
   console.log('Image Name:', fileName);
   };
 

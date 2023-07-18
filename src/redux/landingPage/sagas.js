@@ -1,7 +1,6 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as types from './types';
 import { url } from '../../urlLoader';
-import { postRequestFormData } from 'helper/api';
 
 function* fetchHeaderRequest() {
   try {
@@ -202,8 +201,8 @@ function* fetchServiceRequest() {
 
 function* updateServiceRequest(action) {
   try {
-    const { id } = action.payload;
-    const response = yield call(fetch, `${url}/api/v1/landing-page/service/update?Id=${id}`, {
+    const { serviceId } = action.payload;
+    const response = yield call(fetch, `${url}/api/v1/landing-page/service/update?Id=${serviceId}`, {
       method: 'PUT',
       body: JSON.stringify(action.payload.data),
       headers: {
@@ -215,14 +214,14 @@ function* updateServiceRequest(action) {
     console.log('data::', data)
     
     if (data.success) {
-      yield put({ type: types.UPDATE_ABOUT_SUCCESS, payload: data.data });
+      yield put({ type: types.UPDATE_SERVICE_SUCCESS, payload: data.data });
     } else {
-      yield put({ type: types.UPDATE_ABOUT_FAILED, payload: "echec modification des données" });
+      yield put({ type: types.UPDATE_SERVICE_FAILED, payload: "echec modification des données" });
     }
 
   } catch (error) {
     console.log(error);
-    yield put({ type: types.UPDATE_ABOUT_FAILED, payload: error });
+    yield put({ type: types.UPDATE_SERVICE_FAILED, payload: error });
   }
 }
 
@@ -325,7 +324,7 @@ function* fetchCustomerRequest() {
 
     const response = yield call(fetch, link);
     const data = yield response.json();
-
+console.log('data::', data)
     if (data.success) {
       yield put({ type: types.GET_CUSTOMER_SUCCESS, payload: data.data });
     } else {
@@ -425,22 +424,20 @@ function* deleteGripRequest(action) {
     yield put({ type: types.DELETE_GRIP_FAILED, payload: error });
   }
 }
-
 function* addGripRequest(action) {
   try {
-    const { number, title, description, image } = action.payload;
+    const response = yield call(fetch, `${url}/api/v1/landing-page/grip/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      body: action.payload,
+    });
 
-    const formData = new FormData();
-    formData.append('number', number);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('image', image);
-
-    const response = yield postRequestFormData(`${url}/api/v1/landing-page/grip/create`, {});
-
-    if (response) {
-      console.log(response);
-      yield put({ type: types.ADD_GRIP_SUCCESS, payload: response });
+    if (response.ok) {
+      const data = yield response.json();
+      console.log(data);
+      yield put({ type: types.ADD_GRIP_SUCCESS, payload: data });
     } else {
       yield put({ type: types.ADD_GRIP_FAILED, payload: "Echec de l'ajout des données" });
     }
@@ -449,8 +446,6 @@ function* addGripRequest(action) {
     yield put({ type: types.ADD_GRIP_FAILED, payload: error });
   }
 }
-
-
 export default function* LandingSaga() {
   yield takeLatest(types.GET_HEADER_REQUEST, fetchHeaderRequest);
   yield takeLatest(types.UPDATE_HEADER_REQUEST, updateHeaderRequest);

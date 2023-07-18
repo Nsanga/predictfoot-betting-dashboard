@@ -19,7 +19,7 @@ import { MdEdit } from 'react-icons/md'
 import { useDispatch } from 'react-redux';
 import { updateServiceRequest } from 'redux/landingPage/actions';
 
-const ModalEditService = ({ service }) => {
+const ModalEditService = ({ service, serviceId }) => {
     const OverlayOne = () => (
         <ModalOverlay
             bg='blackAlpha.300'
@@ -57,16 +57,14 @@ const ModalEditService = ({ service }) => {
 
     const handleUpdateService = () => {
         const formData = {
-            number,
-            title,
-            description,
-            // Ajoutez d'autres propriétés nécessaires ici
+            number:number,
+            title: title,
+            description: description,
         };
 
-        dispatch(updateServiceRequest(service._id, formData));
+        dispatch(updateServiceRequest(serviceId, formData));
         // onClose();
     };
-
 
     return (
         <>

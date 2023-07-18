@@ -22,12 +22,6 @@ export default function ServiceTable(props) {
   const brandColor = useColorModeValue("brand.500", "white");
   const bg = useColorModeValue("white", "navy.700");
 
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditModalOpen = () => {
-    setIsEditModalOpen(true);
-  };
-
   return (
     <Card bg={bg} {...rest} p='14px'>
       <Flex align='center' justify='space-between' direction={{ base: "column", md: "row" }}>
@@ -77,15 +71,12 @@ export default function ServiceTable(props) {
             variant='no-hover'
             me='16px'
             ms='auto'
-            p='0px !important'
-            onClick={handleEditModalOpen}>
+            p='0px !important'>
             <ModalEditService
-              isOpen={isEditModalOpen}
-              onClose={() => setIsEditModalOpen(false)}
               number={number}
               title={name}
               description={description}
-              itemId={service._id}
+              serviceId={itemId}
               service={service}
             />
             {/* <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' /> */}

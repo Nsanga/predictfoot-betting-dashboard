@@ -274,7 +274,7 @@ function LandingReducer(state = INITIAL_STATE, action) {
         loading: true,
         error: null,
       };
-    case types.UPDATE_SERVICE_SUCCESS:
+      case types.UPDATE_SERVICE_SUCCESS:
       const { serviceId, updatedData } = action.payload;
 
       // Trouvez le service à mettre à jour dans le tableau des services existants
@@ -288,7 +288,8 @@ function LandingReducer(state = INITIAL_STATE, action) {
 
       return {
         ...state,
-        services: updatedServices,
+        service: updatedServices,
+        loading: false,
       };
     case types.UPDATE_SERVICE_FAILED:
       return {

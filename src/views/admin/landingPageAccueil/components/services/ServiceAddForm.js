@@ -38,7 +38,7 @@ const ServiceAddForm = ({ service, loading }) => {
                                 name={services.title}
                                 description={services.description}
                                 itemId={services._id}
-                                service={service}
+                                service={services}
                             />
                         ))}
                     </>
