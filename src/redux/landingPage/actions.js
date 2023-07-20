@@ -115,7 +115,6 @@ export const deleteCustomerRequest = (id) => ({
   payload: {id},
 });
 
-
 export const fetchGripRequest = payload => ({
   type: types.GET_GRIP_REQUEST,
   payload
@@ -133,5 +132,25 @@ export const updateGripRequest = (id) => ({
 
 export const deleteGripRequest = (id) => ({
   type: types.DELETE_GRIP_REQUEST,
+  payload: {id},
+});
+
+export const fetchArticleRequest = (page, limit) => ({
+  type: types.GET_ARTICLE_REQUEST,
+  payload: {page, limit},
+});
+
+export const addArticleRequest = (formData) => ({
+  type: types.ADD_ARTICLE_REQUEST,
+  payload: formData
+});
+
+export const updateArticleRequest = (id) => ({
+  type: types.UPDATE_ARTICLE_REQUEST,
+  payload: id
+});
+
+export const deleteArticleRequest = (id) => ({
+  type: types.DELETE_ARTICLE_REQUEST,
   payload: {id},
 });

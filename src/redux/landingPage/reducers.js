@@ -10,6 +10,9 @@ const INITIAL_STATE = {
   plan: [],
   customer: [],
   grip: [],
+  articles: [],
+  totalPages: 0,
+  page: 0,
   loading: false,
   error: null,
 };
@@ -502,6 +505,83 @@ function LandingReducer(state = INITIAL_STATE, action) {
         error: null,
       };
     case types.DELETE_GRIP_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+      case types.GET_ARTICLE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case types.GET_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        articles: action.payload.results,
+        totalPages: action.payload.totalPages,
+        page: action.payload.page,
+      };
+    case types.GET_ARTICLE_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.toString(),
+      };
+    case types.ADD_ARTICLE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case types.ADD_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+    case types.ADD_ARTICLE_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case types.UPDATE_ARTICLE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case types.UPDATE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+    case types.UPDATE_ARTICLE_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case types.DELETE_ARTICLE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case types.DELETE_ARTICLE_SUCCESS:
+      const idArticle = action.payload;
+      const updatedArticle = state.article.filter((article) => article._id !== idArticle);
+      return {
+        ...state,
+        articles: updatedArticle,
+        loading: false,
+        error: null,
+      };
+    case types.DELETE_ARTICLE_FAILED:
       return {
         ...state,
         loading: false,

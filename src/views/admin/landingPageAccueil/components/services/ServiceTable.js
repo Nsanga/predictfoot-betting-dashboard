@@ -79,7 +79,6 @@ export default function ServiceTable(props) {
               serviceId={itemId}
               service={service}
             />
-            {/* <Icon as={MdEdit} color='secondaryGray.500' h='18px' w='18px' /> */}
           </Link>
         </Flex>
       </Flex>

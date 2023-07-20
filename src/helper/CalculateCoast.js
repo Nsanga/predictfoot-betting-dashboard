@@ -1,10 +1,19 @@
+
+
 function calculateTotalCoast(predicts) {
-    let totalCoast = 0;
-  console.log(predicts, 'ffffffff')
-    predicts.forEach((predict) => {
-      totalCoast += predict.coast;
-    });
-    console.log(totalCoast, 'ffffffff')
-    return totalCoast;
+  if (!Array.isArray(predicts)) {
+    return 0; // Return 0 or any default value depending on your use case
   }
-  export default calculateTotalCoast
+
+  let totalCoast = 0;
+
+  predicts.forEach((predict) => {
+    totalCoast += predict.coast;
+  });
+
+  const roundedTotalCoast = Number(totalCoast.toFixed(3));
+
+  return roundedTotalCoast;
+}
+
+export default calculateTotalCoast;

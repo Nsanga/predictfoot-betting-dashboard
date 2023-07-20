@@ -50,7 +50,7 @@ const Tabpane = (
                                 <AddPredict predictType='Week Tips' />
                             </Flex>
                         </Flex>
-                        {predicts.length === 0 ? (
+                        {!predicts || predicts.length === 0  ? (
                             <Text
                                 color={bgColorPrimary}
                                 fontSize='20px'
@@ -115,7 +115,7 @@ const Tabpane = (
                                 <AddPredict predictType='VIP Tips' />
                             </Flex>
                         </Flex>
-                        {predicts.length === 0 ? (
+                        {!predicts || predicts.length === 0  ? (
                             <Text
                                 color={bgColorPrimary}
                                 fontSize='20px'

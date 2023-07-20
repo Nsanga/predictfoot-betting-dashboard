@@ -2,8 +2,8 @@ const json = `application/json; charset=utf-8`;
 const multPart = `multipart/form-data; charset=utf-8`;
 
 const request = async (contentType, method, url, data, options = {}) => {
-    try {    
-        const jsonUser = JSON.parse().token;
+    try {
+
         const response = await fetch(url, {
             method: method,
             headers: {
@@ -13,12 +13,14 @@ const request = async (contentType, method, url, data, options = {}) => {
             body: data,
             timeout: 15000,
             ...options
-        });    
-            let jsonResponse = await response.json();
-            return jsonResponse;    
+        });
+
+        return response; // Return the entire response object
+
     } catch (error) {
-        console.log(error)
-    } 
+        console.log(error);
+        throw error;
+    }
 };
 
 const unAuthRequest = async (contentType, method, url, data) => {
@@ -31,23 +33,26 @@ const unAuthRequest = async (contentType, method, url, data) => {
             body: data,
             timeout: 15000,
         });
-    if (response)
-        return await response.json();
-    throw new Error("Api call failed");
+
+    if (response.ok) {
+        return await response.json(); // Parse the response body as JSON if response is OK
+    } else {
+        throw new Error("Api call failed");
+    }
 };
 
 // // request auth
 export const getRequest = (url) => request(json, 'GET', url);
-export const postRequest = (url, data) => request(json, 'POST', url, data);
-export const putRequest = (url, data) => request(json, 'PUT', url, data);
+export const postRequest = (url, data) => postUnauthRequest(url, data); // Use postUnauthRequest for 'POST'
+export const putRequest = (url, data) => putUnauthRequest(url, data); // Use putUnauthRequest for 'PUT'
 export const deleteRequest = (url, data) => request(json, 'DELETE', url, data);
 
 // multipart/formData
-export const putRequestFormData = (url, data, options = {}) => request(multPart, 'PUT', url, data, options);
-export const postRequestFormData = (url, data, options = {}) => request(multPart, 'POST', url, data, options);
+export const putRequestFormData = (url, formData, options = {}) => request(multPart, 'PUT', url, formData, options);
+export const postRequestFormData = (url, formData, options = {}) => request(multPart, 'POST', url, formData, options);
 
 //unAuth
-export const postUnauthRequest = (url, data) => unAuthRequest(json, 'POST', url, data);
-export const getUnauthRequest = (url, data) => unAuthRequest(json, 'GET', url, data);
-export const putUnauthRequest = (url, data) => unAuthRequest(json, 'PUT', url, data);
-export const deleteUnauthRequest = (url, data) => unAuthRequest(json, 'DELETE', url, data);
+export const postUnauthRequest = (url, data) => unAuthRequest(json, 'POST', url, JSON.stringify(data)); // Always stringify data for 'POST' request
+export const getUnauthRequest = (url) => unAuthRequest(json, 'GET', url);
+export const putUnauthRequest = (url, data) => unAuthRequest(json, 'PUT', url, JSON.stringify(data)); // Always stringify data for 'PUT' request
+export const deleteUnauthRequest = (url) => unAuthRequest(json, 'DELETE', url);
