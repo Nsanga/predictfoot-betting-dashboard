@@ -66,7 +66,7 @@ export default function SidebarDocs() {
           PRO!
         </Text>
       </Flex>
-      <Link href='https://horizon-ui.com/pro?ref=horizon-chakra-free'>
+      <Link href='https://predictfoot-dashboard.com/pro?ref=predictfoot-dashboard'>
         <Button
           bg='whiteAlpha.300'
           _hover={{ bg: "whiteAlpha.200" }}

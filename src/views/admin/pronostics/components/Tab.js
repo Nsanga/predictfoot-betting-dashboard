@@ -50,15 +50,17 @@ const Tabpane = (
                                 <AddPredict predictType='Week Tips' />
                             </Flex>
                         </Flex>
-                        {predicts.length === 0 ? (
-                            <Text
-                                color={bgColorPrimary}
-                                fontSize='20px'
-                                align='center'
-                                p={4}
-                            >
-                                Aucune prédiction pour la journée en cours.
-                            </Text>
+                        {!predicts || predicts.length === 0 ? (
+                            <Flex direction='column' h="30ch" align='center' justify='center'>
+                                <Text
+                                    color={bgColorPrimary}
+                                    fontSize='20px'
+                                    align='center'
+                                    p={4}
+                                >
+                                    Aucune prédiction pour la journée en cours.
+                                </Text>
+                            </Flex>
                         ) : (
                             <>
                                 <Card bg={bg} p='12px'>
@@ -115,15 +117,17 @@ const Tabpane = (
                                 <AddPredict predictType='VIP Tips' />
                             </Flex>
                         </Flex>
-                        {predicts.length === 0 ? (
-                            <Text
-                                color={bgColorPrimary}
-                                fontSize='20px'
-                                align='center'
-                                p={4}
-                            >
-                                Aucune prédiction pour la journée en cours.
-                            </Text>
+                        {!predicts || predicts.length === 0 ? (
+                            <Flex direction='column' h="30ch" align='center' justify='center'>
+                                <Text
+                                    color={bgColorPrimary}
+                                    fontSize='20px'
+                                    align='center'
+                                    p={4}
+                                >
+                                    Aucune prédiction pour la journée en cours.
+                                </Text>
+                            </Flex>
                         ) : (
                             <>
                                 <Card bg={bg} p='12px'>

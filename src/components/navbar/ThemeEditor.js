@@ -15,7 +15,7 @@ export function ThemeEditor(props) {
         <ThemeEditorContainer>
           <ThemeEditorButton {...props} />
           <ThemeEditorDrawer hideUpgradeToPro>
-            <ThemeEditorColors icon={CgColorPicker} title="Colors" />
+            {/* <ThemeEditorColors icon={CgColorPicker} title="Colors" /> */}
             <ThemeEditorFontSizes icon={ImFontSize} title="Font Sizes" />
           </ThemeEditorDrawer>
         </ThemeEditorContainer>

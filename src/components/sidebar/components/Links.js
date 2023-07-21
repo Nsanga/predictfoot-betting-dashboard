@@ -63,7 +63,7 @@ export function SidebarLinks(props) {
         if (route.children) {
           return (
             <Box key={index}>
-              <Accordion allowMultiple={true} >
+              <Accordion allowMultiple={true} border='transparent'>
                 <AccordionItem>
                   <AccordionButton >
                     {route.icon ? (

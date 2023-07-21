@@ -1,6 +1,8 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as types from './types';
 import { url } from '../../urlLoader';
+import { getUnauthRequest } from 'helper/api';
+import { deleteUnauthRequest } from 'helper/api';
 
 function* fetchPredictRequest(action) {
   console.log('action', action)
@@ -9,8 +11,7 @@ function* fetchPredictRequest(action) {
     let link = `${url}/api/v1/predict/get?dateFrom=${dateFrom}&dateTo=${dateTo}&type=${type}&search=${search}&page=${page}&limit=${limit}`;
     console.log('LIEN::', link);
 
-    const response = yield call(fetch, link);
-    const data = yield response.json();
+    const data = yield getUnauthRequest(link);
     console.log('data::', data);
 
     if (data.success) {
@@ -32,8 +33,7 @@ function* fetchOldPredictRequest(action) {
     let link = `${url}/api/v1/predict/get?dateFrom=${dateFrom}&dateTo=${dateTo}&type=${type}&search=${search}&page=${page}&limit=${limit}`;
     console.log('Lien-Old::', link);
 
-    const response = yield call(fetch, link);
-    const data = yield response.json();
+    const data = yield getUnauthRequest(link);
     console.log('dataOld::', data);
 
     if (data.success) {
@@ -51,14 +51,7 @@ function* fetchOldPredictRequest(action) {
 function* deletePredictRequest(action) {
   try {
     const { id } = action.payload;
-    const response = yield call(fetch, `${url}/api/v1/predict/delete?Id=${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data = yield response.json();
+    const data = yield deleteUnauthRequest(`${url}/api/v1/predict/delete?Id=${id}`, {});
 
     if (data.success) {
       yield put({ type: types.DELETE_PREDICT_SUCCESS, payload: id });

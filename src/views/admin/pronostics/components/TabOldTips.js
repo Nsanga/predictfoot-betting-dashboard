@@ -36,7 +36,7 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange }) => {
                                 <IconButton aria-label='update' mr='2' color={iconColor} icon={<BiExport size='24px' />} />
                             </Flex>
                         </Flex>
-                        {oldPredicts.length === 0 ? (
+                        {!oldPredicts || oldPredicts.length === 0 ? (
                             <Text
                                 color={bgColorPrimary}
                                 fontSize='16px'
@@ -113,7 +113,7 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange }) => {
                                 <IconButton aria-label='update' mr='2' color={iconColor} icon={<BiExport size='24px' />} />
                             </Flex>
                         </Flex>
-                        {oldPredicts.length === 0 ? (
+                        {!oldPredicts || oldPredicts.length === 0 ? (
                             <Text
                                 color={bgColorPrimary}
                                 fontSize='16px'
