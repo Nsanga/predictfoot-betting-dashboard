@@ -29,7 +29,7 @@ const Tabpane = (
     return (
         <div>
             <Tabs isFitted orientation="vertical">
-                <TabList >
+                <TabList alignItems='flex-start' w='35%' style={{ height: "100%", display: "flex", flexDirection: "column" }}>
                     <Tab fontWeight='700'fontSize={{base:"12px", lg:'md'}} >Pronostics</Tab>
                     <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Paiements</Tab>
                     <Tab fontWeight='700' fontSize={{base:"12px", lg:'md'}} >Packages</Tab>

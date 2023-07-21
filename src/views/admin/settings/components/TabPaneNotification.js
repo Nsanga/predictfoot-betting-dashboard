@@ -25,7 +25,7 @@ const TabpaneNotification = () => {
     return (
         <div>
             <Tabs variant='soft-rounded' colorScheme='blue'>
-                <TabList m={6}>
+                <TabList >
                     <Tab>Types de campagne</Tab>
                     <Tab>Chaines de communication</Tab>
                 </TabList>
