@@ -20,8 +20,7 @@ export default function Upload({ imageUrl, handleImageChange }) {
     const imageURL = URL.createObjectURL(file);
     setSelectedImage(imageURL);
     setImageName(file.name);
-
-    handleImageChange(imageURL, file.name);
+    handleImageChange(imageURL, event.target.files[0]);
   };
 
   const handleContainerClick = () => {

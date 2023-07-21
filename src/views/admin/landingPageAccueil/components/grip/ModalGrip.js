@@ -49,7 +49,6 @@ const ModalGrip = ({ isOpen, onClose }) => {
       description: description,
       image: image
     };
-    console.log('formData',formData)
     dispatch(addGripRequest(formData));
     // onClose();
   };

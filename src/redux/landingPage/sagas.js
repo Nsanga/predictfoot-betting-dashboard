@@ -1,6 +1,8 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as types from './types';
 import { url } from '../../urlLoader';
+import {postRequestFormData } from '../../helper/api';
+
 
 function* fetchHeaderRequest() {
   try {
@@ -432,25 +434,18 @@ function* addGripRequest(action) {
     formData.append('number', number);
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('image', image);
+    formData.append("image", image, image.name);
+    const data = yield postRequestFormData(`${url}/api/v1/landing-page/grip/create`, formData);
 
-    const boundary = '---------------------------' + Date.now().toString(16);
 
-    const response = yield call(fetch, `${url}/api/v1/landing-page/grip/create`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': `multipart/form-data; boundary=${boundary}`,
-      },
-      body: formData,
-    });
-
-    if (response.ok) {
-      const data = yield response.json();
-      console.log(data);
-      yield put({ type: types.ADD_GRIP_SUCCESS, payload: data });
-    } else {
-      yield put({ type: types.ADD_GRIP_FAILED, payload: "Echec de l'ajout des données" });
-    }
+    console.log("formdata:",data)
+    // if (response.ok) {
+    //   const data = yield response.json();
+    //   console.log(data);
+    //   yield put({ type: types.ADD_GRIP_SUCCESS, payload: data });
+    // } else {
+    //   yield put({ type: types.ADD_GRIP_FAILED, payload: "Echec de l'ajout des données" });
+    // }
   } catch (error) {
     console.log(error);
     yield put({ type: types.ADD_GRIP_FAILED, payload: error });
