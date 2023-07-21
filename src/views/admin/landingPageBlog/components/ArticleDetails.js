@@ -17,8 +17,8 @@ import {
     Box,
 } from '@chakra-ui/react';
 import AddForm from './AddForm';
-import { MdDelete } from 'react-icons/md';
-import { FaClock, FaStar } from 'react-icons/fa';
+import { MdDelete, MdStars } from 'react-icons/md';
+import { FaClock } from 'react-icons/fa';
 
 const ArticleDetails = (
     {
@@ -60,7 +60,7 @@ const ArticleDetails = (
                                 >
                                     {name} 
                                     <Box ml={2}> 
-                                    {statut === 'populaire' ? <FaStar color="gold" size={15} /> : null} 
+                                    {statut === 'populaire' ? <MdStars color="gold" size={15} /> : null} 
                                     {statut === 'recent' ? <FaClock color="blue" size={15} /> : null}
                                     </Box> 
                                 </Flex>
