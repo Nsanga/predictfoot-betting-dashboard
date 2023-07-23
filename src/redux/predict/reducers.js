@@ -5,6 +5,7 @@ import * as types from './types';
 const INITIAL_STATE = {
   predicts: [],
   oldPredicts: [],
+  countries:[],
   totalPages: 0,
   page: 0,
   loading: false,
@@ -98,6 +99,24 @@ function PredictReducer(state = INITIAL_STATE, action) {
         loading: false,
         error: action.payload,
       };
+      case types.GET_COUNTRY_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+      case types.GET_COUNTRY_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          countries: action.payload.results,
+        };
+      case types.GET_COUNTRY_FAILED:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload.toString(),
+        };
     default:
       return state;
   }

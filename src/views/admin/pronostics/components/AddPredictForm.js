@@ -1,9 +1,11 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Input,Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import moment from 'moment';
+import { connect, useDispatch } from "react-redux";
+import {fetchCountryByDate} from '../../../../redux/predict/actions'
 
-const AddPredictForm = () => {
+const AddPredictForm = ({countries,loading}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedChampionship, setSelectedChampionship] = useState(null);
@@ -12,7 +14,12 @@ const AddPredictForm = () => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [championshipOptions, setChampionshipOptions] = useState([]);
   const [matchOptions, setMatchOptions] = useState([]);
+  const [predictionOptions,setPredictionOptions] = useState([]);
+  const [selectedPrediction, setSelectedPrediction] = useState(null);
+  const [selectedCote, setSelectedCote] = useState('');
+  const dispatch = useDispatch();
 
+  
   // Function to get the date for today, tomorrow, and the day after tomorrow
   const getDates = () => {
     const today = moment();
@@ -39,10 +46,9 @@ const AddPredictForm = () => {
     const fetchCountries = async () => {
       if (!selectedDate) return; // Skip if no date is selected yet
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/fixture/getCountries?date=${selectedDate.value}`);
-        const data = await response.json();
-        if (data.success) {
-          const countryOptions = data.data.country.map((country) => ({
+        await dispatch( fetchCountryByDate({date:selectedDate.value})); 
+        if (countries.length > 0 && countries) {
+          const countryOptions = countries.map((country) => ({
             value: country.name,
             label: country.name,
             flag: country.flag,
@@ -58,7 +64,7 @@ const AddPredictForm = () => {
       }
     };
     fetchCountries();
-  }, [selectedDate]);
+  }, [dispatch,selectedDate]);
 
   // Fetch championships based on the selected country and populate championshipOptions state
   useEffect(() => {
@@ -125,6 +131,32 @@ const AddPredictForm = () => {
     fetchMatches();
   }, [selectedDate, selectedChampionship]);
 
+  const handlePredictionChange = (prediction) => {
+    setSelectedPrediction(prediction);
+    console.log("prediction",prediction);
+  };
+
+    // Set prediction option
+    useEffect(() => {
+      setPredictionOptions([
+        { value: 'Home Win', label: 'Home Win' },
+        { value: 'Away Win', label: 'Away Win' },
+        { value: 'Draw', label: 'Draw' },
+        { value: 'Double Chance Home', label: 'Double Chance Home' },
+        { value: 'Double Chance Away', label: 'Double Chance Away' },
+        { value: 'Two Teams Goals', label: 'Two Teams Goals' },
+        { value: 'Two Teams Don\'t Goals', label: 'Two Teams Don\'t Goals' },
+        { value: 'Over 0.5', label: 'Over 0.5' },
+        { value: 'Under 0.5', label: 'Under 0.5' },
+        { value: 'Over 1.5', label: 'Over 1.5' },
+        { value: 'Under 1.5', label: 'Under 1.5' },
+        { value: 'Over 2.5', label: 'Over 2.5' },
+        { value: 'Under 2.5', label: 'Under 2.5' },
+        { value: 'Over 3.5', label: 'Over 3.5' },
+        { value: 'Under 3.5', label: 'Under 3.5' },
+      ]);
+    }, []);
+
   // Function to format the label of each option with the flag or default image
   const formatOptionLabel = ({ value, label, flag, logo }) => (
     <Flex alignItems="center">
@@ -146,7 +178,7 @@ const AddPredictForm = () => {
           <Select
             value={selectedDate}
             options={dateOptions}
-            onChange={setSelectedDate}
+            onChange={(e) =>setSelectedDate(e)}
             name="date"
             isSearchable={true}
             isClearable={true}
@@ -164,6 +196,7 @@ const AddPredictForm = () => {
             isClearable={true}
             placeholder="Choisir Pays"
             formatOptionLabel={formatOptionLabel} // Apply the custom label format
+            isLoading={loading}
           />
         </Box>
         <Box>
@@ -195,15 +228,35 @@ const AddPredictForm = () => {
       <Flex justify="space-between">
         <Box>
           <Text>Prédiction</Text>
-          <Select />
+          <Select
+            value={selectedPrediction}
+            options={predictionOptions}
+            onChange={handlePredictionChange}
+            name="prediction"
+            isSearchable={true}
+            isClearable={true}
+            placeholder="Choisir Prédiction"
+          />
         </Box>
         <Box>
           <Text>Cote</Text>
-          <Select />
+          <Input
+            type="text"
+            value={selectedCote}
+            onChange={(e) => setSelectedCote(e.target.value)}
+            placeholder="Entrez la cote"
+          />
         </Box>
       </Flex>
     </Flex>
   );
 };
 
-export default AddPredictForm;
+
+const mapStateToProps = ({ PredictReducer }) => ({
+  countries: PredictReducer.countries,
+  loading: PredictReducer.loading,
+  error: PredictReducer.error,
+});
+
+export default connect(mapStateToProps)(AddPredictForm);

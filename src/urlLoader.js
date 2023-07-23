@@ -1,6 +1,5 @@
-const localURL = "http://localhost:5000";
+const localURL = "http://localhost:5000/api/v1";
 const liveURL = "";
-console.log("::::",liveURL);
 
 module.exports = {
     url:process.env.NODE_ENV ===  'production' ? liveURL : localURL

@@ -1,6 +1,12 @@
 
 import * as types from './types';
 
+//fetch country games by date 
+export const fetchCountryByDate = (payload) => ({
+  type: types.GET_COUNTRY_REQUEST,
+  payload: payload
+});
+
 export const fetchPredictRequest = (payload) => ({
   type: types.GET_PREDICT_REQUEST,
   payload: payload
