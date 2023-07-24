@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Input, Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import moment from 'moment';
@@ -96,23 +96,23 @@ const AddPredictForm = () => {
           const matchOptions = data.data.map((match) => ({
             value: match.fixture_id,
             label:
-            <Flex direction="row" justify="space-between">
-              <Flex >
-                <img src={match.homeTeam.logo} alt={match.homeTeam.team_name} height="30px" width="30px" />
-                <Text ml={2}>{match.homeTeam.team_name}</Text>
+              <Flex direction="row" justify="space-between">
+                <Flex >
+                  <img src={match.homeTeam.logo} alt={match.homeTeam.team_name} height="30px" width="30px" />
+                  <Text ml={2}>{match.homeTeam.team_name}</Text>
+                </Flex>
+                <Flex alignItems="center" align="center" justify="center">
+                  <Text fontSize="sm">
+                    <b>
+                      <u>{moment(match.event_date).format('HH:mm')} GMT</u>
+                    </b>
+                  </Text>
+                </Flex>
+                <Flex >
+                  <img src={match.awayTeam.logo} alt={match.awayTeam.team_name} height="30px" width="30px" />
+                  <Text ml={2}>{match.awayTeam.team_name}</Text>
+                </Flex>
               </Flex>
-              <Flex alignItems="center" align="center" justify="center">
-                <Text fontSize="sm">
-                  <b>
-                    <u>{moment(match.event_date).format('HH:mm')} GMT</u>
-                  </b>
-                </Text>
-              </Flex>
-              <Flex >
-                <img src={match.awayTeam.logo} alt={match.awayTeam.team_name} height="30px" width="30px" />
-                <Text ml={2}>{match.awayTeam.team_name}</Text>
-              </Flex>
-            </Flex>
           }));
           setMatchOptions(matchOptions);
           setSelectedMatch(null); // Reset the selected match when the date or championship changes
@@ -140,7 +140,7 @@ const AddPredictForm = () => {
 
   return (
     <Flex direction="column" gap={8}>
-      <Flex justify="space-between">
+      <Flex justify="space-between" gap={2}>
         <Box>
           <Text>Date</Text>
           <Select
@@ -151,6 +151,12 @@ const AddPredictForm = () => {
             isSearchable={true}
             isClearable={true}
             placeholder="Choisir Date"
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                width: '200px', // Remplacez la valeur par la largeur souhaitée
+              }),
+            }}
           />
         </Box>
         <Box>
@@ -164,6 +170,12 @@ const AddPredictForm = () => {
             isClearable={true}
             placeholder="Choisir Pays"
             formatOptionLabel={formatOptionLabel} // Apply the custom label format
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                width: '230px', // Remplacez la valeur par la largeur souhaitée
+              }),
+            }}
           />
         </Box>
         <Box>
@@ -177,6 +189,12 @@ const AddPredictForm = () => {
             isClearable={true}
             placeholder="Choisir Championnat"
             formatOptionLabel={formatOptionLabel} // Apply the custom label format
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                width: '250px', // Remplacez la valeur par la largeur souhaitée
+              }),
+            }}
           />
         </Box>
       </Flex>
@@ -192,14 +210,18 @@ const AddPredictForm = () => {
           placeholder="Choisir Rencontre"
         />
       </Box>
-      <Flex justify="space-between">
+      <Flex justify='space-between'>
         <Box>
           <Text>Prédiction</Text>
-          <Select />
+          <Input 
+          placeholder='Entrer une prediction' 
+          size='md' />
         </Box>
         <Box>
-          <Text>Cote</Text>
-          <Select />
+          <Text>Côte</Text>
+          <Input 
+          placeholder='Entrer une côte' 
+          size='md' />
         </Box>
       </Flex>
     </Flex>

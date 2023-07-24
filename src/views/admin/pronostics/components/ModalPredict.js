@@ -18,7 +18,7 @@ const ModalPredict = ({ isOpen, onClose, predictType }) => {
         />
     );
     return (
-        <Modal isCentered isOpen={isOpen} onClose={onClose} size='2xl'>
+        <Modal isCentered isOpen={isOpen} onClose={onClose} size='3xl'>
             {overlay}
             <ModalContent>
                 <ModalHeader>Ajouter un {predictType}</ModalHeader>
