@@ -27,7 +27,8 @@ export default function Footer() {
       }}
       justifyContent='flex-end'
       px={{ base: "30px", md: "50px" }}
-      pb='30px'>
+      pb='30px'
+      >
       <Text
         color={textColor}
         textAlign={{

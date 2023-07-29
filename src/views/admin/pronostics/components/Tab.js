@@ -9,11 +9,12 @@ import Card from "components/card/Card.js";
 import moment from 'moment';
 import 'moment/locale/fr';
 import AddPredict from './AddPredict';
+import DataPreview from './DataPreview';
 
 moment.locale('fr');
 
 const Tabpane = (
-    { predicts, totalCoast, handleTabChange }
+    { predicts, totalCoast, handleTabChange, loading }
 ) => {
     const iconColor = useColorModeValue("brand.500", "white");
     const cardShadow = useColorModeValue(
@@ -28,11 +29,6 @@ const Tabpane = (
     const filterTips = (array = [], type) => {
         return array.filter((ele) => ele.type_prediction === type)
     }
-    const [activeTab, setActiveTab] = useState('Week Tips');
-
-    const handleTabChanges = (type) => {
-        setActiveTab(type);
-    };
 
     return (
         <div>
@@ -50,62 +46,70 @@ const Tabpane = (
                                 <AddPredict predictType='Week Tips' />
                             </Flex>
                         </Flex>
-                        {!predicts || predicts.length === 0 ? (
-                            <Flex direction='column' h="30ch" align='center' justify='center'>
-                                <Text
-                                    color={bgColorPrimary}
-                                    fontSize='20px'
-                                    align='center'
-                                    p={4}
-                                >
-                                    Aucune prédiction pour la journée en cours.
-                                </Text>
-                            </Flex>
+                        {loading ? (
+                            <DataPreview />
                         ) : (
                             <>
-                                <Card bg={bg} p='12px'>
-                                    <Flex direction='row' align='center' justify='space-between'>
-                                        <Text
-                                            // align='center'
-                                            color={textColorSecondary}
-                                            fontWeight='500'
-                                            fontSize='12px'
-                                        >
-                                            Prédictions d'aujourd'hui
-                                        </Text>
-                                        <Box bg={bgColorPrimary} borderRadius={4}>
-                                            <Text
-                                                color={textColorCoast}
-                                                fontWeight='900'
-                                                fontSize='12px'
-                                                p='4px'
-                                            >
-                                                {totalCoast}
-                                            </Text>
-                                        </Box>
+                                {!predicts || predicts.length === 0 ? (
+                                    <Text
+                                        color={bgColorPrimary}
+                                        fontSize='20px'
+                                        align='center'
+                                        p={4}
+                                        mt={40}
+                                    >
+                                        Aucune prédiction pour la journée en cours.
+                                    </Text>
+                                ) : (
+                                    <>
+                                        <Card bg={bg} p='12px'>
+                                            <Flex direction='row' align='center' justify='space-between'>
+                                                <Text
+                                                    // align='center'
+                                                    color={textColorSecondary}
+                                                    fontWeight='500'
+                                                    fontSize='12px'
+                                                >
+                                                    Prédictions d'aujourd'hui
+                                                </Text>
+                                                <Box bg={bgColorPrimary} borderRadius={4}>
+                                                    <Text
+                                                        color={textColorCoast}
+                                                        fontWeight='900'
+                                                        fontSize='12px'
+                                                        p='4px'
+                                                    >
+                                                        {totalCoast}
+                                                    </Text>
+                                                </Box>
 
-                                    </Flex>
-                                </Card>
-                                {filterTips(predicts, "Week Tips")?.map((match, index) => (
-                                    <Fixture
-                                        key={index}
-                                        boxShadow={cardShadow}
-                                        mb='20px'
-                                        flag={match.country.flag}
-                                        country={match.country.name}
-                                        championship={match.championship.name}
-                                        time={moment(match.fixture.event_date).format('HH:mm')}
-                                        logoHomeTeam={match.fixture.homeTeam.logo}
-                                        homeTeamName={match.fixture.homeTeam.team_name}
-                                        logoAwayTeam={match.fixture.awayTeam.logo}
-                                        awayTeamName={match.fixture.awayTeam.team_name}
-                                        prediction={match.prediction}
-                                        coast={match.coast}
-                                        predicts={predicts}
-                                    />
-                                ))}
+                                            </Flex>
+                                        </Card>
+                                        {filterTips(predicts, "Week Tips")?.map((match, index) => (
+                                            <Fixture
+                                                key={index}
+                                                boxShadow={cardShadow}
+                                                mb='20px'
+
+                                                flag={match.country.flag}
+                                                country={match.country.name}
+                                                championship={match.championship.name}
+                                                time={moment(match.fixture.event_date).format('HH:mm')}
+                                                logoHomeTeam={match.fixture.homeTeam.logo}
+                                                homeTeamName={match.fixture.homeTeam.team_name}
+                                                logoAwayTeam={match.fixture.awayTeam.logo}
+                                                awayTeamName={match.fixture.awayTeam.team_name}
+                                                prediction={match.prediction}
+                                                coast={match.coast}
+                                                predicts={predicts}
+                                                match={match}
+                                            />
+                                        ))}
+                                    </>
+                                )}
                             </>
                         )}
+
 
 
                     </TabPanel>
@@ -117,63 +121,69 @@ const Tabpane = (
                                 <AddPredict predictType='VIP Tips' />
                             </Flex>
                         </Flex>
-                        {!predicts || predicts.length === 0 ? (
-                            <Flex direction='column' h="30ch" align='center' justify='center'>
-                                <Text
-                                    color={bgColorPrimary}
-                                    fontSize='20px'
-                                    align='center'
-                                    p={4}
-                                >
-                                    Aucune prédiction pour la journée en cours.
-                                </Text>
-                            </Flex>
+                        {loading ? (
+                            <DataPreview />
                         ) : (
                             <>
-                                <Card bg={bg} p='12px'>
-                                    <Flex direction='row' align='center' justify='space-between'>
-                                        <Text
-                                            // align='center'
-                                            color={textColorSecondary}
-                                            fontWeight='500'
-                                            fontSize='12px'
-                                        >
-                                            Prédictions d'aujourd'hui
-                                        </Text>
-                                        <Box bg={bgColorPrimary} borderRadius={4}
-                                        >
-                                            <Text
-                                                color={textColorCoast}
-                                                fontWeight='900'
-                                                fontSize='12px'
-                                                p='4px'
-                                            >
-                                                {totalCoast}
-                                            </Text>
-                                        </Box>
+                                {!predicts || predicts.length === 0 ? (
+                                    <Text
+                                        color={bgColorPrimary}
+                                        fontSize='20px'
+                                        align='center'
+                                        p={4}
+                                        mt={40}
+                                    >
+                                        Aucune prédiction pour la journée en cours.
+                                    </Text>
+                                ) : (
+                                    <>
+                                        <Card bg={bg} p='12px'>
+                                            <Flex direction='row' align='center' justify='space-between'>
+                                                <Text
+                                                    // align='center'
+                                                    color={textColorSecondary}
+                                                    fontWeight='500'
+                                                    fontSize='12px'
+                                                >
+                                                    Prédictions d'aujourd'hui
+                                                </Text>
+                                                <Box bg={bgColorPrimary} borderRadius={4}
+                                                >
+                                                    <Text
+                                                        color={textColorCoast}
+                                                        fontWeight='900'
+                                                        fontSize='12px'
+                                                        p='4px'
+                                                    >
+                                                        {totalCoast}
+                                                    </Text>
+                                                </Box>
 
-                                    </Flex>
-                                </Card>
-                                {filterTips(predicts, "VIP Tips")?.map((match, index) => (
-                                    <Fixture
-                                        key={index}
-                                        boxShadow={cardShadow}
-                                        mb='20px'
-                                        flag={match.country.flag}
-                                        country={match.country.name}
-                                        championship={match.championship.name}
-                                        time={moment(match.fixture.event_date).format('HH:mm')}
-                                        logoHomeTeam={match.fixture.homeTeam.logo}
-                                        homeTeamName={match.fixture.homeTeam.team_name}
-                                        logoAwayTeam={match.fixture.awayTeam.logo}
-                                        awayTeamName={match.fixture.awayTeam.team_name}
-                                        prediction={match.prediction}
-                                        coast={match.coast}
-                                        predicts={predicts}
-                                    />
-                                ))}
+                                            </Flex>
+                                        </Card>
+                                        {filterTips(predicts, "VIP Tips")?.map((match, index) => (
+                                            <Fixture
+                                                key={index}
+                                                boxShadow={cardShadow}
+                                                mb='20px'
+                                                flag={match.country.flag}
+                                                country={match.country.name}
+                                                championship={match.championship.name}
+                                                time={moment(match.fixture.event_date).format('HH:mm')}
+                                                logoHomeTeam={match.fixture.homeTeam.logo}
+                                                homeTeamName={match.fixture.homeTeam.team_name}
+                                                logoAwayTeam={match.fixture.awayTeam.logo}
+                                                awayTeamName={match.fixture.awayTeam.team_name}
+                                                prediction={match.prediction}
+                                                coast={match.coast}
+                                                predicts={predicts}
+                                            />
+                                        ))}
+                                    </>
+                                )}
                             </>
                         )}
+
 
                     </TabPanel>
                 </TabPanels>

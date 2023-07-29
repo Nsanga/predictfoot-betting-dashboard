@@ -18,7 +18,7 @@ import 'moment/locale/fr';
 
 moment.locale('fr');
 
-const OldTips = ({oldPredicts, totalOldCoast}) => {
+const OldTips = ({oldPredicts, totalOldCoast, loadingOld}) => {
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -57,13 +57,14 @@ const OldTips = ({oldPredicts, totalOldCoast}) => {
         Old tips
       </Text>
 
-      <TabpaneOldTips oldPredicts={oldPredicts} totalOldCoast={totalOldCoast} handleTabChange={handleTabChange}/>
+      <TabpaneOldTips oldPredicts={oldPredicts} totalOldCoast={totalOldCoast} handleTabChange={handleTabChange} loadingOld={loadingOld}/>
     </Card>
   );
 }
 const mapStateToProps = ({ PredictReducer }) => ({
   oldPredicts: PredictReducer.oldPredicts,
   totalPages: PredictReducer.totalPages,
+  loadingOld: PredictReducer.loadingOld,
   page: PredictReducer.page,
   error: PredictReducer.error,
   totalOldCoast: PredictReducer.totalOldCoast,

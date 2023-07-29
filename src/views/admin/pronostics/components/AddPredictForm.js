@@ -2,16 +2,32 @@ import { Box, Flex, Input, Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import moment from 'moment';
+import { connect, useDispatch } from "react-redux";
+import { fetchChampionshipByDate, fetchCountryByDate, fetchMatchByDate } from '../../../../redux/predict/actions'
 
-const AddPredictForm = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedChampionship, setSelectedChampionship] = useState(null);
-  const [selectedMatch, setSelectedMatch] = useState(null);
+const AddPredictForm = ({ selectedDate,
+  setSelectedDate,
+  selectedCountry,
+  setSelectedCountry,
+  selectedChampionship,
+  setSelectedChampionship,
+  selectedMatch,
+  setSelectedMatch,
+  selectedPrediction,
+  setSelectedPrediction,
+  selectedCote,
+  setSelectedCote,
+  countries,
+  championships,
+  matchs,
+  loading, }) => {
   const [dateOptions, setDateOptions] = useState([]);
   const [countryOptions, setCountryOptions] = useState([]);
   const [championshipOptions, setChampionshipOptions] = useState([]);
   const [matchOptions, setMatchOptions] = useState([]);
+  const [predictionOptions, setPredictionOptions] = useState([]);
+  const dispatch = useDispatch();
+
 
   // Function to get the date for today, tomorrow, and the day after tomorrow
   const getDates = () => {
@@ -39,10 +55,9 @@ const AddPredictForm = () => {
     const fetchCountries = async () => {
       if (!selectedDate) return; // Skip if no date is selected yet
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/fixture/getCountries?date=${selectedDate.value}`);
-        const data = await response.json();
-        if (data.success) {
-          const countryOptions = data.data.country.map((country) => ({
+        await dispatch(fetchCountryByDate({ date: selectedDate.value }));
+        if (countries && countries?.length > 0) {
+          const countryOptions = countries.map((country) => ({
             value: country.name,
             label: country.name,
             flag: country.flag,
@@ -58,17 +73,16 @@ const AddPredictForm = () => {
       }
     };
     fetchCountries();
-  }, [selectedDate]);
+  }, [dispatch, selectedDate]);
 
   // Fetch championships based on the selected country and populate championshipOptions state
   useEffect(() => {
     const fetchChampionships = async () => {
-      if (!selectedCountry) return; // Skip if no country is selected yet
+      if (!selectedCountry) return;
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/fixture/getChampionships?date=${selectedDate.value}&country=${selectedCountry.value}`);
-        const data = await response.json();
-        if (data.success) {
-          const championshipOptions = data.data.championship.map((championship) => ({
+        await dispatch(fetchChampionshipByDate({ date: selectedDate.value, country: selectedCountry.value }));
+        if (championships && championships.length > 0) {
+          const championshipOptions = championships.map((championship) => ({
             value: championship.name,
             label: championship.name,
             logo: championship.logo,
@@ -83,18 +97,18 @@ const AddPredictForm = () => {
       }
     };
     fetchChampionships();
-  }, [selectedCountry, selectedDate]);
+  }, [dispatch, selectedCountry, selectedDate]);
 
   // Fetch matches based on the selected date and championship and populate matchOptions state
   useEffect(() => {
     const fetchMatches = async () => {
       if (!selectedDate || !selectedChampionship) return; // Skip if date or championship is not selected yet
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/fixture/getMatches?date=${selectedDate.value}&championship=${selectedChampionship.value}`);
-        const data = await response.json();
-        if (data.success) {
-          const matchOptions = data.data.map((match) => ({
-            value: match.fixture_id,
+        await dispatch(fetchMatchByDate({ date: selectedDate.value, championship: selectedChampionship.value }));
+        console.log('::ok',selectedMatch);
+        if (matchs && matchs.length > 0) {
+          const matchOptions = matchs.map((match) => ({
+            value: match,
             label:
               <Flex direction="row" justify="space-between">
                 <Flex >
@@ -123,7 +137,33 @@ const AddPredictForm = () => {
       }
     };
     fetchMatches();
-  }, [selectedDate, selectedChampionship]);
+  }, [dispatch, selectedDate, selectedChampionship]);
+
+  const handlePredictionChange = (prediction) => {
+    setSelectedPrediction(prediction);
+    console.log("prediction", prediction);
+  };
+
+  // Set prediction option
+  useEffect(() => {
+    setPredictionOptions([
+      { value: 'Home Win', label: 'Home Win' },
+      { value: 'Away Win', label: 'Away Win' },
+      { value: 'Draw', label: 'Draw' },
+      { value: 'Double Chance Home', label: 'Double Chance Home' },
+      { value: 'Double Chance Away', label: 'Double Chance Away' },
+      { value: 'Two Teams Goals', label: 'Two Teams Goals' },
+      { value: 'Two Teams Don\'t Goals', label: 'Two Teams Don\'t Goals' },
+      { value: 'Over 0.5', label: 'Over 0.5' },
+      { value: 'Under 0.5', label: 'Under 0.5' },
+      { value: 'Over 1.5', label: 'Over 1.5' },
+      { value: 'Under 1.5', label: 'Under 1.5' },
+      { value: 'Over 2.5', label: 'Over 2.5' },
+      { value: 'Under 2.5', label: 'Under 2.5' },
+      { value: 'Over 3.5', label: 'Over 3.5' },
+      { value: 'Under 3.5', label: 'Under 3.5' },
+    ]);
+  }, []);
 
   // Function to format the label of each option with the flag or default image
   const formatOptionLabel = ({ value, label, flag, logo }) => (
@@ -137,7 +177,6 @@ const AddPredictForm = () => {
       <span>{label}</span>
     </Flex>
   );
-
   return (
     <Flex direction="column" gap={8}>
       <Flex justify="space-between" gap={2}>
@@ -146,7 +185,7 @@ const AddPredictForm = () => {
           <Select
             value={selectedDate}
             options={dateOptions}
-            onChange={setSelectedDate}
+            onChange={(e) => setSelectedDate(e)}
             name="date"
             isSearchable={true}
             isClearable={true}
@@ -170,6 +209,7 @@ const AddPredictForm = () => {
             isClearable={true}
             placeholder="Choisir Pays"
             formatOptionLabel={formatOptionLabel} // Apply the custom label format
+            isLoading={loading}
             styles={{
               control: (provided) => ({
                 ...provided,
@@ -213,19 +253,37 @@ const AddPredictForm = () => {
       <Flex justify='space-between'>
         <Box>
           <Text>Prédiction</Text>
-          <Input 
-          placeholder='Entrer une prediction' 
-          size='md' />
+          <Select
+            value={selectedPrediction}
+            options={predictionOptions}
+            onChange={handlePredictionChange}
+            name="prediction"
+            isSearchable={true}
+            isClearable={true}
+            placeholder="Choisir Prédiction"
+          />
         </Box>
         <Box>
-          <Text>Côte</Text>
-          <Input 
-          placeholder='Entrer une côte' 
-          size='md' />
+          <Text>Cote</Text>
+          <Input
+            type="text"
+            value={selectedCote}
+            onChange={(e) => setSelectedCote(e.target.value)}
+            placeholder="Entrez la cote"
+          />
         </Box>
       </Flex>
     </Flex>
   );
 };
 
-export default AddPredictForm;
+
+const mapStateToProps = ({ PredictReducer }) => ({
+  countries: PredictReducer.countries,
+  championships: PredictReducer.championships,
+  matchs: PredictReducer.matchs,
+  loading: PredictReducer.loading,
+  error: PredictReducer.error,
+});
+
+export default connect(mapStateToProps)(AddPredictForm);

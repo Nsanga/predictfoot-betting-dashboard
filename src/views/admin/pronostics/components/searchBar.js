@@ -18,15 +18,17 @@ import { ItemContent } from 'components/menu/ItemContent';
 import { SearchBar } from 'components/navbar/searchBar/SearchBar';
 import { SidebarResponsive } from 'components/sidebar/Sidebar';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 // Assets
 import navImage from 'assets/img/layout/Navbar.png';
 import { MdNotificationsNone, MdInfoOutline } from 'react-icons/md';
 import { FaEthereum } from 'react-icons/fa';
 import routes from 'routes.js';
 import { ThemeEditor } from '@hypertheme-editor/chakra-ui/lib';;
-export default function SearchBars(props) {
-	const { secondary } = props;
+
+export default function SearchBarss(props) {
+	const { secondary, debut, fin, searchResults, ...rest } = props;
+	
 	// Chakra Color Mode
 	const navbarIcon = useColorModeValue('gray.400', 'white');
 	let menuBg = useColorModeValue('white', 'navy.800');
@@ -50,7 +52,7 @@ export default function SearchBars(props) {
 			p="10px"
 			borderRadius="30px"
 			boxShadow={shadow}>
-			<SearchBar mb={secondary ? { base: '10px', md: 'unset' } : 'unset'} me="10px" borderRadius="30px" />
+			<SearchBar mb={secondary ? { base: '10px', md: 'unset' } : 'unset'} me="10px" borderRadius="30px" searchResults={searchResults} />
 			<Flex
 				bg={ethBg}
 				display={secondary ? 'flex' : 'none'}
@@ -66,9 +68,9 @@ export default function SearchBars(props) {
 	);
 }
 
-SearchBars.propTypes = {
+SearchBarss.propTypes = {
 	variant: PropTypes.string,
 	fixed: PropTypes.bool,
 	secondary: PropTypes.bool,
-	onOpen: PropTypes.func
+	onOpen: PropTypes.func,
 };

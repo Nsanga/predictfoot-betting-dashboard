@@ -31,7 +31,9 @@ export default function Fixture(props) {
         prediction,
         coast,
         predicts,
-        loading, ...rest } = props;
+        loading,
+        predictType,
+        match, ...rest } = props;
     // Chakra Color Mode
     const textColorPrimary = useColorModeValue("brand.500", "white");
     const textColorSecondary = "gray.400";
@@ -98,8 +100,13 @@ export default function Fixture(props) {
                                 </Text>
                             </Flex>
                             {predicts && predicts.length > 0 && (
-                                <Popup itemId={predicts[0]._id} />
+                                <React.Fragment>
+                                    {predicts.reduce((ids, item) => [...ids, item._id], []).length > 0 && (
+                                        <Popup itemId={predicts.map((item) => item._id)} predicts={predicts} match={match}/>
+                                    )}
+                                </React.Fragment>
                             )}
+
                         </Flex>
                         <Flex direction='row' align='center' justify='space-between'>
                             <Flex>

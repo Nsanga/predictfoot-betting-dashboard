@@ -28,7 +28,7 @@ const AddPredict = ({predictType}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [overlay, setOverlay] = React.useState(<OverlayOne />)
     const iconColor = useColorModeValue("brand.500", "white");
-
+    
     return (
         <>
 
@@ -40,7 +40,7 @@ const AddPredict = ({predictType}) => {
                     setOverlay(<OverlayOne />)
                     onOpen()
                 }} />
-            <ModalPredict isOpen={isOpen} onClose={onClose} predictType={predictType}/>
+            <ModalPredict isOpen={isOpen} onClose={onClose} predictType={predictType} />
         </>
     )
 }

@@ -13,6 +13,7 @@ const Pronostic = ({
   page,
   oldPredicts,
   totalCoast,
+  predictType
 }) => {
   // Chakra Color Mode
   const brandColor = useColorModeValue("brand.500", "white");
@@ -64,9 +65,10 @@ const Pronostic = ({
             totalCoast={totalCoast}
             loading={loading}
             handleTabChange={handleTabChange}
+            predictType={predictType}
           />
         </Box>
-        <Box boxSize={{ base: 'none', lg: "md"}}>
+        <Box >
           <OldTips />
         </Box>
       </SimpleGrid>
