@@ -102,7 +102,11 @@ export default function Fixture(props) {
                             {predicts && predicts.length > 0 && (
                                 <React.Fragment>
                                     {predicts.reduce((ids, item) => [...ids, item._id], []).length > 0 && (
-                                        <Popup itemId={predicts.map((item) => item._id)} predicts={predicts} match={match}/>
+                                        <Popup
+                                            itemId={predicts.map((item) => item._id)}
+                                            predicts={predicts} match={match}
+                                            fixtureId={predicts.map((item) => item.fixture.fixture_id)} 
+                                        />
                                     )}
                                 </React.Fragment>
                             )}
@@ -133,9 +137,7 @@ export default function Fixture(props) {
                             </Text>
                         </Flex>
                     </>
-                )
-                }
-
+                )}
 
             </Card >
         </Box >

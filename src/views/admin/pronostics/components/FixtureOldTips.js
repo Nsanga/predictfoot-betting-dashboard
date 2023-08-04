@@ -17,7 +17,8 @@ import 'moment/locale/fr';
 
 moment.locale('fr');
 export default function FixtureOldTips(props) {
-    const { flag, country, championship, date, logoHomeTeam, homeTeamName, score, logoAwayTeam, awayTeamName, prediction, coast, oldPredicts, ...rest } = props;
+    const { flag, country, championship, date, logoHomeTeam, homeTeamName, score, logoAwayTeam, awayTeamName, prediction, coast, oldPredicts, match, ...rest } = props;
+    console.log('ok', match)
     // Chakra Color Mode
     const textColorPrimary = useColorModeValue("brand.500", "white");
     const textColorSecondary = "gray.400";
@@ -74,8 +75,20 @@ export default function FixtureOldTips(props) {
                         </Text>
                     </Flex>
 
+                    {/* {oldPredicts && oldPredicts.length > 0 && (
+                        <Popup itemId={oldPredicts[0]._id} match={match} fixtureId={oldPredicts[0].fixture.fixture_id}/>
+                    )} */}
                     {oldPredicts && oldPredicts.length > 0 && (
-                        <Popup itemId={oldPredicts[0]._id} />
+                        <React.Fragment>
+                            {oldPredicts.reduce((ids, item) => [...ids, item._id], []).length > 0 && (
+                                <Popup
+                                    itemId={oldPredicts.map((item) => item._id)}
+                                    oldPredicts={oldPredicts}
+                                    match={match}
+                                    fixtureId={oldPredicts.map((item) => item.fixture.fixture_id)}
+                                />
+                            )}
+                        </React.Fragment>
                     )}
                 </Flex>
                 <Flex direction='row' align='center' justify='space-between'>

@@ -90,7 +90,6 @@ const Tabpane = (
                                                 key={index}
                                                 boxShadow={cardShadow}
                                                 mb='20px'
-
                                                 flag={match.country.flag}
                                                 country={match.country.name}
                                                 championship={match.championship.name}

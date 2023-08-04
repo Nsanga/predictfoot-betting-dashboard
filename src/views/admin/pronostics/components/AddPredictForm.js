@@ -5,8 +5,7 @@ import moment from 'moment';
 import { connect, useDispatch } from "react-redux";
 import { fetchChampionshipByDate, fetchCountryByDate, fetchMatchByDate } from '../../../../redux/predict/actions'
 
-const AddPredictForm = ({ selectedDate,
-  setSelectedDate,
+const AddPredictForm = ({ selectedDate, setSelectedDate,
   selectedCountry,
   setSelectedCountry,
   selectedChampionship,
@@ -26,6 +25,8 @@ const AddPredictForm = ({ selectedDate,
   const [championshipOptions, setChampionshipOptions] = useState([]);
   const [matchOptions, setMatchOptions] = useState([]);
   const [predictionOptions, setPredictionOptions] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  // const [selectedDate, setSelectedDate] = useState(null);
   const dispatch = useDispatch();
 
 
@@ -73,7 +74,7 @@ const AddPredictForm = ({ selectedDate,
       }
     };
     fetchCountries();
-  }, [dispatch, selectedDate]);
+  }, [dispatch, selectedDate, isOpen]);
 
   // Fetch championships based on the selected country and populate championshipOptions state
   useEffect(() => {
@@ -81,6 +82,7 @@ const AddPredictForm = ({ selectedDate,
       if (!selectedCountry) return;
       try {
         await dispatch(fetchChampionshipByDate({ date: selectedDate.value, country: selectedCountry.value }));
+        console.log(selectedDate.value)
         if (championships && championships.length > 0) {
           const championshipOptions = championships.map((championship) => ({
             value: championship.name,
@@ -97,7 +99,7 @@ const AddPredictForm = ({ selectedDate,
       }
     };
     fetchChampionships();
-  }, [dispatch, selectedCountry, selectedDate]);
+  }, [dispatch, selectedCountry, selectedDate, isOpen]);
 
   // Fetch matches based on the selected date and championship and populate matchOptions state
   useEffect(() => {
@@ -105,7 +107,6 @@ const AddPredictForm = ({ selectedDate,
       if (!selectedDate || !selectedChampionship) return; // Skip if date or championship is not selected yet
       try {
         await dispatch(fetchMatchByDate({ date: selectedDate.value, championship: selectedChampionship.value }));
-        console.log('::ok',selectedMatch);
         if (matchs && matchs.length > 0) {
           const matchOptions = matchs.map((match) => ({
             value: match,
@@ -137,7 +138,7 @@ const AddPredictForm = ({ selectedDate,
       }
     };
     fetchMatches();
-  }, [dispatch, selectedDate, selectedChampionship]);
+  }, [dispatch, selectedDate, selectedChampionship, isOpen]);
 
   const handlePredictionChange = (prediction) => {
     setSelectedPrediction(prediction);

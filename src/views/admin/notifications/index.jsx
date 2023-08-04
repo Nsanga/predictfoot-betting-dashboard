@@ -1,10 +1,11 @@
 import { Box, Image, SimpleGrid } from "@chakra-ui/react";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Tabpane from "./components/TabPane";
 import phoneNotification from "../../../assets/img/Phone_Notification.png";
 
 export default function Overview() {
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid

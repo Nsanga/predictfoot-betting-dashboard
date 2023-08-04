@@ -26,7 +26,7 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange, loadingOl
 
     const dateFrom = moment().subtract(1, 'days').format('YYYY-MM-DD');
     const dateTo = moment().subtract(1, 'days').format('YYYY-MM-DD')
-    
+
     return (
         <div>
             <Tabs isFitted  >
@@ -110,6 +110,7 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange, loadingOl
                                                 prediction={match.prediction}
                                                 coast={match.coast}
                                                 oldPredicts={oldPredicts}
+                                                match={match}
                                             />
                                         ))}
                                     </>
@@ -192,6 +193,7 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange, loadingOl
                                                 prediction={match.prediction}
                                                 coast={match.coast}
                                                 oldPredicts={oldPredicts}
+                                                match={match}
                                             />
                                         ))}
                                     </>

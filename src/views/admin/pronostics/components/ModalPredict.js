@@ -7,13 +7,16 @@ import {
     ModalFooter,
     ModalBody,
     Button,
+    Text,
+    Flex,
 } from '@chakra-ui/react';
 import AddPredictForm from './AddPredictForm';
 import { addPredictRequest } from 'redux/predict/actions';
 import { useDispatch } from 'react-redux';
 import { url } from 'urlLoader';
+import moment from 'moment';
 
-const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, matchs, loading, itemId, predicts, match }) => {
+const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, matchs, loading, itemId, fixtureId, match }) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedChampionship, setSelectedChampionship] = useState(null);
@@ -24,27 +27,95 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
     const [isUpdating, setIsUpdating] = useState(false);
     const dispatch = useDispatch();
 
+    // Function to get the date for today, tomorrow, and the day after tomorrow
+    const getDates = () => {
+        const today = moment();
+        const tomorrow = moment().add(1, 'day');
+        const dayAfterTomorrow = moment().add(2, 'day');
+
+        return [
+            { value: formatDate(today), label: "Aujourd'hui" },
+            { value: formatDate(tomorrow), label: 'Demain' },
+            { value: formatDate(dayAfterTomorrow), label: 'Après-demain' },
+        ];
+    };
+
+    // Function to format the date as 'YYYY-MM-DD'
+    const formatDate = (date) => date.format('YYYY-MM-DD');
+
+    // Set date options with today, tomorrow, and the day after tomorrow
+    const [dateOptions, setDateOptions] = useState(getDates(selectedDate)); // Initialize dateOptions with the initial values
+
     useEffect(() => {
-        // Vérifier si un match est disponible
-        if (match) {
-            console.log(':::',setSelectedDate)
-        //   setSelectedDate(match.date);
-        setSelectedCountry(match.country);
-        setSelectedChampionship(match.championship);
-          setSelectedMatch(match.fixture);
-          setSelectedPrediction(match.prediction);
-          setSelectedCote(match.coast.toString()); // Convertir en chaîne de caractères, si nécessaire
+        if (isOpen && match) {
+            console.log(selectedDate)
+            // Si un match est sélectionné, pré-remplir les champs avec les valeurs du match
+            const selectedOption = dateOptions.find((option) => option.value === match.date);
+            // setSelectedDate(selectedOption || { value: match.date, label: match.date });
+
+            if (match.country) {
+                setSelectedCountry({ value: match.country.name, label: match.country.name, flag: match.country.flag });
+            }
+
+            if (match.championship) {
+                setSelectedChampionship({ value: match.championship.name, label: match.championship.name, logo: match.championship.logo });
+            }
+
+            if (match.fixture) {
+                const selectedMatchOption = {
+                    value: match.fixture,
+                    label: (
+                        <Flex direction="row" justify="space-between">
+                            {/* Ajoutez le contenu que vous souhaitez afficher pour le match ici */}
+                            {/* Assurez-vous que les propriétés homeTeam et awayTeam existent avant d'y accéder */}
+                            {match.fixture.homeTeam && (
+                                <Flex>
+                                    <img src={match.fixture.homeTeam.logo} alt={match.fixture.homeTeam.team_name} height="30px" width="30px" />
+                                    <Text ml={2}>{match.fixture.homeTeam.team_name}</Text>
+                                </Flex>
+                            )}
+                            {/* Assurez-vous que la propriété event_date existe avant d'y accéder */}
+                            {match.fixture.event_date && (
+                                <Flex alignItems="center" align="center" justify="center">
+                                    <Text fontSize="sm">
+                                        <b>
+                                            <u>{moment(match.fixture.event_date).format('HH:mm')} GMT</u>
+                                        </b>
+                                    </Text>
+                                </Flex>
+                            )}
+                            {/* Assurez-vous que les propriétés homeTeam et awayTeam existent avant d'y accéder */}
+                            {match.fixture.awayTeam && (
+                                <Flex>
+                                    <img src={match.fixture.awayTeam.logo} alt={match.fixture.awayTeam.team_name} height="30px" width="30px" />
+                                    <Text ml={2}>{match.fixture.awayTeam.team_name}</Text>
+                                </Flex>
+                            )}
+                        </Flex>
+                    ),
+                };
+                setSelectedMatch(selectedMatchOption);
+            }
+
+            if (match.prediction) {
+                setSelectedPrediction({ value: match.prediction, label: match.prediction });
+            }
+
+            if (match.coast) {
+                setSelectedCote(match.coast.toString());
+            }
         } else {
-          // Si le match est vide, réinitialiser les états du formulaire
-          setSelectedDate(null);
-          setSelectedCountry(null);
-          setSelectedChampionship(null);
-          setSelectedMatch(null);
-          setSelectedPrediction(null);
-          setSelectedCote('');
+            // Si le match est vide, réinitialiser les états du formulaire
+            setSelectedDate(null);
+            setSelectedCountry(null);
+            setSelectedChampionship(null);
+            setSelectedMatch(null);
+            setSelectedPrediction(null);
+            setSelectedCote("");
         }
-      }, [match]);
-    
+    }, [match, selectedDate]);
+
+
 
     const handleAddPredict = async () => {
         setIsAdding(true);
@@ -60,6 +131,7 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
                     name: selectedChampionship.label
                 },
                 fixture: {
+                    fixture_id: selectedMatch.value.fixture_id,
                     event_date: selectedMatch.value.event_date,
                     homeTeam: {
                         team_name: selectedMatch.value.homeTeam.team_name,
@@ -69,6 +141,14 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
                         team_name: selectedMatch.value.awayTeam.team_name,
                         logo: selectedMatch.value.awayTeam.logo,
                     },
+                    goalsHomeTeam: selectedMatch.value.goalsHomeTeam,
+                    goalsAwayTeam: selectedMatch.value.goalsAwayTeam,
+                    score: {
+                        halftime: selectedMatch.value.score.halftime,
+                        fulltime: selectedMatch.value.score.fulltime,
+                        extratime: selectedMatch.value.score.Extratime,
+                        penalty: selectedMatch.value.score.penalty
+                    }
                 },
                 prediction: selectedPrediction.value,
                 coast: parseFloat(selectedCote),
@@ -102,7 +182,6 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
             // Fermez le modal, quelle que soit la réponse de la requête
             onClose();
         }
-        onClose()
     };
 
     const handleUpdatePredict = async () => {
@@ -119,6 +198,7 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
                     name: selectedChampionship.label
                 },
                 fixture: {
+                    fixture_id: selectedMatch.value.fixture_id,
                     event_date: selectedMatch.value.event_date,
                     homeTeam: {
                         team_name: selectedMatch.value.homeTeam.team_name,
@@ -128,6 +208,14 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
                         team_name: selectedMatch.value.awayTeam.team_name,
                         logo: selectedMatch.value.awayTeam.logo,
                     },
+                    goalsHomeTeam: selectedMatch.value.goalsHomeTeam,
+                    goalsAwayTeam: selectedMatch.value.goalsAwayTeam,
+                    score: {
+                        halftime: selectedMatch.value.score.halftime,
+                        fulltime: selectedMatch.value.score.fulltime,
+                        extratime: selectedMatch.value.score.Extratime,
+                        penalty: selectedMatch.value.score.penalty
+                    }
                 },
                 prediction: selectedPrediction.value,
                 coast: parseFloat(selectedCote),
@@ -138,7 +226,7 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
 
             // Dispatch the action to add the prediction with formData
             // dispatch(addPredictRequest(formData));
-            const response = await fetch(`${url}/predict/update?Id=${itemId}`, {
+            const response = await fetch(`${url}/predict/update?fixture_id=${fixtureId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -154,14 +242,12 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
             }
         } catch (error) {
             console.error('Erreur lors de la requête:', error);
-        }
-        finally {
+        } finally {
             // Après la résolution de la requête (succès ou échec), définissez l'état isAdding sur false
             setIsUpdating(false);
-            // Fermez le modal, quelle que soit la réponse de la requête
+            // Fermez le modal uniquement après le succès de la requête
             onClose();
         }
-        onClose()
     };
 
     const overlay = (
@@ -174,7 +260,7 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
         <Modal isCentered isOpen={isOpen} onClose={onClose} size='3xl'>
             {overlay}
             <ModalContent>
-                <ModalHeader>{itemId ? `Modifier cette ${predictType}` : `Ajouter un ${predictType}`}</ModalHeader>
+                <ModalHeader>{itemId ? `Modifier cette prediction` : `Ajouter un ${predictType}`}</ModalHeader>
                 {/* <ModalHeader>Ajouter un {predictType}</ModalHeader> */}
                 <ModalBody>
                     <AddPredictForm
@@ -203,11 +289,6 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
                         {itemId ? 'Modifier' : 'Ajouter'}
                     </Button>
                 </ModalFooter>
-                {/* <ModalFooter>
-                    <Button onClick={handleAddPredict} colorScheme='blue' variant='solid' isLoading={isAdding}>
-                        Ajouter
-                    </Button>
-                </ModalFooter> */}
             </ModalContent>
         </Modal>
     )

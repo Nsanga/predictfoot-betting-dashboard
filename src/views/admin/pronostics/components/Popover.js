@@ -22,7 +22,7 @@ import ModalPredict from "./ModalPredict";
 export default function Popup(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { ...rest } = props;
-    const { itemId, match } = props;
+    const { itemId, match, fixtureId } = props;
 
     const textColor = useColorModeValue("secondaryGray.500", "white");
     const textHover = useColorModeValue(
@@ -124,8 +124,8 @@ export default function Popup(props) {
             </MenuList>
             {isModalOpen && (
                 <ModalPredict isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}
-                    predictType='prédiction'
                     itemId={itemId}
+                    fixtureId={fixtureId}
                     match={match} 
                     />
             )}
