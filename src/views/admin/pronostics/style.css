@@ -1,0 +1,33 @@
+/* style.css */
+.pagination {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.pagination li {
+    cursor: pointer;
+    /* margin: 0 5px; */
+    padding: 2px;
+    width: 25px;
+    height: 25px;
+    /* border: 1px solid #ccc; */
+    border-radius: 50%;
+    /* Use 50% for circular shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination .active {
+    background-color: #0f5784;
+    color: #ffffff;
+}
+
+.page {
+    color: #0f5784;
+    font-weight: 500;
+}

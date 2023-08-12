@@ -1,4 +1,4 @@
-const localURL = "http://localhost:5000/api/v1";
+const localURL = "http://localhost:5000";
 const liveURL = "";
 
 module.exports = {

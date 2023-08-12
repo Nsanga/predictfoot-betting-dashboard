@@ -27,6 +27,7 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
   const [predictionOptions, setPredictionOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   // const [selectedDate, setSelectedDate] = useState(null);
+  const [loadingCountries, setLoadingCountries] = useState(false);
   const dispatch = useDispatch();
 
 
@@ -55,6 +56,7 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
   useEffect(() => {
     const fetchCountries = async () => {
       if (!selectedDate) return; // Skip if no date is selected yet
+      setLoadingCountries(true);
       try {
         await dispatch(fetchCountryByDate({ date: selectedDate.value }));
         if (countries && countries?.length > 0) {
@@ -68,13 +70,14 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
           setChampionshipOptions([]); // Reset the selected championship options when the date changes
           setMatchOptions([]); // Reset the selected match options when the date changes
         }
+        setLoadingCountries(false);
       } catch (error) {
         console.error('Error fetching countries:', error);
         setCountryOptions([]); // Set empty options in case of an error
       }
     };
     fetchCountries();
-  }, [dispatch, selectedDate, isOpen]);
+  }, [selectedDate]);
 
   // Fetch championships based on the selected country and populate championshipOptions state
   useEffect(() => {
@@ -186,7 +189,14 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
           <Select
             value={selectedDate}
             options={dateOptions}
-            onChange={(e) => setSelectedDate(e)}
+            onChange={(e) => {
+              if (!loadingCountries) {
+                setSelectedDate(e);
+              } else {
+                <Text>loading</Text>
+              }
+              console.log("Countries state:", countries);
+            }}
             name="date"
             isSearchable={true}
             isClearable={true}

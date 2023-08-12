@@ -39,6 +39,6 @@ export const updatePredictRequest = (id) => ({
 
 export const deletePredictRequest = (id) => ({
   type: types.DELETE_PREDICT_REQUEST,
-  payload: {id},
+  payload: id,
 });
 

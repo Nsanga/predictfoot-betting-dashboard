@@ -1,6 +1,5 @@
 import { Box, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-// import { Pagination } from "chakra-pagination";
 import Tabpane from "./components/Tab";
 import OldTips from "./components/OldTips";
 import { fetchPredictRequest } from "redux/predict/actions";
@@ -11,9 +10,8 @@ const Pronostic = ({
   loading,
   totalPages,
   page,
-  oldPredicts,
   totalCoast,
-  predictType
+  predictType,
 }) => {
   // Chakra Color Mode
   const brandColor = useColorModeValue("brand.500", "white");
@@ -29,7 +27,7 @@ const Pronostic = ({
 
     const search = "";
     const page = 1;
-    const limit = 10;
+    const limit = 6;
 
     dispatch(
       fetchPredictRequest({
@@ -48,10 +46,24 @@ const Pronostic = ({
     setType(newType);
   };
 
-  const handlePageChange = (event, page) => {
-    const limit = 10;
-    dispatch(fetchPredictRequest(page, limit));
+  const handlePageChange = (selectedPage) => {
+    console.log('selectedPage', selectedPage)
+    const limit = 6;
+    const currentDate = new Date().toISOString().split("T")[0];
+  
+    dispatch(
+      fetchPredictRequest({
+        dateFrom: currentDate,
+        dateTo: currentDate,
+        type,
+        search: "",
+        page: selectedPage + 1,
+        limit,
+      })
+    );
   };
+  
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid
@@ -59,16 +71,19 @@ const Pronostic = ({
         gap="20px"
         spacingX="8rem"
       >
-        <Box boxSize={{ base: 'none', lg: "lg"}}>
+        <Box boxSize={{ base: "none", lg: "lg" }}>
           <Tabpane
             predicts={predicts}
             totalCoast={totalCoast}
             loading={loading}
             handleTabChange={handleTabChange}
+            handlePageChange={handlePageChange}
             predictType={predictType}
+            totalPages={totalPages}
+            page={page}
           />
         </Box>
-        <Box >
+        <Box>
           <OldTips />
         </Box>
       </SimpleGrid>

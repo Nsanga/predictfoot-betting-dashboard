@@ -4,17 +4,19 @@ import SearchBars from './searchBar';
 import Fixture from './Fixtures';
 import { IconButton } from '@chakra-ui/react'
 import { BsPlusCircleFill } from 'react-icons/bs'
-import { BiExport } from 'react-icons/bi'
+import { BiChevronLeft, BiChevronRight, BiExport } from 'react-icons/bi'
 import Card from "components/card/Card.js";
 import moment from 'moment';
 import 'moment/locale/fr';
 import AddPredict from './AddPredict';
 import DataPreview from './DataPreview';
+import ReactPaginate from 'react-paginate';
+import "../style.css";
 
 moment.locale('fr');
 
 const Tabpane = (
-    { predicts, totalCoast, handleTabChange, loading }
+    { predicts, totalCoast, handleTabChange, loading, totalPages, handlePageChange, page }
 ) => {
     const iconColor = useColorModeValue("brand.500", "white");
     const cardShadow = useColorModeValue(
@@ -104,6 +106,16 @@ const Tabpane = (
                                                 match={match}
                                             />
                                         ))}
+                                        <ReactPaginate
+                                            previousLabel={<IconButton background='transparent' icon={<BiChevronLeft size='2rem'/>}  rounded='full' color="gray.400"/>}
+                                            nextLabel={<IconButton background='transparent' icon={<BiChevronRight size='2rem'/>} rounded='full' color="gray.400"/>}
+                                            pageCount={totalPages}
+                                            onPageChange={(selectedPage) => handlePageChange(selectedPage.selected)}
+                                            forcePage={page - 1}
+                                            containerClassName={"pagination"}
+                                            activeClassName={"active"}
+                                            pageClassName={"page"}
+                                        />
                                     </>
                                 )}
                             </>
@@ -176,8 +188,20 @@ const Tabpane = (
                                                 prediction={match.prediction}
                                                 coast={match.coast}
                                                 predicts={predicts}
+                                                match={match}
                                             />
                                         ))}
+                                        <ReactPaginate
+                                            previousLabel={<IconButton background='transparent' icon={<BiChevronLeft size='2rem'/>}  rounded='full' color="gray.400"/>}
+                                            nextLabel={<IconButton background='transparent' icon={<BiChevronRight size='2rem'/>} rounded='full' color="gray.400"/>}
+                                            pageCount={totalPages}
+                                            onPageChange={(selectedPage) => handlePageChange(selectedPage.selected)} 
+                                            forcePage={page - 1}
+                                            containerClassName={"pagination"}
+                                            activeClassName={"active"}
+                                            pageClassName={"page"}
+                                        />
+
                                     </>
                                 )}
                             </>

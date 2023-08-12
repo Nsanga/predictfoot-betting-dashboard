@@ -234,11 +234,11 @@ function* updateServiceRequest(action) {
 
 function* deleteServiceRequest(action) {
   try {
-    const { id } = action.payload;
-    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/service/delete?Id=${id}`, {});
+    const id = action.payload;
+    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/service/delete?Id=${id}`);
 
     if (data.success) {
-      yield put({ type: types.DELETE_SERVICE_SUCCESS, payload: id });
+      yield put({ type: types.DELETE_SERVICE_SUCCESS, payload: data.data });
     } else {
       yield put({ type: types.DELETE_SERVICE_FAILED, payload: "echec suppression des données" });
     }
@@ -294,7 +294,7 @@ function* fetchPackageRequest() {
 function* deletePackageRequest(action) {
   try {
     const { id } = action.payload;
-    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/plan/delete?Id=${id}`, {});
+    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/plan/delete?Id=${id}`);
 
     if (data.success) {
       yield put({ type: types.DELETE_PACKAGE_SUCCESS, payload: id });
@@ -329,7 +329,7 @@ function* fetchCustomerRequest() {
 function* deleteCustomerRequest(action) {
   try {
     const { id } = action.payload;
-    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/customer/delete?Id=${id}`, {});
+    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/customer/delete?Id=${id}`);
 
     if (data.success) {
       yield put({ type: types.DELETE_CUSTOMER_SUCCESS, payload: id });
@@ -387,7 +387,7 @@ function* fetchGripRequest() {
 function* deleteGripRequest(action) {
   try {
     const { id } = action.payload;
-    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/grip/delete?Id=${id}`, {});
+    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/grip/delete?Id=${id}`);
 
 
     if (data.success) {
@@ -453,7 +453,7 @@ function* fetchArticleRequest(action) {
 function* deleteArticleRequest(action) {
   try {
     const { id } = action.payload;
-    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/blog/delete?Id=${id}`, {});
+    const data = yield deleteUnauthRequest(`${url}/api/v1/landing-page/blog/delete?Id=${id}`);
 
     if (data.success) {
       yield put({ type: types.DELETE_ARTICLE_SUCCESS, payload: id });

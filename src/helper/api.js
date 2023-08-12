@@ -1,65 +1,51 @@
-const json = `application/json; charset=utf-8`;
-const multPart = `multipart/form-data; boundary=---------------------------${Date.now().toString(16)}`;
-const urlEncoded = `application/x-www-form-urlencoded`;
+const json = 'application/json; charset=utf-8';
+const multPart = 'multipart/form-data; charset=utf-8';
 
-const request = async (method, url, data, contentType = 'application/json', options = {}) => {
-    try {
-        const headers = {
-            'Content-Type': contentType,
-            ...(options.token && { Authorization: `Bearer ${options.token}` }),
-        };
-
-        const requestOptions = {
-            method: method,
-            headers: headers,
-            body: data,
-            ...options,
-        };
-
-        const response = await fetch(url, requestOptions);
-
-        if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}`);
-        }
-
-        const contentTypeHeader = response.headers.get('content-type');
-        if (contentTypeHeader && contentTypeHeader.includes('application/json')) {
-            return await response.json();
-        } else if (contentTypeHeader && contentTypeHeader.includes('text/plain')) {
-            return await response.text();
-        } else {
-            // You can add support for other response types here if needed
-            return response;
-        }
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+const request = async (contentType, method, url, data, options = {}) => {
+  try {
+    const jsonUser = JSON.parse().token;
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        'Content-Type': contentType,
+        Authorization: 'Bearer ' + jsonUser,
+      },
+      body: data,
+      timeout: 15000,
+      ...options,
+    });
+    let jsonResponse = await response.json();
+    return jsonResponse;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-// Authenticated requests with token
-export const getRequest = (url, token) => request('GET', url, null, json, { token });
-export const postRequest = (url, data, token) => request('POST', url, data, json, { token });
-export const putRequest = (url, data, token) => request('PUT', url, data, json, { token });
-export const deleteRequest = (url, data, token) => request('DELETE', url, data, json, { token });
+const unAuthRequest = async (contentType, method, url, data) => {
+  const response = await fetch(url, {
+    method: method,
+    headers: {
+      'Content-Type': contentType,
+    },
+    body: data,
+    timeout: 15000,
+  });
+  if (response) return await response.json();
+  throw new Error('Api call failed');
+};
 
-// multipart/formData
+// Fonctions d'API
+export const getRequest = (url) => request(json, 'GET', url);
+export const postRequest = (url, data) => request(json, 'POST', url, data);
+export const putRequest = (url, data) => request(json, 'PUT', url, data);
+export const deleteRequest = (url, data) => request(json, 'DELETE', url, data);
 export const putRequestFormData = (url, data, options = {}) =>
-    request('PUT', url, data, multPart, options);
-
+  request(multPart, 'PUT', url, data, options);
 export const postRequestFormData = (url, data, options = {}) =>
-    request('POST', url, data, multPart, options);
+  request(multPart, 'POST', url, data, options);
+export const postUnauthRequest = (url, data) => unAuthRequest(json, 'POST', url, data);
+export const getUnauthRequest = (url, data) => unAuthRequest(json, 'GET', url, data);
+export const putUnauthRequest = (url, data) => unAuthRequest(json, 'PUT', url, data);
+export const deleteUnauthRequest = (url, data) => unAuthRequest(json, 'DELETE', url, data);
 
-// URL-encoded form data
-export const postRequestUrlEncoded = (url, data, options = {}) =>
-    request('POST', url, data, urlEncoded, options);
-
-// text/plain
-export const postRequestPlainText = (url, data, options = {}) =>
-    request('POST', url, data, 'text/plain', options);
-
-// Unauthenticated requests
-export const postUnauthRequest = (url, data) => request('POST', url, data, json);
-export const getUnauthRequest = (url, data) => request('GET', url, data, json);
-export const putUnauthRequest = (url, data) => request('PUT', url, data, json);
-export const deleteUnauthRequest = (url, data) => request('DELETE', url, data, json);
+// Assurez-vous que toutes les fonctions d'API sont correctement exportées

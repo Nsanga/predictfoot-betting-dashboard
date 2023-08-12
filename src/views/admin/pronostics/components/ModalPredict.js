@@ -44,14 +44,14 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
     const formatDate = (date) => date.format('YYYY-MM-DD');
 
     // Set date options with today, tomorrow, and the day after tomorrow
-    const [dateOptions, setDateOptions] = useState(getDates(selectedDate)); // Initialize dateOptions with the initial values
+    const [dateOptions, setDateOptions] = useState(getDates()); // Initialize dateOptions with the initial values
 
     useEffect(() => {
-        if (isOpen && match) {
+        if (match) {
             console.log(selectedDate)
             // Si un match est sélectionné, pré-remplir les champs avec les valeurs du match
-            const selectedOption = dateOptions.find((option) => option.value === match.date);
-            // setSelectedDate(selectedOption || { value: match.date, label: match.date });
+            const selectedOption = dateOptions.find((option) => option.value === match.date); 
+            // setSelectedDate(selectedOption || { value: match.date, label: match.date }); 
 
             if (match.country) {
                 setSelectedCountry({ value: match.country.name, label: match.country.name, flag: match.country.flag });
@@ -113,7 +113,7 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
             setSelectedPrediction(null);
             setSelectedCote("");
         }
-    }, [match, selectedDate]);
+    }, [match]);
 
 
 
@@ -158,21 +158,8 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
             console.log(formData);
 
             // Dispatch the action to add the prediction with formData
-            // dispatch(addPredictRequest(formData));
-            const response = await fetch(`${url}/predict/create`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Réponse de l\'API:', data);
-            } else {
-                console.error('Échec de l\'ajout de la prédiction');
-            }
+            dispatch(addPredictRequest(formData));
+            onClose();
         } catch (error) {
             console.error('Erreur lors de la requête:', error);
         }
@@ -180,7 +167,6 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
             // Après la résolution de la requête (succès ou échec), définissez l'état isAdding sur false
             setIsAdding(false);
             // Fermez le modal, quelle que soit la réponse de la requête
-            onClose();
         }
     };
 
@@ -226,7 +212,7 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
 
             // Dispatch the action to add the prediction with formData
             // dispatch(addPredictRequest(formData));
-            const response = await fetch(`${url}/predict/update?fixture_id=${fixtureId}`, {
+            const response = await fetch(`${url}/api/v1/predict/update?fixture_id=${fixtureId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

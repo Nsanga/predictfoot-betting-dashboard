@@ -78,7 +78,7 @@ export const updateServiceRequest = (serviceId, updatedData) => ({
 
 export const deleteServiceRequest = (id) => ({
   type: types.DELETE_SERVICE_REQUEST,
-  payload: {id},
+  payload: id,
 });
 
 export const fetchPackageRequest = payload => ({

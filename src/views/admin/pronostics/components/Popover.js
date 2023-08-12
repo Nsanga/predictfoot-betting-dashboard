@@ -118,7 +118,7 @@ export default function Popup(props) {
                         bg: "transparent",
                     }}
                     mb='10px'>
-                    <ModalAlert itemId={itemId} />
+                    <ModalAlert itemId={itemId} fixtureId={fixtureId} match={match} />
                 </MenuItem>
 
             </MenuList>

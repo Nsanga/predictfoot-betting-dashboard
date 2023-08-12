@@ -10,6 +10,8 @@ const INITIAL_STATE = {
   matchs: [],
   totalPages: 0,
   page: 0,
+  totalOldPages: 0,
+  oldpage: 0,
   loading: false,
   loadingOld:false,
   error: null,
@@ -51,8 +53,8 @@ function PredictReducer(state = INITIAL_STATE, action) {
         ...state,
         loadingOld: false,
         oldPredicts: action.payload.results,
-        totalPages: action.payload.totalPages,
-        page: action.payload.page,
+        totalOldPages: action.payload.totalOldPages,
+        oldpage: action.payload.oldpage,
         totalOldCoast: calculateTotalCoast(action.payload.results),
       };
     case types.GET_OLD_TIPS_FAILED:
@@ -85,17 +87,16 @@ function PredictReducer(state = INITIAL_STATE, action) {
         loading: true,
         error: null,
       };
-    case types.DELETE_PREDICT_SUCCESS:
-      const id = action.payload;
-      const updatedPredicts = state.predicts.filter((predict) => predict._id !== id);
-      const updatedOldPredicts = state.oldPredicts.filter((oldPredicts) => oldPredicts._id !== id);
-      return {
-        ...state,
-        predicts: updatedPredicts,
-        oldPredicts: updatedOldPredicts,
-        loading: false,
-        error: null,
-      };
+      case types.DELETE_PREDICT_SUCCESS:
+        const updatedPredicts = state.predicts ? state.predicts.filter((predict) => predict._id !== action.payload) : [];
+        const updatedOldPredicts = state.oldPredicts ? state.oldPredicts.filter((oldPredict) => oldPredict._id !== action.payload) : [];
+        return {
+          ...state,
+          predicts: updatedPredicts,
+          oldPredicts: updatedOldPredicts,
+          loading: false,
+          error: null,
+        };      
     case types.DELETE_PREDICT_FAILED:
       return {
         ...state,

@@ -2,13 +2,15 @@ import React from 'react'
 import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Text, useColorModeValue } from "@chakra-ui/react/dist/chakra-ui-react.cjs";
 import SearchBars from './searchBar';
 import { IconButton } from '@chakra-ui/react'
-import { BiExport } from 'react-icons/bi'
 import FixtureOldTips from './FixtureOldTips';
 import Card from "components/card/Card.js";
 import DataPreview from './DataPreview';
 import moment from 'moment';
+import { BiChevronLeft, BiChevronRight, BiExport } from 'react-icons/bi'
+import ReactPaginate from 'react-paginate';
+import "../style.css";
 
-const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange, loadingOld }) => {
+const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange, loadingOld, totalOldPages, handleOldPageChange, oldpage }) => {
     const iconColor = useColorModeValue("brand.500", "white");
     const cardShadow = useColorModeValue(
         "0px 18px 40px rgba(112, 144, 176, 0.12)",
@@ -113,6 +115,16 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange, loadingOl
                                                 match={match}
                                             />
                                         ))}
+                                        <ReactPaginate
+                                            previousLabel={<IconButton background='transparent' icon={<BiChevronLeft size='2rem'/>}  rounded='full' color="gray.400"/>}
+                                            nextLabel={<IconButton background='transparent' icon={<BiChevronRight size='2rem'/>} rounded='full' color="gray.400"/>}
+                                            pageCount={totalOldPages}
+                                            onPageChange={(selectedPage) => handleOldPageChange(selectedPage.selected)} 
+                                            forcePage={oldpage - 1}
+                                            containerClassName={"pagination"}
+                                            activeClassName={"active"}
+                                            pageClassName={"page"}
+                                        />
                                     </>
                                 )}
                             </>
@@ -196,7 +208,18 @@ const TabpaneOldTips = ({ oldPredicts, totalOldCoast, handleTabChange, loadingOl
                                                 match={match}
                                             />
                                         ))}
+                                        <ReactPaginate
+                                            previousLabel={<IconButton background='transparent' icon={<BiChevronLeft size='2rem'/>}  rounded='full' color="gray.400"/>}
+                                            nextLabel={<IconButton background='transparent' icon={<BiChevronRight size='2rem'/>} rounded='full' color="gray.400"/>}
+                                            pageCount={totalOldPages}
+                                            onPageChange={(selectedPage) => handleOldPageChange(selectedPage.selected)} 
+                                            forcePage={oldpage - 1}
+                                            containerClassName={"pagination"}
+                                            activeClassName={"active"}
+                                            pageClassName={"page"}
+                                        />
                                     </>
+                                    
                                 )}
                             </>
                         )}

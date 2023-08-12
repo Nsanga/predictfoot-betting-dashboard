@@ -19,7 +19,7 @@ import { GiCrossedBones } from 'react-icons/gi'
 import { deletePredictRequest } from 'redux/predict/actions'
 import { useDispatch } from 'react-redux';
 
-const ModalAlert = ({ itemId }) => {
+const ModalAlert = ({ itemId, match }) => {
     const OverlayOne = () => (
         <ModalOverlay
             bg='blackAlpha.300'
@@ -33,8 +33,8 @@ const ModalAlert = ({ itemId }) => {
     const dispatch = useDispatch();
 
     const handleConfirmDelete = () => {
-        console.log(itemId, 'ggggggg')
-        dispatch(deletePredictRequest(itemId));
+        console.log(match, 'ggggggg')
+        dispatch(deletePredictRequest(match));
         onClose();
     };
 

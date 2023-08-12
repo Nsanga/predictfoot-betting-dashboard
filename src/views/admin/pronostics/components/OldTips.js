@@ -18,7 +18,7 @@ import 'moment/locale/fr';
 
 moment.locale('fr');
 
-const OldTips = ({oldPredicts, totalOldCoast, loadingOld}) => {
+const OldTips = ({oldPredicts, totalOldCoast, loadingOld, totalOldPages, oldpage}) => {
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -37,7 +37,7 @@ const OldTips = ({oldPredicts, totalOldCoast, loadingOld}) => {
 
     const search = "";
     const page = 1;
-    const limit = 10;
+    const limit = 5;
 
     dispatch(fetchOldTipsRequest({ dateFrom: currentDate, dateTo: currentDate, type, search, page, limit }));
     console.log("Dispatched fetchOldTipsRequest");
@@ -46,6 +46,23 @@ const OldTips = ({oldPredicts, totalOldCoast, loadingOld}) => {
     console.log('typeOld:', newType)
     setType(newType);
   };
+
+  const handleOldPageChange = (selectedPage) => {
+    const limit = 5;
+    const currentDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
+
+    dispatch(
+      fetchOldTipsRequest({
+        dateFrom: currentDate,
+        dateTo: currentDate,
+        type,
+        search: "",
+        page: selectedPage + 1 ,
+        limit,
+      })
+    );
+  };
+
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }}>
       <Text
@@ -57,15 +74,23 @@ const OldTips = ({oldPredicts, totalOldCoast, loadingOld}) => {
         Old tips
       </Text>
 
-      <TabpaneOldTips oldPredicts={oldPredicts} totalOldCoast={totalOldCoast} handleTabChange={handleTabChange} loadingOld={loadingOld}/>
+      <TabpaneOldTips 
+      oldPredicts={oldPredicts} 
+      totalOldCoast={totalOldCoast} 
+      handleTabChange={handleTabChange} 
+      handleOldPageChange={handleOldPageChange}
+      loadingOld={loadingOld}
+      totalOldPages={totalOldPages}
+      oldpage={oldpage}
+      />
     </Card>
   );
 }
 const mapStateToProps = ({ PredictReducer }) => ({
   oldPredicts: PredictReducer.oldPredicts,
-  totalPages: PredictReducer.totalPages,
+  totalOldPages: PredictReducer.totalOldPages,
   loadingOld: PredictReducer.loadingOld,
-  page: PredictReducer.page,
+  oldpage: PredictReducer.oldpage,
   error: PredictReducer.error,
   totalOldCoast: PredictReducer.totalOldCoast,
 });
