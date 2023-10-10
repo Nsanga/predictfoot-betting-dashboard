@@ -11,7 +11,7 @@ import moment from 'moment';
 function* fetchCountryByDate(action) {
   try {
     const {date} = action.payload;
-    let request = `${url}/api/v1/fixture/getCountries/?date=${date}`;
+    let request = `${url}/api/v1/fixture/getCountries?date=${date}`;
     const data = yield getUnauthRequest(request);
    
     if (data.success) {
