@@ -17,10 +17,11 @@ export default function Upload({ imageUrl, handleImageChange }) {
 
   const handleChangeImage = (event) => {
     const file = event.target.files[0];
+    console.log('file:', file)
     const imageURL = URL.createObjectURL(file);
     setSelectedImage(imageURL);
     setImageName(file.name);
-    handleImageChange(imageURL, event.target.files[0]);
+    handleImageChange(imageURL, file);
   };
 
   const handleContainerClick = () => {

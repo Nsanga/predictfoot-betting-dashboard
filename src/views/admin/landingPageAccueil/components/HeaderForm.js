@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Flex, Input, Spinner, Text, useColorModeValue } from '@chakra-ui/react'
 import Upload from './Upload';
 import { Button, ButtonGroup } from '@chakra-ui/react'
@@ -14,12 +14,13 @@ const HeaderForm = (
     }
 ) => {
     const iconColor = useColorModeValue("brand.500", "white");
-    const [title, setTitle] = React.useState('')
-    const [description, setDescription] = React.useState('')
-    const [linkAppS, setLinkAppS] = React.useState('')
-    const [linkPlayS, setLinkPlayS] = React.useState('')
-    const [image, setImage] = React.useState('')
-    const [isEditMode, setIsEditMode] = React.useState(false);
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [linkAppS, setLinkAppS] = useState('')
+    const [linkPlayS, setLinkPlayS] = useState('')
+    const [image, setImage] = useState('')
+    const [buttonLoading, setButtonLoading] = useState(false);
+    // const [isEditMode, setIsEditMode] = React.useState(headband._id);
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -37,7 +38,8 @@ const HeaderForm = (
         setLinkPlayS(event.target.value);
     }
 
-    const handleImageChange = (imageURL) => {
+    const handleImageChange = (imageURL, imageFile) => {
+        console.log('imageURL:',  imageFile)
         setImage(imageURL);
     };
 
@@ -53,11 +55,12 @@ const HeaderForm = (
             setLinkAppS(headband.linkAppStore || '');
             setLinkPlayS(headband.linkPlayStore || '');
             setImage(headband.image || '');
-            setIsEditMode(true);
+            // setIsEditMode(true);
         }
     }, [headband]);
 
-    const handleButtonClick = () => {
+    const handleButtonClick = async () => {
+        setButtonLoading(true); // Start button loading
         const formData = {
             title: title,
             description: description,
@@ -66,13 +69,15 @@ const HeaderForm = (
             image: image
         };
 
-        if (isEditMode) {
+        if (headband && headband._id) {
+            console.log(headband._id)
             // Call the update action with the ID and updated form data
             dispatch(updateHeaderRequest(headband._id, formData));
         } else {
             // Appel de l'action pour l'ajout
               dispatch(addHeaderRequest(formData)); // Remplacez `formData` par la valeur appropriée
         }
+        setButtonLoading(false);
     };
 
     return (
@@ -130,11 +135,11 @@ const HeaderForm = (
                         <Button
                             colorScheme='blue'
                             onClick={handleButtonClick}
-                            isLoading={loading} // Utilisation de la prop isLoading pour afficher le chargement du bouton d'action
-                            loadingText={isEditMode ? 'Update' : 'Ajouter'}
+                            isLoading={buttonLoading} 
+                            loadingText={headband && headband._id ? 'Update' : 'Ajouter'}
                             spinnerPlacement='start'
                         >
-                            {isEditMode ? 'Update' : 'Ajouter'}
+                            {headband && headband._id ? 'Update' : 'Ajouter'}
                         </Button>
                     </Flex>
 

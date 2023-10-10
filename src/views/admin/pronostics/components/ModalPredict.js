@@ -27,91 +27,45 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
     const [isUpdating, setIsUpdating] = useState(false);
     const dispatch = useDispatch();
 
-    // Function to get the date for today, tomorrow, and the day after tomorrow
-    const getDates = () => {
-        const today = moment();
-        const tomorrow = moment().add(1, 'day');
-        const dayAfterTomorrow = moment().add(2, 'day');
-
-        return [
-            { value: formatDate(today), label: "Aujourd'hui" },
-            { value: formatDate(tomorrow), label: 'Demain' },
-            { value: formatDate(dayAfterTomorrow), label: 'Après-demain' },
-        ];
-    };
-
-    // Function to format the date as 'YYYY-MM-DD'
-    const formatDate = (date) => date.format('YYYY-MM-DD');
-
-    // Set date options with today, tomorrow, and the day after tomorrow
-    const [dateOptions, setDateOptions] = useState(getDates()); // Initialize dateOptions with the initial values
-
     useEffect(() => {
         if (match) {
-            console.log(selectedDate)
-            // Si un match est sélectionné, pré-remplir les champs avec les valeurs du match
-            const selectedOption = dateOptions.find((option) => option.value === match.date); 
-            // setSelectedDate(selectedOption || { value: match.date, label: match.date }); 
-
-            if (match.country) {
-                setSelectedCountry({ value: match.country.name, label: match.country.name, flag: match.country.flag });
-            }
-
-            if (match.championship) {
-                setSelectedChampionship({ value: match.championship.name, label: match.championship.name, logo: match.championship.logo });
-            }
-
-            if (match.fixture) {
-                const selectedMatchOption = {
-                    value: match.fixture,
-                    label: (
-                        <Flex direction="row" justify="space-between">
-                            {/* Ajoutez le contenu que vous souhaitez afficher pour le match ici */}
-                            {/* Assurez-vous que les propriétés homeTeam et awayTeam existent avant d'y accéder */}
-                            {match.fixture.homeTeam && (
-                                <Flex>
-                                    <img src={match.fixture.homeTeam.logo} alt={match.fixture.homeTeam.team_name} height="30px" width="30px" />
-                                    <Text ml={2}>{match.fixture.homeTeam.team_name}</Text>
-                                </Flex>
-                            )}
-                            {/* Assurez-vous que la propriété event_date existe avant d'y accéder */}
-                            {match.fixture.event_date && (
-                                <Flex alignItems="center" align="center" justify="center">
-                                    <Text fontSize="sm">
-                                        <b>
-                                            <u>{moment(match.fixture.event_date).format('HH:mm')} GMT</u>
-                                        </b>
-                                    </Text>
-                                </Flex>
-                            )}
-                            {/* Assurez-vous que les propriétés homeTeam et awayTeam existent avant d'y accéder */}
-                            {match.fixture.awayTeam && (
-                                <Flex>
-                                    <img src={match.fixture.awayTeam.logo} alt={match.fixture.awayTeam.team_name} height="30px" width="30px" />
-                                    <Text ml={2}>{match.fixture.awayTeam.team_name}</Text>
-                                </Flex>
-                            )}
-                        </Flex>
-                    ),
-                };
-                setSelectedMatch(selectedMatchOption);
-            }
-
-            if (match.prediction) {
-                setSelectedPrediction({ value: match.prediction, label: match.prediction });
-            }
-
-            if (match.coast) {
-                setSelectedCote(match.coast.toString());
-            }
-        } else {
-            // Si le match est vide, réinitialiser les états du formulaire
-            setSelectedDate(null);
-            setSelectedCountry(null);
-            setSelectedChampionship(null);
-            setSelectedMatch(null);
-            setSelectedPrediction(null);
-            setSelectedCote("");
+            setSelectedDate(); 
+            setSelectedCountry({ value: match.country.name, label: match.country.name, flag: match.country.flag });
+            setSelectedChampionship({ value: match.championship.name, label: match.championship.name, logo: match.championship.logo });
+            setSelectedMatch({
+                value: match.fixture,
+                label: (
+                    <Flex direction="row" justify="space-between">
+                        {/* Ajoutez le contenu que vous souhaitez afficher pour le match ici */}
+                        {/* Assurez-vous que les propriétés homeTeam et awayTeam existent avant d'y accéder */}
+                        {match.fixture.homeTeam && (
+                            <Flex>
+                                <img src={match.fixture.homeTeam.logo} alt={match.fixture.homeTeam.team_name} height="30px" width="30px" />
+                                <Text ml={2}>{match.fixture.homeTeam.team_name}</Text>
+                            </Flex>
+                        )}
+                        {/* Assurez-vous que la propriété event_date existe avant d'y accéder */}
+                        {match.fixture.event_date && (
+                            <Flex alignItems="center" align="center" justify="center">
+                                <Text fontSize="sm">
+                                    <b>
+                                        <u>{moment(match.fixture.event_date).format('HH:mm')} GMT</u>
+                                    </b>
+                                </Text>
+                            </Flex>
+                        )}
+                        {/* Assurez-vous que les propriétés homeTeam et awayTeam existent avant d'y accéder */}
+                        {match.fixture.awayTeam && (
+                            <Flex>
+                                <img src={match.fixture.awayTeam.logo} alt={match.fixture.awayTeam.team_name} height="30px" width="30px" />
+                                <Text ml={2}>{match.fixture.awayTeam.team_name}</Text>
+                            </Flex>
+                        )}
+                    </Flex>
+                ),
+            });
+            setSelectedPrediction({ value: match.prediction, label: match.prediction });
+            setSelectedCote(match.coast.toString());
         }
     }, [match]);
 

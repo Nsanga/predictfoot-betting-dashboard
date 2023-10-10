@@ -3,12 +3,12 @@ const multPart = 'multipart/form-data; charset=utf-8';
 
 const request = async (contentType, method, url, data, options = {}) => {
   try {
-    const jsonUser = JSON.parse().token;
+    // const jsonUser = JSON.parse(user_token).token;
     const response = await fetch(url, {
       method: method,
       headers: {
         'Content-Type': contentType,
-        Authorization: 'Bearer ' + jsonUser,
+        // Authorization: 'Bearer ' + jsonUser,
       },
       body: data,
       timeout: 15000,

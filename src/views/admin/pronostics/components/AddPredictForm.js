@@ -59,17 +59,7 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
       setLoadingCountries(true);
       try {
         await dispatch(fetchCountryByDate({ date: selectedDate.value }));
-        if (countries && countries?.length > 0) {
-          const countryOptions = countries.map((country) => ({
-            value: country.name,
-            label: country.name,
-            flag: country.flag,
-          }));
-          setCountryOptions(countryOptions);
-          setSelectedCountry(null); // Reset the selected country when the date changes
-          setChampionshipOptions([]); // Reset the selected championship options when the date changes
-          setMatchOptions([]); // Reset the selected match options when the date changes
-        }
+        
         setLoadingCountries(false);
       } catch (error) {
         console.error('Error fetching countries:', error);
@@ -79,23 +69,29 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
     fetchCountries();
   }, [selectedDate]);
 
+  useEffect(() => {
+    if (countries && countries.length > 0) {
+      const countryOptions = countries.map((country) => ({
+        value: country.name,
+        label: country.name,
+        flag: country.flag,
+      }));
+      setCountryOptions(countryOptions);
+      setSelectedCountry(null);
+      setChampionshipOptions([]);
+      setMatchOptions([]);
+    }
+  }, [countries]);
+
   // Fetch championships based on the selected country and populate championshipOptions state
   useEffect(() => {
     const fetchChampionships = async () => {
       if (!selectedCountry) return;
       try {
+        console.log('ok;;', selectedDate)
+        console.log('ok::', selectedCountry)
         await dispatch(fetchChampionshipByDate({ date: selectedDate.value, country: selectedCountry.value }));
-        console.log(selectedDate.value)
-        if (championships && championships.length > 0) {
-          const championshipOptions = championships.map((championship) => ({
-            value: championship.name,
-            label: championship.name,
-            logo: championship.logo,
-          }));
-          setChampionshipOptions(championshipOptions);
-          setSelectedChampionship(null); // Reset the selected championship when the country changes
-          setMatchOptions([]); // Reset the selected match options when the country changes
-        }
+        
       } catch (error) {
         console.error('Error fetching championships:', error);
         setChampionshipOptions([]); // Set empty options in case of an error
@@ -104,37 +100,26 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
     fetchChampionships();
   }, [dispatch, selectedCountry, selectedDate, isOpen]);
 
+  useEffect(() => {
+    if (championships && championships.length > 0) {
+      const championshipOptions = championships.map((championship) => ({
+        value: championship.name,
+        label: championship.name,
+        logo: championship.logo,
+      }));
+      setChampionshipOptions(championshipOptions);
+      setSelectedChampionship(null); // Reset the selected championship when the country changes
+      setMatchOptions([]); // Reset the selected match options when the country changes
+    }
+  }, [championships]);
+
   // Fetch matches based on the selected date and championship and populate matchOptions state
   useEffect(() => {
     const fetchMatches = async () => {
       if (!selectedDate || !selectedChampionship) return; // Skip if date or championship is not selected yet
       try {
         await dispatch(fetchMatchByDate({ date: selectedDate.value, championship: selectedChampionship.value }));
-        if (matchs && matchs.length > 0) {
-          const matchOptions = matchs.map((match) => ({
-            value: match,
-            label:
-              <Flex direction="row" justify="space-between">
-                <Flex >
-                  <img src={match.homeTeam.logo} alt={match.homeTeam.team_name} height="30px" width="30px" />
-                  <Text ml={2}>{match.homeTeam.team_name}</Text>
-                </Flex>
-                <Flex alignItems="center" align="center" justify="center">
-                  <Text fontSize="sm">
-                    <b>
-                      <u>{moment(match.event_date).format('HH:mm')} GMT</u>
-                    </b>
-                  </Text>
-                </Flex>
-                <Flex >
-                  <img src={match.awayTeam.logo} alt={match.awayTeam.team_name} height="30px" width="30px" />
-                  <Text ml={2}>{match.awayTeam.team_name}</Text>
-                </Flex>
-              </Flex>
-          }));
-          setMatchOptions(matchOptions);
-          setSelectedMatch(null); // Reset the selected match when the date or championship changes
-        }
+        
       } catch (error) {
         console.error('Error fetching matches:', error);
         setMatchOptions([]); // Set empty options in case of an error
@@ -142,6 +127,34 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
     };
     fetchMatches();
   }, [dispatch, selectedDate, selectedChampionship, isOpen]);
+
+  useEffect(() => {
+    if (matchs && matchs.length > 0) {
+      const matchOptions = matchs.map((match) => ({
+        value: match,
+        label:
+          <Flex direction="row" justify="space-between">
+            <Flex >
+              <img src={match.homeTeam.logo} alt={match.homeTeam.team_name} height="30px" width="30px" />
+              <Text ml={2}>{match.homeTeam.team_name}</Text>
+            </Flex>
+            <Flex alignItems="center" align="center" justify="center">
+              <Text fontSize="sm">
+                <b>
+                  <u>{moment(match.event_date).format('HH:mm')} GMT</u>
+                </b>
+              </Text>
+            </Flex>
+            <Flex >
+              <img src={match.awayTeam.logo} alt={match.awayTeam.team_name} height="30px" width="30px" />
+              <Text ml={2}>{match.awayTeam.team_name}</Text>
+            </Flex>
+          </Flex>
+      }));
+      setMatchOptions(matchOptions);
+      setSelectedMatch(null); // Reset the selected match when the date or championship changes
+    }
+  }, [matchs]);
 
   const handlePredictionChange = (prediction) => {
     setSelectedPrediction(prediction);
@@ -190,11 +203,7 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
             value={selectedDate}
             options={dateOptions}
             onChange={(e) => {
-              if (!loadingCountries) {
-                setSelectedDate(e);
-              } else {
-                <Text>loading</Text>
-              }
+              setSelectedDate(e);
               console.log("Countries state:", countries);
             }}
             name="date"

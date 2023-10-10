@@ -23,6 +23,7 @@ function* fetchHeaderRequest() {
 }
 
 function* updateHeaderRequest(action) {
+  console.log('actionHEAD', action)
   try {
     const { id, data } = action.payload;
     
@@ -36,14 +37,17 @@ function* updateHeaderRequest(action) {
 
     // Vérifier si une nouvelle image est fournie
     if (data.image) {
-      formData.append('image', data.image); // Ajouter l'image au FormData 
+      console.log('Type of data.image:', typeof data.image);
+formData.append('image', data.image, data.image.name);
+      // formData.append('image', data.image); // Ajouter l'image au FormData 
     }
 
     const responseData = yield putRequestFormData(`${url}/api/v1/landing-page/headband/update?Id=${id}`, formData);
-    console.log('data', responseData)
+    console.log('dataHEAD', responseData)
 
     if (responseData.success) {
       yield put({ type: types.UPDATE_HEADER_SUCCESS, payload: responseData.data });
+      yield call(fetchHeaderRequest, {payload: {}});
     } else {
       yield put({ type: types.UPDATE_HEADER_FAILED, payload: "echec modification des données" });
     }
