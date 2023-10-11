@@ -26,7 +26,7 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
   const [matchOptions, setMatchOptions] = useState([]);
   const [predictionOptions, setPredictionOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  // const [selectedDate, setSelectedDate] = useState(null);
+  const [formatSelectedDate, setFormatSelectedDate] = useState({ value: selectedDate, label: selectedDate });
   const [loadingCountries, setLoadingCountries] = useState(false);
   const dispatch = useDispatch();
 
@@ -88,8 +88,6 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
     const fetchChampionships = async () => {
       if (!selectedCountry) return;
       try {
-        console.log('ok;;', selectedDate)
-        console.log('ok::', selectedCountry)
         await dispatch(fetchChampionshipByDate({ date: selectedDate.value, country: selectedCountry.value }));
         
       } catch (error) {
@@ -200,11 +198,10 @@ const AddPredictForm = ({ selectedDate, setSelectedDate,
         <Box>
           <Text>Date</Text>
           <Select
-            value={selectedDate}
+            value={formatSelectedDate}
             options={dateOptions}
             onChange={(e) => {
               setSelectedDate(e);
-              console.log("Countries state:", countries);
             }}
             name="date"
             isSearchable={true}

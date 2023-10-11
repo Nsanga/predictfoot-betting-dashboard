@@ -29,7 +29,7 @@ const ModalPredict = ({ isOpen, onClose, predictType, countries, championships, 
 
     useEffect(() => {
         if (match) {
-            setSelectedDate(); 
+            setSelectedDate(match.date); 
             setSelectedCountry({ value: match.country.name, label: match.country.name, flag: match.country.flag });
             setSelectedChampionship({ value: match.championship.name, label: match.championship.name, logo: match.championship.logo });
             setSelectedMatch({
